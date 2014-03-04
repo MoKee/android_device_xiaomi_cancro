@@ -811,10 +811,10 @@ char* QCamera2HardwareInterface::get_parameters(struct camera_device *device)
     if (rc == NO_ERROR) {
         hw->waitAPIResult(QCAMERA_SM_EVT_GET_PARAMS, &apiResult);
 
-        if (hw->m_apiResult.params) {
+        if (apiResult.params) {
             android::CameraParameters params;
-            params.unflatten(android::String8(hw->m_apiResult.params));
-            hw->putParameters(hw->m_apiResult.params);
+            params.unflatten(android::String8(apiResult.params));
+            hw->putParameters(apiResult.params);
 
             // Hide nv12-venus from userspace to prevent framework crash
             const char *fmt = params.get("preview-format");
