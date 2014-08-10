@@ -25,8 +25,6 @@
     <bool name="config_unplugTurnsOnScreen">true</bool>
     <bool name="config_animateScreenLights">false</bool>
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
-    <bool name="config_enableNetworkLocationOverlay">true</bool>
-    <bool name="config_enableFusedLocationOverlay">true</bool>
     <bool name="config_dreamsSupported">true</bool>
     <bool name="config_dreamsEnabledByDefault">false</bool>
     <bool name="config_dreamsActivatedOnDockByDefault">true</bool>
@@ -49,7 +47,7 @@
     <bool name="config_intrusiveNotificationLed">true</bool>
 
     <!-- Default LED on time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOn">2000</integer>
+    <integer name="config_defaultNotificationLedOn">500</integer>
 
     <!-- Default LED off time for notification LED in milliseconds. -->
     <integer name="config_defaultNotificationLedOff">1000</integer>
@@ -243,6 +241,15 @@
         <item>"mobile_cbs,12,0,2,300000,true"</item>
         <item>"bluetooth,7,7,2,-1,true"</item>
     </string-array>
+
+    <!-- bool value to for enabling motion accelerometer -->
+    <bool name="use_motion_accel">false</bool>
+
+    <!-- Enable overlay for all location components. -->
+    <bool name="config_enableNetworkLocationOverlay" translatable="false">false</bool>
+    <string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
+    <bool name="config_enableFusedLocationOverlay" translatable="false">false</bool>
+    <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
 
     <!-- This string array should be overridden by the device to present a list of radio
          attributes.  This is used by the connectivity manager to decide which networks can coexist
