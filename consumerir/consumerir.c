@@ -124,7 +124,7 @@ consumerir_module_t HAL_MODULE_INFO_SYM = {
         .hal_api_version    = HARDWARE_HAL_API_VERSION,
         .id                 = CONSUMERIR_HARDWARE_MODULE_ID,
         .name               = "Consumer IR Module",
-        .author             = "The CyanogenMod Project",
+        .author             = "The MoKee OpenSource Project",
         .methods            = &consumerir_module_methods,
     },
 };
