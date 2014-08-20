@@ -66,10 +66,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.qcom
 
+<<<<<<< HEAD
 # Filesystem management tools
 PRODUCT_PACKAGES += \
 	e2fsck
 	
+=======
+>>>>>>> af382e8... Revert "cancro: build fs management stuff from source"
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf \
