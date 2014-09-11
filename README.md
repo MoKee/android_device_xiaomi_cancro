@@ -20,4 +20,4 @@ Camera  | 13MPx, LED Flash
 
 ![Xiaomi Mi3](http://cdn.gsmarena.com/vv/reviewsimg/xiaomi-mi-3/gal/gsmarena_004.jpg "Xiaomi Mi3 in black")
 
-This branch is for building Mokee44 (or Android KitKat 4.4 AOSP based roms) ROMS.
+This branch is for building MoKee 44 (or Android KitKat 4.4 AOSP based roms) ROMS.
