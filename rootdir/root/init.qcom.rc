@@ -183,10 +183,15 @@ on boot
 
     # For power module access
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
 
     chown system system /sys/class/leds/button-backlight1/brightness
     chown system system /sys/class/leds/green/blink
     chown system system /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/red/blink
     chown system system /sys/class/leds/flashlight/brightness
 
 on charger

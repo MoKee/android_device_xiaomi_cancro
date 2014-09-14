@@ -9,6 +9,10 @@ DEVICE_PACKAGE_OVERLAYS += device/xiaomi/cancro/overlay
 
 LOCAL_PATH := device/xiaomi/cancro
 
+# bootanimation
+ PRODUCT_COPY_FILES += \
+     vendor/pa/prebuilt/bootanimation/1920x1080.zip:system/media/bootanimation.zip
+
 # Charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/chargeonlymode:root/sbin/chargeonlymode
