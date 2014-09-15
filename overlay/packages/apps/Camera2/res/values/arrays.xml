@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright (C) 2008 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+
+<resources>
+    <!-- Camera Preferences Video Quality entries -->
+    <string-array name="pref_video_quality_entries" translatable="false">
+        <item>@string/pref_video_quality_entry_1080p</item>
+        <item>@string/pref_video_quality_entry_720p</item>
+        <item>@string/pref_video_quality_entry_480p</item>
+        <item>@string/pref_video_quality_entry_fwvga</item>
+        <item>@string/pref_video_quality_entry_wvga</item>
+        <item>@string/pref_video_quality_entry_vga</item>
+        <item>@string/pref_video_quality_entry_wqvga</item>
+        <item>@string/pref_video_quality_entry_cif</item>
+        <item>@string/pref_video_quality_entry_qvga</item>
+        <item>@string/pref_video_quality_entry_qcif</item>
+   </string-array>
+
+    <string-array name="pref_video_quality_entryvalues" translatable="false">
+        <!-- The integer value of CamcorderProfile.QUALITY_1080P -->
+        <item>6</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_720P -->
+        <item>5</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_480P -->
+        <item>4</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_FWVGA -->
+        <item>8</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_WVGA -->
+        <item>9</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_VGA -->
+        <item>10</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_WQVGA -->
+        <item>11</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_CIF -->
+        <item>@string/pref_video_quality_default</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_QVGA -->
+        <item>7</item>
+        <!-- The integer value of CamcorderProfile.QUALITY_QCIF -->
+        <item>2</item>
+    </string-array>
+
+</resources>
