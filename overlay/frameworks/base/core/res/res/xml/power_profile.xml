@@ -17,7 +17,7 @@
 */
 -->
 
-<device name="Android">
+<device name="Mi 3W">
   <item name="none">0</item>
   <item name="screen.on">100</item>
   <item name="bluetooth.active">142</item> <!-- In call -->
@@ -32,7 +32,7 @@
   <item name="dsp.video">88</item>
   <item name="radio.active">300</item>
   <item name="gps.on">170</item>
-  <item name="battery.capacity">1390</item>
+  <item name="battery.capacity">3050</item>
   <item name="radio.scanning">70</item>
   <array name="radio.on"> <!-- Strength 0 to BINS-1 -->
       <value>3</value>

@@ -66,16 +66,27 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     gps.msm8974
 
-# Power
-PRODUCT_PACKAGES += \
-    power.qcom
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf \
     $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
     $(LOCAL_PATH)/gps/quipc.conf:system/etc/quipc.conf \
     $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.gps.qc_nlp_in_use=1 \
+    persist.loc.nlp_name=com.qualcomm.services.location \
+    ro.gps.agps_provider=1 \
+    ro.qc.sdk.izat.premium_enabled=1 \
+    ro.qc.sdk.izat.service_mask=0x5
+
+# Lights
+PRODUCT_PACKAGES += \
+    lights.msm8974
+
+# Power
+PRODUCT_PACKAGES += \
+    power.msm8974
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -154,6 +165,24 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/xtwifi.conf:system/etc/xtwifi.conf \
     $(LOCAL_PATH)/rootdir/system/etc/modem/Diag.cfg:system/etc/modem/Diag.cfg
 
+#Audio & Media
+PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libdivxdrmdecrypt \
+    libdashplayer \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
+    libOmxVdec \
+    libOmxVdecHevc \
+    libOmxVenc \
+    libstagefrighthw \
+    qcmediaplayer
+
+PRODUCT_BOOT_JARS += qcmediaplayer
+
 PRODUCT_PACKAGES += \
     audiod \
     audio.a2dp.default \
@@ -166,6 +195,32 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     tinymix
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    mm.enable.smoothstreaming=true \
+    mm.enable.qcom_parser=3183219 \
+    persist.usb.hvdcp.detect=true \
+    ro.qc.sdk.audio.fluencetype=fluence \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=true \
+    persist.audio.fluence.voicecall=true \
+    af.resampler.quality=4 \
+    persist.audio.init_volume_index=1 \
+    audio.offload.buffer.size.kb=32 \
+    av.offload.enable=true \
+    audio.offload.gapless.enabled=false \
+    audio.offload.disable=1 \
+    audio.offload.pcm.enable=false \
+    use.voice.path.for.pcm.voip=true \
+    media.aac_51_output_enabled=true \
+    ro.qc.sdk.audio.ssr=false \
+    qcom.hw.aac.encoder=false \
+    tunnel.audio.encode=false \
+    audio.offload.pcm.enable=false \
+    ro.hdmi.enable=true \
+    ro.qc.sdk.sensors.gestures \
+    debug.sf.hw=1 \
+    debug.egl.hw=1
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -197,23 +252,9 @@ PRODUCT_PACKAGES += \
     memtrack.msm8974 \
     liboverlay
 
-# Media
-PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
-    libdivxdrmdecrypt \
-    libdashplayer \
-    libOmxAacEnc \
-    libOmxAmrEnc \
-    libOmxCore \
-    libOmxEvrcEnc \
-    libOmxQcelp13Enc \
-    libOmxVdec \
-    libOmxVdecHevc \
-    libOmxVenc \
-    libstagefrighthw \
-    qcmediaplayer
-
-PRODUCT_BOOT_JARS += qcmediaplayer
+# Do not power down SIM card when modem is sent to Low Power Mode.
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.apm_sim_not_pwdn=1
 
 # QRNGD
 PRODUCT_PACKAGES += \
@@ -246,8 +287,9 @@ PRODUCT_PACKAGES += \
 
 # ANT+
 PRODUCT_PACKAGES += \
-    libantradio \
-    AntHalService
+    AntHalService \
+    com.dsi.ant.antradio_library \
+    libantradio
 
 # fmradio support
 PRODUCT_PACKAGES += \
@@ -266,8 +308,59 @@ PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
+ifneq ($(QCPATH),)
+# proprietary wifi display, if available
+PRODUCT_BOOT_JARS += WfdCommon
+
+# Connectivity Engine support
+ifeq ($(BOARD_USES_QCNE),true)
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig \
+    services-ext \
+    init.cne.rc
+
+PRODUCT_PROPERTY_OVERRIDES +=
+    persist.cne.feature=1
+
+endif
+endif
+
+# Enable Bluetooth HFP service
+PRODUCT_PROPERTY_OVERRIDES += \
+    qcom.bt.dev_power_class=1 \
+    bluetooth.hfp.client=1
+
+# System properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=480 \
+    persist.hwc.mdpcomp.enable=true \
+    debug.mdpcomp.logs \
+    debug.composition.type=dyn \
+    dev.pm.dyn_samplingrate=1 \
+    ril.subscription.types=RUIM \
+    ro.opengles.version=196608 \
+    persist.omh.enabled=true \
+    persist.sys.ssr.restart_level=3 \
+    persist.timed.enable=true \
+    persist.debug.wfd.enable=1 \
+    persist.sys.wfd.virtual=0 \
+    ro.qualcomm.bt.hci_transport=smd \
+    ro.telephony.default_network=9 \
+    ro.use_data_netmgrd=true \
+    persist.data.netmgrd.qos.enable=true \
+    persist.data.tcpackprio.enable=true \
+    ro.data.large_tcp_window_size=true \
+    telephony.lteOnGsmDevice=1 \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=15 \
+    ro.telephony.call_ring.multiple=0
+    ro.fm.transmitter=false \
+    ro.nfc.port=I2C \
+    com.qc.hardware=true
+
 # Permissions
 PRODUCT_COPY_FILES += \
+    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -286,7 +379,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-	frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml \
+    frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
