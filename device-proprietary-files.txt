@@ -261,6 +261,7 @@ vendor/lib/liboi_sbc_decoder.so
 # Perf
 bin/mpdecision
 vendor/lib/libqc-opt.so
+vendor/lib/hw/power.msm8974.so
 
 # ADSP
 bin/adsprpcd
@@ -350,12 +351,10 @@ vendor/lib/libC2D2.so
 vendor/lib/libc2d2_z180.so
 vendor/lib/libCB.so
 vendor/lib/libc2d30-a4xx.so
-vendor/lib/libc2d30.so
 vendor/lib/libc2d30-a3xx.so
 vendor/lib/libgsl.so
 vendor/lib/libllvm-qcom.so
 vendor/lib/libOpenCL.so
-vendor/lib/libOpenVG.so
 vendor/lib/libsc-a2xx.so
 vendor/lib/libsc-a3xx.so
 vendor/lib/libRSDriver_adreno.so

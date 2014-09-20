@@ -1243,8 +1243,8 @@
 /sys/devices/f9968000.i2c/i2c-12/12-0042/0018:0483:5702.0001/HID-SENSOR-2000e1.7/iio:device*    uevent                                  0660    system  system
 
 # cpufreq driver
-/sys/devices/system/cpu/cpu*    cpufreq/sys_cap_freq        0644    system    system
+/sys/devices/system/cpu/cpu*    cpufreq/sys_cap_freq        0664    system    system
 /sys/devices/system/cpu/cpu*    cpufreq/thermal_cap_freq    0644    system    system
-/sys/devices/system/cpu/cpu*    cpufreq/scaling_max_freq    0644    system    system
-/sys/devices/system/cpu/cpu*    cpufreq/scaling_min_freq    0644    system    system
+/sys/devices/system/cpu/cpu*    cpufreq/scaling_max_freq    0664    system    system
+/sys/devices/system/cpu/cpu*    cpufreq/scaling_min_freq    0664    system    system
 /sys/devices/system/cpu/nrcpus                              0644    system    system

@@ -80,6 +80,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.izat.premium_enabled=1 \
     ro.qc.sdk.izat.service_mask=0x5
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.rild.nitz_plmn="" \
+    persist.rild.nitz_long_ons_0="" \
+    persist.rild.nitz_long_ons_1="" \
+    persist.rild.nitz_long_ons_2="" \
+    persist.rild.nitz_long_ons_3="" \
+    persist.rild.nitz_short_ons_0="" \
+    persist.rild.nitz_short_ons_1="" \
+    persist.rild.nitz_short_ons_2="" \
+    persist.rild.nitz_short_ons_3=""
+
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8974
@@ -218,7 +229,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     tunnel.audio.encode=false \
     audio.offload.pcm.enable=false \
     ro.hdmi.enable=true \
-    ro.qc.sdk.sensors.gestures \
+    ro.qc.sdk.sensors.gestures=true \
     debug.sf.hw=1 \
     debug.egl.hw=1
 
@@ -252,9 +263,9 @@ PRODUCT_PACKAGES += \
     memtrack.msm8974 \
     liboverlay
 
-# Do not power down SIM card when modem is sent to Low Power Mode.
+# power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1
+    persist.radio.apm_sim_not_pwdn=0
 
 # QRNGD
 PRODUCT_PACKAGES += \
@@ -268,10 +279,6 @@ PRODUCT_PACKAGES += \
 # IR package
 PRODUCT_PACKAGES += \
     consumerir.msm8974
-
-# Torch
-PRODUCT_PACKAGES += \
-    Torch
 
 # USB
 PRODUCT_PACKAGES += \
@@ -319,7 +326,7 @@ PRODUCT_PACKAGES += \
     services-ext \
     init.cne.rc
 
-PRODUCT_PROPERTY_OVERRIDES +=
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=1
 
 endif
@@ -334,7 +341,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=480 \
     persist.hwc.mdpcomp.enable=true \
-    debug.mdpcomp.logs \
+    debug.mdpcomp.logs=0 \
     debug.composition.type=dyn \
     dev.pm.dyn_samplingrate=1 \
     ril.subscription.types=RUIM \
@@ -353,7 +360,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     telephony.lteOnGsmDevice=1 \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
-    ro.telephony.call_ring.multiple=0
+    ro.telephony.call_ring.multiple=0 \
     ro.fm.transmitter=false \
     ro.nfc.port=I2C \
     com.qc.hardware=true

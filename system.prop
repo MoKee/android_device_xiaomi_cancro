@@ -7,12 +7,6 @@
 ro.vendor.extension_library=/system/lib/libqc-opt.so
 rild.libpath=/system/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
-persist.radio.apm_sim_not_pwdn=0
-
-#
-# system props for the cne module
-#
-persist.cne.feature=0
 
 mmp.enable.3g2=true
 mm.enable.smoothstreaming=true
