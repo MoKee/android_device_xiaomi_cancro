@@ -41,6 +41,3 @@ PRODUCT_NAME := pa_cancro
 PRODUCT_BRAND := xiaomi
 PRODUCT_MODEL := MI 3W
 PRODUCT_MANUFACTURER := Xiaomi
-
-# Inherit from proprietary blobs
-$(call inherit-product-if-exists, vendor/xiaomi/cancro/cancro-vendor.mk)

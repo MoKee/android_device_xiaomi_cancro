@@ -3,8 +3,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-$(call inherit-product-if-exists, vendor/xiaomi/cancro/cancro-vendor.mk)
-
 DEVICE_PACKAGE_OVERLAYS += device/xiaomi/cancro/overlay
 
 LOCAL_PATH := device/xiaomi/cancro
@@ -97,7 +95,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.msm8974
+    power.qcom
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -158,7 +156,7 @@ PRODUCT_COPY_FILES += \
 
 # Thermal config
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf \
+    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine-8974.conf \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/android_model_facea.dat:system/etc/android_model_facea.dat \
@@ -339,7 +337,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=480 \
+    ro.sf.lcd_density=400 \
     persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.logs=0 \
     debug.composition.type=dyn \
@@ -357,7 +355,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=true \
     persist.data.tcpackprio.enable=true \
     ro.data.large_tcp_window_size=true \
-    telephony.lteOnGsmDevice=1 \
+    telephony.lteOnGsmDevice=0 \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
     ro.telephony.call_ring.multiple=0 \
