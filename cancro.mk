@@ -263,7 +263,7 @@ PRODUCT_PACKAGES += \
 
 # power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=0
+    persist.radio.apm_sim_not_pwdn=1
 
 # QRNGD
 PRODUCT_PACKAGES += \
