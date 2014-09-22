@@ -424,6 +424,9 @@ bin/rfs_access
 bin/rmt_storage
 bin/rild
 lib/libril.so
+lib/libreference-ril.so
+lib/librilutils.so
+
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 framework/qcnvitems.jar
@@ -462,7 +465,7 @@ bin/time_daemon
 # Fastcharge
 bin/hvdcp
 
-lib/hw/lights.msm8974.so
+#lib/hw/lights.msm8974.so
 
 #NFC
 lib/hw/nfc_nci_nfca.default.so

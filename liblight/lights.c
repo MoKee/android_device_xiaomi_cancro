@@ -56,6 +56,9 @@ const char *const LCD_FILE
 const char *const BUTTONS_FILE
         = "/sys/class/leds/button-backlight/brightness";
 
+const char *const BUTTONS_FILE_1
+        = "/sys/class/leds/button-backlight1/brightness";
+
 const char *const RED_LED_FILE
         = "/sys/class/leds/red/brightness";
 
@@ -338,7 +341,7 @@ set_light_buttons(struct light_device_t *dev,
 
     pthread_mutex_lock(&g_lock);
 
-    err = write_int(BUTTONS_FILE, brightness);
+    err = write_int(BUTTONS_FILE && BUTTONS_FILE_1 , brightness);
 
     pthread_mutex_unlock(&g_lock);
 
