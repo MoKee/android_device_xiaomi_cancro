@@ -39,6 +39,7 @@
     <bool name="config_cellBroadcastAppLinks">true</bool>
 
     <integer name="config_lightSensorWarmupTime">500</integer>
+    <integer name="config_radioScanningTimeout">9000</integer>
 
     <!-- AOSPA LEGACY ADDITIONS -->
 
@@ -48,13 +49,13 @@
     <bool name="config_intrusiveNotificationLed">true</bool>
 
     <!-- Default LED on time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOn">500</integer>
+    <integer name="config_defaultNotificationLedOn">5000</integer>
 
     <!-- Default LED off time for notification LED in milliseconds. -->
-    <integer name="config_defaultNotificationLedOff">2000</integer>
+    <integer name="config_defaultNotificationLedOff">5000</integer>
 
     <bool name="config_proximityCheckOnWake">true</bool>
-    <integer name="config_proximityCheckTimeout">300</integer>
+    <integer name="config_proximityCheckTimeout">500</integer>
 
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each

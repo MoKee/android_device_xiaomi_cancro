@@ -45,4 +45,8 @@
 /dev/fscklogs(/.*)?                    u:object_r:fscklogs:s0
 
 # Persist filesystem
-/persist(/.*)?                    u:object_r:persist_file:s0
+/persist(/.*)?                         u:object_r:persist_file:s0
+
+# Hardware tunables
+/sys/class/leds/red/ramp_step_ms       u:object_r:sysfs_writable:s0
+/sys/class/leds/red/duty_pcts          u:object_r:sysfs_writable:s0

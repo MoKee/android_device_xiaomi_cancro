@@ -346,6 +346,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=dyn \
     dev.pm.dyn_samplingrate=1 \
     ril.subscription.types=RUIM \
+    ro.telephony.ril_class=QualcommSharedRIL \
     ro.opengles.version=196608 \
     persist.omh.enabled=true \
     persist.sys.ssr.restart_level=3 \
