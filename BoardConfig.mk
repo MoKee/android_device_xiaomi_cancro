@@ -79,8 +79,8 @@ BOARD_HAVE_QCOM_FM := true
 QCOM_FM_ENABLED := true
 
 # Power HAL
-TARGET_POWERHAL_VARIANT := cm
-CM_POWERHAL_EXTENSION := qcom
+#TARGET_POWERHAL_VARIANT := cm
+#CM_POWERHAL_EXTENSION := qcom
 
 # CM Hardware
 BOARD_HARDWARE_CLASS += device/xiaomi/cancro/cmhw
@@ -106,6 +106,7 @@ BOARD_SEPOLICY_UNION += \
     cne.te \
     qmux.te \
     mpdecision.te \
+    netd.te \
     thermald.te \
     ueventd.te \
     vold.te \

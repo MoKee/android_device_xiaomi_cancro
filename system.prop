@@ -4,8 +4,8 @@
 #
 # system.prop for cancro
 #
-ro.vendor.extension_library=/system/lib/libqc-opt.so
-rild.libpath=/system/lib/libril-qc-qmi-1.so
+ro.vendor.extension_library=/vendor/lib/libqc-opt.so
+rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 
 mmp.enable.3g2=true
