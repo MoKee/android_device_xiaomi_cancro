@@ -20,3 +20,17 @@ vidc.debug.level=1
 ro.qualcomm.cabl=0
 ro.qcom.ad=1
 ro.qcom.ad.calib.data=/data/calib.cfg
+
+# qualcomm sensors enable
+ro.qualcomm.sensors.qmd=true
+ro.qualcomm.sensors.smd=true
+ro.qc.sdk.sensors.gestures=true
+ro.qualcomm.sensors.pedometer=true
+ro.qualcomm.sensors.pam=true
+ro.qualcomm.sensors.scrn_ortn=true
+ro.qc.sensors.step_detector=true
+ro.qc.sensors.step_counter=true
+ro.qualcomm.sensors.georv=true
+debug.qualcomm.sns.hal=w
+debug.qualcomm.sns.daemon=w
+debug.qualcomm.sns.libsensor1=w
