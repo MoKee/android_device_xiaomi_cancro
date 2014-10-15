@@ -37,7 +37,6 @@
     <bool name="config_hotswapCapable">true</bool>
     <bool translatable="false" name="skip_restoring_network_selection">true</bool>
     <bool name="config_cellBroadcastAppLinks">true</bool>
-    <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
 
     <integer name="config_lightSensorWarmupTime">500</integer>
     <integer name="config_radioScanningTimeout">9000</integer>
