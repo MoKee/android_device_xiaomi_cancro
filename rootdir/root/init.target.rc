@@ -91,7 +91,6 @@ on post-fs-data
     chmod 0660 /dev/sysmatdrv
 
 on boot
-    insmod /system/lib/modules/adsprpc.ko
     chown system system /sys/class/input/input0/enabled
     chown system system /sys/class/input/input1/enabled
     chown system system /sys/class/input/input2/enabled
@@ -101,10 +100,6 @@ on boot
     chown system system /sys/class/input/input6/enabled
     chown system system /sys/bus/i2c/devices/2-004a/golden_ref
     chown system system /sys/bus/i2c/devices/2-004a/golden_en
-    chown system system /sys/bus/i2c/devices/2-0048/auto_tune
-    chown system system /sys/bus/i2c/devices/2-004b/hover_tune
-    chown system system /sys/bus/i2c/devices/2-004b/hover_from_flash
-    exec /system/bin/sh /system/bin/atmel_hover_tune.sh
 
 
 # Dynamically modify golden_ref setting
