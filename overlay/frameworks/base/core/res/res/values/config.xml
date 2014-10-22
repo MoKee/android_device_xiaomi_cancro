@@ -25,8 +25,8 @@
     <bool name="config_unplugTurnsOnScreen">true</bool>
     <bool name="config_animateScreenLights">false</bool>
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
-    <bool name="config_enableNetworkLocationOverlay">false</bool>
-    <bool name="config_enableFusedLocationOverlay">false</bool>
+    <bool name="config_enableNetworkLocationOverlay">true</bool>
+    <bool name="config_enableFusedLocationOverlay">true</bool>
     <bool name="config_dreamsSupported">true</bool>
     <bool name="config_dreamsEnabledByDefault">false</bool>
     <bool name="config_dreamsActivatedOnDockByDefault">true</bool>
