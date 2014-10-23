@@ -62,10 +62,6 @@
     # Allow QMUX daemon to assign port open wait time
     chown -h radio.radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
-    setprop wifi.interface wlan0
-
-    setprop ro.telephony.call_ring.multiple false
-
     #Set SUID bit for usbhub
     chmod -h 4755 /system/bin/usbhub
     chmod -h 755 /system/bin/usbhub_init
@@ -151,11 +147,11 @@
     chown -h system.system /sys/power/autosleep
     chown -h system.system /sys/power/state
     chown -h system.system /sys/power/wakeup_count
-    chown -h radio.system /sys/power/wake_lock
-    chown -h radio.system /sys/power/wake_unlock
-    chmod -h 0660 /sys/power/state
-    chmod -h 0660 /sys/power/wake_lock
-    chmod -h 0660 /sys/power/wake_unlock
+    chown -h root.system /sys/power/wake_lock
+    chown -h root.system /sys/power/wake_unlock
+    chmod -h 0664 /sys/power/state
+    chmod -h 0664 /sys/power/wake_lock
+    chmod -h 0664 /sys/power/wake_unlock
 
     chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
@@ -177,7 +173,7 @@
 
     # Assume SMP uses shared cpufreq policy for all CPUs
     chown -h system.system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod -h 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod -h 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 
     chown -h system.system /sys/class/timed_output/vibrator/enable
     chown -h system.system /sys/class/leds/keyboard-backlight/brightness

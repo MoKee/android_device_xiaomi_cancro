@@ -184,6 +184,7 @@ on boot
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
+    restorecon_recursive /data/nfc
 
     # For power module access
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -271,6 +272,7 @@ on post-fs-data
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
+    restorecon_recursive /data/misc/audio
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
@@ -315,6 +317,7 @@ on post-fs-data
 
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
+    restorecon_recursive /data/time
 
     mkdir /data/audio/ 0770 media audio
 
@@ -513,7 +516,8 @@ service qmuxd /system/bin/qmuxd
 
 service netmgrd /system/bin/netmgrd
     class main
-    disabled
+    user root
+    group radio
 
 service sensors /system/bin/sensors.qcom
     class late_start
@@ -839,3 +843,9 @@ service modem_dump /system/bin/subsystem_ramdump 2 0
 on property:persist.radio.ramdump_sdcard=1
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
     start modem_dump
+
+#temporary
+on property:sys.boot_completed=1
+    setprop pm.sleep_mode 1
+    setprop ro.ril.disable.power.collapse 0
+    write /sys/module/msm_thermal/parameters/enabled "Y"
