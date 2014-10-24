@@ -846,6 +846,6 @@ on property:persist.radio.ramdump_sdcard=1
 
 #temporary
 on property:sys.boot_completed=1
-    setprop pm.sleep_mode 1
+    setprop pm.sleep_mode 0
     setprop ro.ril.disable.power.collapse 0
     write /sys/module/msm_thermal/parameters/enabled "Y"
