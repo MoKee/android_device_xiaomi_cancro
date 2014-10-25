@@ -176,6 +176,9 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 # Enable CPU boosting events in the power HAL
 TARGET_USES_CPU_BOOST_HINT := true
 
+# Charger
+BOARD_CHARGER_ENABLE_SUSPEND := true
+
 # fix this up by examining /proc/mtd on a running device
 TARGET_USERIMAGES_USE_EXT4         := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x01000000
