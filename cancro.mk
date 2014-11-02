@@ -331,7 +331,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=400 \
+    ro.sf.lcd_density=420 \
     persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.logs=0 \
     debug.composition.type=dyn \
