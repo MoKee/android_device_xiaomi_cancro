@@ -11,6 +11,11 @@ LOCAL_PATH := device/xiaomi/cancro
  PRODUCT_COPY_FILES += \
      vendor/pa/prebuilt/bootanimation/1920x1080.zip:system/media/bootanimation.zip
 
+ # USB
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+persist.sys.usb.config=mtp \
+persist.usb.hvdcp.detect=true
+
 # Charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/chargeonlymode:root/sbin/chargeonlymode
