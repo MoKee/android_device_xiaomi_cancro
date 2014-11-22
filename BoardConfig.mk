@@ -41,6 +41,8 @@ BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 ADD_RADIO_FILES ?= true
 TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)
 
+TARGET_KERNEL_CONFIG := aosp_cancro_defconfig
+TARGET_KERNEL_SOURCE := /home/audahadi/kernel_dev/kernel_msm
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE        := 0x00000000
@@ -85,10 +87,10 @@ QCOM_FM_ENABLED := true
 #CM_POWERHAL_EXTENSION := qcom
 
 # CM Hardware
-BOARD_HARDWARE_CLASS += device/xiaomi/cancro/cmhw
+#BOARD_HARDWARE_CLASS += device/xiaomi/cancro/cmhw
 
 # Lights
-TARGET_PROVIDES_LIBLIGHT := true
+#TARGET_PROVIDES_LIBLIGHT := true
 
 # Consumer IR
 TARGET_PROVIDES_CONSUMERIR_HAL := true
