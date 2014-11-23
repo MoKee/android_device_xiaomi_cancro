@@ -201,7 +201,7 @@
 
     <EncoderProfile quality="4kuhd" fileFormat="mp4" duration="30">
       <Video codec="h264"
-            bitRate="40000000"
+            bitRate="100000000"
             width="3840"
             height="2160"
             frameRate="30" />
@@ -418,20 +418,6 @@
              bitRate="156000"
              sampleRate="48000"
              channels="2" />
-    </EncoderProfile>
-
-    <EncoderProfile quality="timelapse4kuhd" fileFormat="mp4" duration="30">
-      <Video codec="h264"
-            bitRate="100000000"
-            width="3840"
-            height="2160"
-            frameRate="30" />
-
-      <!-- audio setting is ignored -->
-      <Audio codec="aac"
-            bitRate="156000"
-            sampleRate="48000"
-            channels="2" />
     </EncoderProfile>
 
         <ImageEncoding quality="95" />

@@ -1,27 +1,39 @@
-## Build and run dtbtool
-DTBTOOL := $(HOST_OUT_EXECUTABLES)/dtbToolCM$(HOST_EXECUTABLE_SUFFIX)
-INSTALLED_DTIMAGE_TARGET := $(PRODUCT_OUT)/dt.img
+LOCAL_PATH := $(call my-dir)
 
-$(INSTALLED_DTIMAGE_TARGET): $(DTBTOOL) $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr $(INSTALLED_KERNEL_TARGET)
-	@echo -e ${CL_CYN}"Start DT image: $@"${CL_RST}
-	$(call append-dtb)
-	$(call pretty,"Target dt image: $(INSTALLED_DTIMAGE_TARGET)")
-	$(hide) $(DTBTOOL) -2 -o $(INSTALLED_DTIMAGE_TARGET) -s $(BOARD_KERNEL_PAGESIZE) -p $(KERNEL_OUT)/scripts/dtc/ $(KERNEL_OUT)/arch/arm/boot/
-	@echo -e ${CL_CYN}"Made DT image: $@"${CL_RST}
+# Android makefile for the WLAN Module
+ifneq ($(filter cancro,$(TARGET_DEVICE)),)
+
+#Create symbolic link
+$(shell mkdir -p $(TARGET_OUT)/lib/modules; \
+        ln -sf /system/lib/modules/pronto/pronto_wlan.ko \
+               $(TARGET_OUT)/lib/modules/wlan.ko)
+endif
+
+uncompressed_ramdisk := $(PRODUCT_OUT)/ramdisk.cpio
+$(uncompressed_ramdisk): $(INSTALLED_RAMDISK_TARGET)
+	zcat $< > $@
+
+DTBTOOL := $(LOCAL_PATH)/mkbootimg_dtb
+KERNEL := $(LOCAL_PATH)/kernel
+DTB := $(LOCAL_PATH)/dt.img
+
+INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
+INSTALLED_RECOVERYIMAGE_TARGET := $(PRODUCT_OUT)/recovery.img
 
 ## Overload bootimg generation: Same as the original, + --dt arg
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(INSTALLED_DTIMAGE_TARGET)
-	$(call pretty,"Target boot image: $@")
-	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --dt $(INSTALLED_DTIMAGE_TARGET) --output $@
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES)
+	#@echo ----- Making boot image ------
+	#$(hide) mkbootimg --kernel $(PRODUCT_OUT)/kernel --ramdisk $(PRODUCT_OUT)/ramdisk.img --cmdline "$(BOARD_KERNEL_CMDLINE)" --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) $(BOARD_MKBOOTIMG_ARGS) -o $(INSTALLED_BOOTIMAGE_TARGET)
+	@echo ----- Made boot image -------- $@
+	$(hide) $(DTBTOOL) --kernel $(KERNEL) --ramdisk $(PRODUCT_OUT)/ramdisk.img --cmdline "$(BOARD_KERNEL_CMDLINE)" --base $(BOARD_KERNEL_BASE) --offset 0x2000000 --dt $(DTB) --pagesize 2048 --tags-addr 0x01E00000 -o $(INSTALLED_BOOTIMAGE_TARGET)
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_BOOTIMAGE_PARTITION_SIZE),raw)
-	@echo -e ${CL_CYN}"Made boot image: $@"${CL_RST}
-
-## Overload recoveryimg generation: Same as the original, + --dt arg
-$(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_DTIMAGE_TARGET) \
-		$(recovery_ramdisk) \
-		$(recovery_kernel)
-	@echo -e ${CL_CYN}"----- Making recovery image ------"${CL_RST}
-	$(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --dt $(INSTALLED_DTIMAGE_TARGET) --output $@
-	$(hide) $(call assert-max-image-size,$@,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE),raw)
-	@echo -e ${CL_CYN}"Made recovery image: $@"${CL_RST}
+	@echo ----- Added DTB ------------------ $@
 	
+$(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) \
+	$(recovery_ramdisk) \
+	$(recovery_kernel)
+	#@echo ----- Making recovery image ------
+	#$(hide) mkbootimg --kernel $(PRODUCT_OUT)/kernel --ramdisk $(PRODUCT_OUT)/ramdisk-recovery.img --cmdline "$(BOARD_KERNEL_CMDLINE)" --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) $(BOARD_MKBOOTIMG_ARGS) -o $(INSTALLED_RECOVERYIMAGE_TARGET)
+	@echo ----- Made recovery image -------- $@
+	$(hide) $(DTBTOOL) --kernel $(KERNEL) --ramdisk $(PRODUCT_OUT)/ramdisk-recovery.img --cmdline "console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37" --base 0x00000000 --offset 0x2000000 --dt $(DTB) --pagesize 2048 --tags-addr 0x01E00000 -o $(PRODUCT_OUT)/recovery.img
+	@echo ----- Added DTB ------------------ $@

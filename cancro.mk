@@ -16,6 +16,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 persist.sys.usb.config=mtp \
 persist.usb.hvdcp.detect=true
 
+PRODUCT_TAGS += dalvik.gc.type-precise
+
 # Charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/chargeonlymode:root/sbin/chargeonlymode
@@ -45,7 +47,9 @@ PRODUCT_PACKAGES += \
     dualboot_init
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/kernel/user/drivers/net/wireless/pronto_wlan.ko:system/lib/modules/pronto/pronto_wlan.ko
+    $(LOCAL_PATH)/modules/pronto/pronto_wlan.ko:system/lib/modules/pronto/pronto_wlan.ko \
+    $(LOCAL_PATH)/modules/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
+    $(LOCAL_PATH)/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -90,8 +94,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_3=""
 
 # Lights
-PRODUCT_PACKAGES += \
-    lights.msm8974
+#PRODUCT_PACKAGES += \
+#    lights.msm8974
 
 # Power
 PRODUCT_PACKAGES += \
@@ -128,7 +132,6 @@ PRODUCT_COPY_FILES += \
 # Media profile
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 

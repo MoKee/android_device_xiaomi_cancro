@@ -246,23 +246,23 @@ esac
 case "$target" in
     "msm8974")
         echo 4 > /sys/module/lpm_levels/enable_low_power/l2
-        echo 1 > /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled
+        echo 0 > /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled
-        echo 1 > /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled
+        echo 0 > /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled
-        echo 1 > /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled
+        echo 0 > /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/suspend_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/suspend_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/suspend_enabled
-        echo 1 > /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled
+        echo 0 > /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled
-        echo 1 > /sys/module/msm_pm/modes/cpu0/retention/idle_enabled
+        echo 0 > /sys/module/msm_pm/modes/cpu0/retention/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu1/retention/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu2/retention/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu3/retention/idle_enabled
@@ -296,7 +296,7 @@ case "$target" in
                 echo 1728000 > /sys/module/cpu_boost/parameters/sync_threshold
                 echo 100000 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
                 echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
-                setprop ro.qualcomm.perf.cores_online 2
+                setprop ro.qualcomm.perf.cores_online 1
             ;;
             *)
                 echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -323,9 +323,9 @@ case "$target" in
         echo 1 > /sys/module/msm_thermal/core_control/enabled
         chown -h root.system /sys/devices/system/cpu/mfreq
         chmod -h 220 /sys/devices/system/cpu/mfreq
-        chown -h root.system /sys/devices/system/cpu/cpu1/online
-        chown -h root.system /sys/devices/system/cpu/cpu2/online
-        chown -h root.system /sys/devices/system/cpu/cpu3/online
+        chown -h system.system /sys/devices/system/cpu/cpu1/online
+        chown -h system.system /sys/devices/system/cpu/cpu2/online
+        chown -h system.system /sys/devices/system/cpu/cpu3/online
         chmod -h 664 /sys/devices/system/cpu/cpu1/online
         chmod -h 664 /sys/devices/system/cpu/cpu2/online
         chmod -h 664 /sys/devices/system/cpu/cpu3/online
