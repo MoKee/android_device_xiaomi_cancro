@@ -221,7 +221,7 @@ service imsdatadaemon /system/bin/imsdatadaemon
     disabled
 
 service wcnss-service /system/bin/wcnss_service
-    class late_start
+    class main
     user system
     group system wifi
     oneshot
@@ -310,6 +310,12 @@ on property:persist.sys.display_idle=0
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xF0000
 
 service sensorext /system/bin/sensorextd
+    class late_start
+    user root
+    group root
+    disabled
+
+service sensorservice /system/bin/sensorservice
     class late_start
     user root
     group root

@@ -34,6 +34,3 @@ ro.qualcomm.sensors.georv=true
 debug.qualcomm.sns.hal=w
 debug.qualcomm.sns.daemon=w
 debug.qualcomm.sns.libsensor1=w
-
-# Dont start ATFWD daemon until we can fix it. It's spamming the log
-persist.radio.atfwd.start=false

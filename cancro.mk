@@ -7,14 +7,22 @@ DEVICE_PACKAGE_OVERLAYS += device/xiaomi/cancro/overlay
 
 LOCAL_PATH := device/xiaomi/cancro
 
-# bootanimation
- PRODUCT_COPY_FILES += \
-     vendor/pa/prebuilt/bootanimation/1920x1080.zip:system/media/bootanimation.zip
+# Temporary workaround
+$(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr/include)
+
+# Kernel
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/dt.img:dt.img
 
  # USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-persist.sys.usb.config=mtp \
-persist.usb.hvdcp.detect=true
+    persist.sys.usb.config=mtp
+
+# Development settings
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.debuggable=1 \
+    ro.adb.secure=0 \
+    ro.secure=0
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -47,7 +55,6 @@ PRODUCT_PACKAGES += \
     dualboot_init
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/modules/pronto/pronto_wlan.ko:system/lib/modules/pronto/pronto_wlan.ko \
     $(LOCAL_PATH)/modules/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
     $(LOCAL_PATH)/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
 
@@ -118,6 +125,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     wcnss_service
 
+PRODUCT_PACKAGES += \
+    libwpa_client \
+    hostapd \
+    dhcpcd.conf \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/usr/keylayout/atmel-maxtouch.kl:system/usr/keylayout/atmel-maxtouch.kl \
@@ -133,6 +147,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # NFC
@@ -268,11 +285,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1
 
-# QRNGD
-PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp
-
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8974
@@ -298,13 +310,6 @@ PRODUCT_PACKAGES += \
     AntHalService \
     com.dsi.ant.antradio_library \
     libantradio
-
-# fmradio support
-PRODUCT_PACKAGES += \
-    qcom.fmradio \
-    libqcomfm_jni \
-    FM2 \
-    FMRecord
 
 #Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -345,8 +350,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.logs=0 \
     debug.composition.type=dyn \
     dev.pm.dyn_samplingrate=1 \
-    ril.subscription.types=RUIM \
-    ro.telephony.ril_class=QualcommSharedRIL \
+    ril.subscription.types=NV,RUIM \
     ro.opengles.version=196608 \
     persist.omh.enabled=true \
     persist.sys.ssr.restart_level=3 \

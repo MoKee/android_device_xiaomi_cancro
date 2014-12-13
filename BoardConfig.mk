@@ -9,12 +9,6 @@ TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE  := true
 TARGET_GRALLOC_USES_ASHMEM := false
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
-#TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
-#TARGET_USE_KRAIT_PLD_SET := true
-#TARGET_KRAIT_BIONIC_PLDOFFS := 10
-#TARGET_KRAIT_BIONIC_PLDTHRESH := 10
-#TARGET_KRAIT_BIONIC_BBTHRESH := 64
-#TARGET_KRAIT_BIONIC_PLDSIZE := 64
 
 TARGET_BOARD_PLATFORM := msm8974
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
@@ -41,18 +35,15 @@ BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 
 ADD_RADIO_FILES ?= true
 TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 2048
-#BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-#BOARD_RAMDISK_OFFSET     := 0x02000000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 
 # kernel
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
-TARGET_KERNEL_SOURCE := kernel/kernel_msm
-TARGET_KERNEL_CONFIG := aosp_cancro_defconfig
+TARGET_PREBUILT_KERNEL := $(COMMON_PATH)/kernel
+TARGET_KERNEL_ARCH := arm
 
 # Flags
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
@@ -61,9 +52,7 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
-TARGET_QCOM_AUDIO_VARIANT := caf
-TARGET_QCOM_DISPLAY_VARIANT := caf-new
-TARGET_QCOM_MEDIA_VARIANT := caf-new
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 # Camera
 USE_CAMERA_STUB := true
@@ -72,29 +61,15 @@ COMMON_GLOBAL_CFLAGS += -DOPPO_CAMERA_HARDWARE
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
-AUDIO_FEATURE_ENABLED_PCM_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_MULTIPLE_TUNNEL := true
-BOARD_USE_RESAMPLER_IN_PCM_OFFLOAD_PATH := true
+AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/cancro/bluetooth
 
-# FM
-BOARD_HAVE_QCOM_FM := true
-QCOM_FM_ENABLED := true
-
 # Power HAL
 TARGET_POWERHAL_VARIANT := qcom
-#CM_POWERHAL_EXTENSION := qcom
-
-# CM Hardware
-#BOARD_HARDWARE_CLASS += device/xiaomi/cancro/cmhw
-
-# Lights
-#TARGET_PROVIDES_LIBLIGHT := true
 
 # Consumer IR
 TARGET_PROVIDES_CONSUMERIR_HAL := true
@@ -102,27 +77,17 @@ TARGET_PROVIDES_CONSUMERIR_HAL := true
 # Simple time service client
 BOARD_USES_QC_TIME_SERVICES := true
 
-# SELinux
-BOARD_SEPOLICY_DIRS += \
-   $(COMMON_PATH)/sepolicy
+# Enable Minikin text layout engine (will be the default soon)
+USE_MINIKIN := true
 
-# The list below is order dependent
-BOARD_SEPOLICY_UNION += \
-    file.te \
-    device.te \
-    app.te \
-    cne.te \
-    qmux.te \
-    mpdecision.te \
-    netd.te \
-    thermald.te \
-    ueventd.te \
-    vold.te \
-    file_contexts \
-    genfs_contexts \
-    te_macros
+# Include an expanded selection of fonts
+EXTENDED_FONT_FOOTPRINT := true
 
-PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
+# Disable Block Based OTA
+BLOCK_BASED_OTA := false
+
+# Logging
+TARGET_USES_LOGD := false
 
 # Graphics
 BOARD_EGL_CFG := $(COMMON_PATH)/configs/egl.cfg
@@ -219,5 +184,9 @@ BOARD_CUSTOM_RECOVERY_UI         := \
 endif
 
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+# SELinux policies
+# qcom sepolicy
+include device/qcom/sepolicy/sepolicy.mk
 
 -include vendor/xiaomi/cancro/BoardConfigVendor.mk
