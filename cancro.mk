@@ -234,7 +234,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=true \
     persist.audio.fluence.voicecall=true \
-    af.resampler.quality=4 \
     persist.audio.init_volume_index=1 \
     audio.offload.buffer.size.kb=32 \
     av.offload.enable=true \
