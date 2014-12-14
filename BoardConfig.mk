@@ -177,6 +177,8 @@ BOARD_USES_QC_TIME_SERVICES := true
 # Logging
 TARGET_USES_LOGD := false
 
+WITH_DEXPREOPT := true
+
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
