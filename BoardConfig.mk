@@ -69,6 +69,8 @@ HAVE_ADRENO_SOURCE:= false
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
 
+TARGET_USE_ION_COMPAT := true
+
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
 # Increase the size if shaders of size greater than 12KB are used.
@@ -146,9 +148,6 @@ TARGET_HW_DISK_ENCRYPTION := true
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := true
 
-# Enable CPU boosting events in the power HAL
-TARGET_USES_CPU_BOOST_HINT := true
-
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
@@ -164,9 +163,6 @@ TARGET_USES_BLOCK_BASED_OTA := false
 # Flags
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
-
-# Power HAL
-TARGET_POWERHAL_VARIANT := qcom
 
 # Consumer IR
 TARGET_PROVIDES_CONSUMERIR_HAL := true

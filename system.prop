@@ -4,7 +4,7 @@
 #
 # system.prop for cancro
 #
-ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 

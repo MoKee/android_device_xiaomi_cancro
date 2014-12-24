@@ -187,6 +187,22 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/xtwifi.conf:system/etc/xtwifi.conf \
     $(LOCAL_PATH)/rootdir/system/etc/modem/Diag.cfg:system/etc/modem/Diag.cfg
 
+# Media
+PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libdivxdrmdecrypt \
+    libdashplayer \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
+    libOmxVdec \
+    libOmxVdecHevc \
+    libOmxVenc \
+    libstagefrighthw \
+    qcmediaplayer
+
 PRODUCT_BOOT_JARS += qcmediaplayer
 
 PRODUCT_PACKAGES += \
@@ -246,6 +262,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     copybit.msm8974 \
     gralloc.msm8974 \
+    hwcomposer.msm8974 \
     memtrack.msm8974 \
     liboverlay
 
@@ -254,8 +271,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1
 
 # Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8974
+# PRODUCT_PACKAGES += \
+#    keystore.msm8974
 	
 # IR package
 PRODUCT_PACKAGES += \
