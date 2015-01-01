@@ -37,7 +37,6 @@ on init
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
-    mkdir /storage/emulated/legacy 0555 root root
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /mnt/media_rw/uicc0 0700 media_rw media_rw
@@ -54,6 +53,7 @@ on init
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -224,7 +224,12 @@ on boot
 
 # msm specific files that need to be created on /data
 on post-fs-data
+    # Create directory for TZ Apps
+    mkdir /data/misc/qsee 0770 system system
+
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    mkdir /data/misc/camera 0770 camera camera
+
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
@@ -376,9 +381,6 @@ on property:persist.debug.trace=1
     write /sys/bus/coresight/devices/coresight-etm2/enable 1
     write /sys/bus/coresight/devices/coresight-etm3/enable 1
 
-on property:ro.board.platform=msm7630_fusion
-    start usbhub_init
-
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
@@ -493,7 +495,7 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
-    disabled
+    group system
 
 on property:ro.boot.emmc=true
     start rmt_storage
@@ -598,7 +600,6 @@ service sensors /system/bin/sensors.qcom
     class late_start
     user root
     group root
-    disabled
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -824,6 +825,7 @@ service profiler_daemon /system/bin/profiler_daemon
     group root
     disabled
 
+# virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
 
@@ -917,6 +919,22 @@ on property:persist.radio.ramdump_sdcard=1
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
     start modem_dump
 
-#temporary
-on property:sys.boot_completed=1
-    write /sys/module/msm_thermal/parameters/enabled "Y"
+#To enalbe fast dormancy for CU
+on property:persist.radio.modem=LTE-CU
+    setprop persist.env.fastdorm.enabled true
+    setprop persist.radio.data_no_toggle 1
+    setprop persist.fd.scroff.timer 3000
+    setprop persist.fd.scron.timer 10000
+
+
+service sensorext /system/bin/sensorextd
+    class late_start
+    user root
+    group root
+    disabled
+
+service sensorservice /system/bin/sensorservice
+    class late_start
+    user root
+    group root
+    disabled

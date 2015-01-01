@@ -36,35 +36,27 @@ on init
     # 0 indicates that virtual display is not a Wifi display and that the
     # session is not exercised through RemoteDisplay in the android framework
     setprop persist.sys.wfd.virtual 0
+    # Immersion
+    export VIBE_PIPE_PATH /dev/pipes
+    mkdir /dev/pipes 0771 system system
 
 # import cne init file
-on post-fs
-    export LD_PRELOAD /vendor/lib/libNimsWrap.so
+#on post-fs
+#    export LD_PRELOAD /vendor/lib/libNimsWrap.so
 
 on fs
-    #exec /sbin/dualboot_init ./fstab.qcom
-    #mount_all ./fstab.qcom.patched
-    mount_all ./fstab.qcom
+    mount_all fstab.qcom
 
     # Keeping following partitions outside fstab file. As user may not have
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
 
-#    wait /dev/block/platform/msm_sdcc.1/by-name/system1
-#    exec /sbin/e2fsck_static -y ${LOCAL_ENV_CURR_SYSTEM}
-#    mount ext4 ${LOCAL_ENV_CURR_SYSTEM} /system ro barrier=1
+    restorecon_recursive   /persist
+    mkdir /persist/data 0700 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
 
-#    wait /dev/block/platform/msm_sdcc.1/by-name/userdata
-#    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/userdata /data
-
-#    wait /dev/block/platform/msm_sdcc.1/by-name/cache
-#    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/cache /cache
-
-#    wait /dev/block/platform/msm_sdcc.1/by-name/persist
-#    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/persist /persist
-    restorecon /persist
-
-#    mount vfat ${LOCAL_ENV_CURR_MODEM} /firmware wait ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+    mount vfat ${LOCAL_ENV_CURR_MODEM} /firmware ro context=u:object_r:firmware_file:s0,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
 
 on post-fs-data
     mkdir /data/tombstones 0771 system system
@@ -308,21 +300,3 @@ on property:persist.sys.display_idle=1
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xA0000
 on property:persist.sys.display_idle=0
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xF0000
-
-service sensorext /system/bin/sensorextd
-    class late_start
-    user root
-    group root
-    disabled
-
-service sensorservice /system/bin/sensorservice
-    class late_start
-    user root
-    group root
-    disabled
-
-service wait4sensorhub /system/bin/wait4sensorhub.sh
-    class late_start
-    user root
-    group root
-    oneshot
