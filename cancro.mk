@@ -330,10 +330,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
 ifneq ($(QCPATH),)
 # proprietary wifi display, if available
 PRODUCT_BOOT_JARS += WfdCommon
