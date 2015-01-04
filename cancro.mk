@@ -14,9 +14,8 @@ $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr/include)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/dt.img:dt.img
 
- # USB
+# USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb \
     camera2.portability.force_api=1
 
 # Development settings
@@ -153,6 +152,7 @@ PRODUCT_PACKAGES += \
     libnfc_nci_jni \
     NfcNci \
     Tag \
+    nfc_nci_nfca.default \
     com.android.nfc_extras
 
 PRODUCT_COPY_FILES += \
@@ -292,8 +292,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1
 
 # Keystore
-# PRODUCT_PACKAGES += \
-#    keystore.msm8974
+PRODUCT_PACKAGES += \
+    keystore.msm8974
 	
 # IR package
 PRODUCT_PACKAGES += \
@@ -398,6 +398,10 @@ PRODUCT_COPY_FILES += \
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+ifneq ($(QCPATH),)
+$(call inherit-product-if-exists, $(QCPATH)/prebuilt_HY11/target/product/msm8974/prebuilt.mk)
+endif
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)

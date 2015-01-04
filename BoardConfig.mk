@@ -57,6 +57,8 @@ AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/cancro/bluetooth
+QCOM_BT_USE_SMD_TTY := true
+BLUETOOTH_HCI_USE_MCT := true
 
 # Graphics
 BOARD_EGL_CFG := device/xiaomi/cancro/configs/egl.cfg
@@ -157,14 +159,8 @@ USE_MINIKIN := true
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-# Disable Block Based OTA
-TARGET_USES_BLOCK_BASED_OTA := false
-
-WITH_DEXPREOPT := true
-
 # Flags
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 
 # Consumer IR
 TARGET_PROVIDES_CONSUMERIR_HAL := true
