@@ -108,7 +108,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.msm8974
+    power.qcom
 
 # WiFi
 PRODUCT_COPY_FILES += \
