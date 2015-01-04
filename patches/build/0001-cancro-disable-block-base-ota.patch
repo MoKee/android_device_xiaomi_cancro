@@ -1,0 +1,24 @@
+From 998aeeefac7255f5cf3c9d619d51b7b6dc1141e4 Mon Sep 17 00:00:00 2001
+From: Keyur Maru <kd2maru@gmail.com>
+Date: Sun, 4 Jan 2015 23:53:30 +0530
+Subject: [PATCH] cancro:disable block base ota
+
+---
+ core/Makefile | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/core/Makefile b/core/Makefile
+index 2f87649..9dced1a 100644
+--- a/core/Makefile
++++ b/core/Makefile
+@@ -1651,7 +1651,6 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
+ 	@echo -e ${CL_YLW}"Package OTA:"${CL_RST}" $@"
+ 	$(hide) MKBOOTIMG=$(MKBOOTIMG) \
+ 	   $(OTA_FROM_TARGET_SCRIPT) -v \
+-	   --block \
+ 	   -p $(HOST_OUT) \
+ 	   -k $(KEY_CERT_PAIR) \
+ 	   --backup=$(backuptool) \
+-- 
+2.1.0
+
