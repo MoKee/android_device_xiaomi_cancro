@@ -48,6 +48,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
+TARGET_POWERHAL_VARIANT := qcom
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
