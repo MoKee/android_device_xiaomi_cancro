@@ -218,6 +218,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     av.offload.enable=true \
     audio.offload.gapless.enabled=false \
     audio.offload.disable=1 \
+    use.dedicated.device.for.voip=true \
     use.voice.path.for.pcm.voip=true \
     media.aac_51_output_enabled=true \
     ro.qc.sdk.audio.ssr=false \
