@@ -279,4 +279,7 @@
          config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">71</integer>
 
+    <!-- Disable lockscreen rotation by default -->
+    <bool name="config_enableLockScreenRotation">true</bool>
+
 </resources>
