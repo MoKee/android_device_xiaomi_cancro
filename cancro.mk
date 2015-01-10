@@ -18,12 +18,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
 
-# Development settings
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.debuggable=1 \
-    ro.adb.secure=0 \
-    ro.secure=0
-
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Charger
