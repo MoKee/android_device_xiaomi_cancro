@@ -119,6 +119,7 @@ PRODUCT_COPY_FILES += \
 
 # SoftAP
 PRODUCT_PACKAGES += \
+    libwcnss_qmi \
     wcnss_service
 
 PRODUCT_PACKAGES += \
