@@ -874,6 +874,7 @@ service charger /charger
 service hvdcp /system/bin/hvdcp
     class core
     user root
+    group root
     disabled
 
 on property:persist.usb.hvdcp.detect=true
