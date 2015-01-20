@@ -265,13 +265,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     $(LOCAL_PATH)/configs/libnfc-brcm-20791b05.conf:system/etc/libnfc-brcm-20791b05.conf
 
-# NFC packages
+# NFC
 PRODUCT_PACKAGES += \
-    libnfc-nci \
-    libnfc_nci_jni \
+    nfc_nci.bcm2079x.default \
     NfcNci \
-    Tag \
-    com.android.nfc_extras
+    Tag
 
 # IR package
 PRODUCT_PACKAGES += \
