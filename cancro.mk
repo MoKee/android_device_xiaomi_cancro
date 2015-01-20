@@ -106,6 +106,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=true \
+    use.dedicated.device.for.voip=true \
     audio.offload.pcm.enable=false
 
 #Enable more sensor
