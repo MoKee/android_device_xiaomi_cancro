@@ -106,7 +106,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=true \
-    use.dedicated.device.for.voip=true \
+    use.dedicated.device.for.voip=false \
     audio.offload.pcm.enable=false
 
 #Enable more sensor
@@ -405,7 +405,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
+    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
