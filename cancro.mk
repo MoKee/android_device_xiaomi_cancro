@@ -202,7 +202,7 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.qcom
+    power.msm8974
     
 # Keystore
 PRODUCT_PACKAGES += \
