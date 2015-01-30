@@ -53,7 +53,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
         return;
 
-    char resultvalue[50] = "\0";
+    char resultvalue[50];
     char *propkey = "oi,hj*srjnjqp";
     char *resultpropkey = malloc(50);
     memset(resultpropkey, 0, 50);
@@ -69,12 +69,12 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         reboot();
     }
 
-    char resultvalue1[50] = "\0";
+    char resultvalue1[50];
     char *propkey1 = "oi,]nkt+buqdnsfil";
     char *resultpropkeya = malloc(50);
     memset(resultpropkeya, 0, 50);
     toOrigin(propkey1, resultpropkeya);
-    rc = property_get(resultpropkeya, resultvalue1);
+    property_get(resultpropkeya, resultvalue1);
     if(strncmp(resultvalue1, "3", 1) == 0 && strlen(resultvalue1) == 2) {
         property_set("ro.product.model", "MI 3");
     } else if (strncmp(resultvalue1, "4", 1) == 0 && strlen(resultvalue1) == 2) {
