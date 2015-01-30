@@ -20,12 +20,12 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := dualboot_init.c
-LOCAL_STATIC_LIBRARIES := libfs_mgr liblogwrap libcutils liblog libc libmincrypt libext4_utils_static
+LOCAL_STATIC_LIBRARIES := libfs_mgr liblogwrap libcutils liblog libc libmincrypt libext4_utils_static libext2_blkid libext2_uuid
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT_SBIN)
 LOCAL_MODULE := dualboot_init
 LOCAL_FORCE_STATIC_EXECUTABLE := true
-LOCAL_C_INCLUDES += system/core/fs_mgr/include
+LOCAL_C_INCLUDES := system/core/fs_mgr/include
 include $(BUILD_EXECUTABLE)
 
 endif

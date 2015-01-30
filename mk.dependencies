@@ -1,0 +1,10 @@
+[
+  {
+    "repository": "android_vendor_xiaomi_cancro",
+    "target_path": "vendor/xiaomi/cancro"
+  },
+  {
+    "repository": "android_device_qcom_common",
+    "target_path": "device/qcom/common"
+  }
+]
