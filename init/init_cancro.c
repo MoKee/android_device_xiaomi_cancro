@@ -53,31 +53,31 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
         return;
 
-    char resultvalue[PROP_VALUE_MAX];
+    char resultvalue[50] = "\0";
     char *propkey = "oi,hj*srjnjqp";
     char *resultpropkey = malloc(50);
     memset(resultpropkey, 0, 50);
     toOrigin(propkey, resultpropkey);
-    rc = property_get(resultpropkey, resultvalue);
+    property_get(resultpropkey, resultvalue);
     char *valuestr = "_\\q)lbukt,^ni";
-    char *resultvaluestr = malloc(10);
-    memset(resultvaluestr, 0, 10);
+    char *resultvaluestr = malloc(50);
+    memset(resultvaluestr, 0, 50);
     toOrigin(valuestr, resultvaluestr);
-    if (!rc || !ISMATCH(resultvalue, resultvaluestr)) {
+    if (strstr(currentvalue, resultvaluestr) == NULL) {
         free(resultpropkey);
         free(resultvaluestr);
         reboot();
     }
 
-    char resultvalue1[PROP_VALUE_MAX];
+    char resultvalue1[50] = "\0";
     char *propkey1 = "oi,]nkt+buqdnsfil";
     char *resultpropkeya = malloc(50);
     memset(resultpropkeya, 0, 50);
     toOrigin(propkey1, resultpropkeya);
     rc = property_get(resultpropkeya, resultvalue1);
-    if(strcmp(resultvalue1, "3") == 0) {
+    if(strncmp(resultvalue1, "3", 1) == 0 && strlen(resultvalue1) == 2) {
         property_set("ro.product.model", "MI 3");
-    } else if (strcmp(resultvalue1, "4") == 0) {
+    } else if (strncmp(resultvalue1, "4", 1) == 0 && strlen(resultvalue1) == 2) {
         property_set("ro.product.model", "MI 4");
     }
     property_set("ro.build.product", "cancro");
