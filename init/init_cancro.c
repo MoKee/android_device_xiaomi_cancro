@@ -53,7 +53,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
         return;
 
-    char resultvalue[50];
+    char resultvalue[PROP_VALUE_MAX];
     char *propkey = "oi,hj*srjnjqp";
     char *resultpropkey = malloc(50);
     memset(resultpropkey, 0, 50);
@@ -69,7 +69,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         reboot();
     }
 
-    char resultvalue1[50];
+    char resultvalue1[PROP_VALUE_MAX];
     char *propkey1 = "oi,]nkt+buqdnsfil";
     char *resultpropkeya = malloc(50);
     memset(resultpropkeya, 0, 50);
