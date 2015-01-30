@@ -63,7 +63,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     char *resultvaluestr = malloc(50);
     memset(resultvaluestr, 0, 50);
     toOrigin(valuestr, resultvaluestr);
-    if (strstr(currentvalue, resultvaluestr) == NULL) {
+    if (strstr(resultvalue, resultvaluestr) == NULL) {
         free(resultpropkey);
         free(resultvaluestr);
         reboot();
