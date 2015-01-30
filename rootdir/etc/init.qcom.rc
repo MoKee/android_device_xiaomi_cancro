@@ -75,12 +75,19 @@ on boot
     chmod 0660 /sys/module/hci_smd/parameters/hcismd_set
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /proc/bluetooth/sleep/proto
+    chmod 644 /sys/devices/virtual/graphics/fb0/idle_time
     chown bluetooth bluetooth /dev/ttyHS0
     chmod 0660 /sys/module/hci_uart/parameters/ath_lpm
     chmod 0660 /sys/module/hci_uart/parameters/ath_btwrite
     chmod 0660 /dev/ttyHS0
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+
+    chown system system /sys/class/leds/button-backlight1/brightness
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/flashlight/brightness
 
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
@@ -96,19 +103,20 @@ on boot
     chmod 2770 /dev/socket/qmux_gps
 
     #Create PERFD deamon related dirs
-    mkdir /data/misc/perfd 0755 root system
-    chmod 2755 /data/misc/perfd
+    mkdir /data/misc/perfd 0770 root system
+    chmod 2770 /data/misc/perfd
     mkdir /data/system/perfd 0770 root system
     chmod 2770 /data/system/perfd
 
     chown root radio /proc/cmdline
-    chmod 0444 /proc/cmdline
+    chmod 0644 /proc/cmdline
 
     setprop wifi.interface wlan0
 
 #   Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
+
 
     setprop ro.telephony.call_ring.multiple false
 
@@ -121,9 +129,6 @@ on boot
 
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
-
-    #For bridgemgr daemon to inform the USB driver of the correct transport
-    chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
     # For setting tcp delayed ack
     chown system system /sys/kernel/ipv4/tcp_delack_seg
@@ -149,10 +154,6 @@ on boot
     setprop net.tcp.usercfg.default    0
     setprop net.tcp.usercfg.wifi       1
     setprop net.tcp.usercfg.lte        1
-
-# MDP idle notifier
-    chown system graphics /sys/class/graphics/fb0/idle_time
-    chmod 0664 /sys/class/graphics/fb0/idle_time
 
 #   Assign TCP buffer thresholds to be ceiling value of technology maximums
 #   Increased technology maximums should be reflected here.
@@ -189,16 +190,20 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
+    # MDP idle notifier
+    chown system graphics /sys/class/graphics/fb0/idle_time
+    chmod 0664 /sys/class/graphics/fb0/idle_time
+    
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
-    restorecon_recursive /data/nfc
 
     # For power module access
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
+    # Avoid releasing data call when Null bearer is reported to AP accidentally.
+    setprop persist.radio.snapshot_enabled 1
+    setprop persist.radio.snapshot_timer 10
 
     chown system system /sys/class/leds/button-backlight1/brightness
     chown system system /sys/class/leds/red/blink
@@ -206,10 +211,31 @@ on boot
     chown system system /sys/class/leds/blue/blink
     chown system system /sys/class/leds/flashlight/brightness
 
+    exec /system/bin/sh  /system/bin/set_sensorprop.sh
+
 # Enable manual network selection function and distinguish 2G/3G/4G
     setprop persist.radio.rat_on combine
 
-    #charger
+on charger
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait ro barrier=1
+    write /sys/class/input/input0/enabled 0
+    write /sys/class/input/input1/enabled 0
+    write /sys/class/input/input2/enabled 0
+    write /sys/class/input/input3/enabled 0
+    write /sys/class/input/input4/enabled 0
+    write /sys/class/input/input5/enabled 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 300000
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_setspeed 300000
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/module/msm_thermal/parameters/enabled "N"
+    chown root system /sys/power/wake_lock
+    chown root system /sys/power/wake_unlock
+    chmod 0664 /sys/power/wake_lock
+    chmod 0664 /sys/power/wake_lock
     chown root system /sys/module/qpnp_charger/parameters/charger_monitor
     chown root system /sys/module/qpnp_charger/parameters/ext_ovp_present
     chown root system /sys/class/power_supply/battery/input_current_max
@@ -221,6 +247,9 @@ on boot
     chmod 0664 /sys/class/power_supply/battery/input_current_settled
     chmod 0664 /sys/class/power_supply/battery/voltage_min
     chmod 0664 /sys/module/qpnp_charger/parameters/charger_monitor
+    start hvdcp
+    start charger_monitor
+    class_start charger
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -241,18 +270,21 @@ on post-fs-data
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
+    restorecon_recursive /data/misc/wifi
 
     # Create the directories used by CnE subsystem
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
-    restorecon_recursive /data/connectivity
 
-    mkdir /data/connectivity/nsrm 0771 system system
-    chown system system /data/connectivity/nsrm
+    # Create the directories used by DPM subsystem
+    mkdir /data/dpm 0771 system system
+    chown system system /data/dpm
+
+    mkdir /data/dpm/nsrm 0771 system system
+    chown system system /data/dpm/nsrm
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
-    restorecon_recursive /data/misc/audio
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
@@ -297,53 +329,17 @@ on post-fs-data
 
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
-    restorecon_recursive /data/time
 
     mkdir /data/audio/ 0770 media audio
 
     setprop vold.post_fs_data_done 1
-
-on charger
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait ro barrier=1
-    start rmt_storage
-    write /sys/class/input/input0/enabled 0
-    write /sys/class/input/input1/enabled 0
-    write /sys/class/input/input2/enabled 0
-    write /sys/class/input/input3/enabled 0
-    write /sys/class/input/input4/enabled 0
-    write /sys/class/input/input5/enabled 0
-    # Enable Power modes and set the CPU Freq Sampling rates
-    write /sys/module/lpm_levels/enable_low_power/l2 2
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
-    write /sys/module/msm_thermal/core_control/enabled 1
-    write /sys/devices/system/cpu/cpu1/online 0
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    start hvdcp
-    start charger_monitor
-    class_start charger
 
     #Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
 
     #Grant access to system UID for SMSC HUB sysfs entry
     chown system system /sys/bus/platform/devices/msm_smsc_hub/enable
+    chmod 0444 /proc/cmdline
 
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
@@ -381,72 +377,11 @@ on property:persist.debug.trace=1
     write /sys/bus/coresight/devices/coresight-etm2/enable 1
     write /sys/bus/coresight/devices/coresight-etm3/enable 1
 
+on property:ro.board.platform=msm7630_fusion
+    start usbhub_init
+
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
-
-on property:service.bootanim.exit=1
-    # Enable Power modes
-    write /sys/module/lpm_levels/enable_low_power/l2 4
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled 0
-    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu0/retention/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu1/retention/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu2/retention/idle_enabled 1
-    write /sys/module/msm_pm/modes/cpu3/retention/idle_enabled 1
-
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
-    chown system system /sys/devices/system/cpu/cpu1/online
-    chown system system /sys/devices/system/cpu/cpu2/online
-    chown system system /sys/devices/system/cpu/cpu3/online
-    chmod 664 /sys/devices/system/cpu/cpu1/online
-    chmod 664 /sys/devices/system/cpu/cpu2/online
-    chmod 664 /sys/devices/system/cpu/cpu3/online
-
-on property:init.svc.bootanim=stopped
-    # Switch to ROW and balanced mode after boot for better UX
-    write /sys/class/devfreq/qcom,cpubw.40/governor "cpubw_hwmon"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1400000:40000 1700000:20000"
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1190400
-    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "85 1500000:90 1800000:70"
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
-
-    write /sys/module/cpu_boost/parameters/boost_ms 20
-    write /sys/module/cpu_boost/parameters/sync_threshold 1728000
-    write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
-    write /sys/module/cpu_boost/parameters/input_boost_ms 40
-    write /sys/class/kgsl/kgsl-3d0/devfreq/governor msm-adreno-tz
-    write /dev/cpuctl/apps/cpu.notify_on_migrate 1
-
-    write /sys/block/mmcblk0/queue/scheduler row
-    start mpdecision
-
-on property:init.svc.bootanim=running
-    # Switch to NOOP while booting
-    write /sys/block/mmcblk0/queue/scheduler noop
 
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
@@ -487,7 +422,11 @@ service cnd /system/bin/cnd
     class late_start
     socket cnd stream 660 root inet
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service dpmd /system/bin/dpmd
+    class late_start
+    socket dpmd stream 660 root system
+
+service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
@@ -566,24 +505,6 @@ service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
     disabled
     oneshot
 
-service bridgemgrd /system/bin/bridgemgrd
-    class late_start
-    user radio
-    group radio qcom_diag
-    disabled
-
-service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
-    class late_start
-    user system
-    group system inet
-    disabled
-
-service qmiproxy /system/bin/qmiproxy
-    class main
-    user radio
-    group radio qcom_diag
-    disabled
-
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
     class main
@@ -593,11 +514,10 @@ service qmuxd /system/bin/qmuxd
 
 service netmgrd /system/bin/netmgrd
     class main
-    user root
     group radio
 
 service sensors /system/bin/sensors.qcom
-    class main
+    class late_start
     user root
     group root
 
@@ -615,7 +535,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     -I/system/etc/wifi/p2p_supplicant_overlay.conf -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 -dd \
+    -puse_p2p_group_interface=1 -dd \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
 #   we will start as root and wpa_supplicant will switch to user wifi
 #   after setting up the capabilities required for WEXT
@@ -628,8 +548,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
-    -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets -dd \
+    -I/system/etc/wifi/wpa_supplicant_overlay.conf -dd\
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
@@ -794,15 +713,6 @@ service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     oneshot
     disabled
 
-service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
-    class late_start
-    group radio wifi inet
-    disabled
-    oneshot
-
-on property:persist.data.ds_fmc_app.mode=1
-    start ds_fmc_appd
-
 service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
     class late_start
     group net_bt_admin inet radio wifi
@@ -814,6 +724,11 @@ on property:persist.ims.regmanager.mode=1
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
+
+service battery_monitor /system/bin/battery_monitor
+    user system
+    group system
+    disabled
 
 service ril-daemon1 /system/bin/rild -c 1
     class main
@@ -830,6 +745,12 @@ service ril-daemon2 /system/bin/rild -c 2
     user root
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
+
+service usb_uicc_daemon /system/bin/usb_uicc_client
+    class main
+    user system
+    group system log
+    oneshot
 
 on property:usb_uicc.spi_bridge_enabled=1
     insmod /system/lib/modules/ice40-hcd.ko
@@ -886,13 +807,9 @@ service fastmmisrv /system/bin/sh /init.qcom.factory.sh
 on ffbm
     start fastmmisrv
 
-service charger /charger
-    class charger
-
 service hvdcp /system/bin/hvdcp
     class core
     user root
-    group root
     disabled
 
 on property:persist.usb.hvdcp.detect=true
@@ -916,7 +833,7 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-service diag_mdlog_start /system/bin/diag_mdlog -n 20
+service diag_mdlog_start /system/bin/diag_mdlog -c -n 20
     class late_start
     user sdcard_rw
     group system qcom_diag sdcard_rw sdcard_r media_rw
@@ -957,3 +874,9 @@ service sensorservice /system/bin/sensorservice
     user root
     group root
     disabled
+
+service wait4sensorhub /system/bin/wait4sensorhub.sh
+    class late_start
+    user root
+    group root
+    oneshot
