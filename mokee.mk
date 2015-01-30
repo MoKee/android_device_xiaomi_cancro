@@ -33,8 +33,8 @@ $(call inherit-product, vendor/mk/config/common_full_phone.mk)
 
 PRODUCT_NAME := mk_cancro
 PRODUCT_DEVICE := cancro
-PRODUCT_BRAND := xiaomi
-PRODUCT_MANUFACTURER := xiaomi
+PRODUCT_BRAND := Xiaomi
+PRODUCT_MANUFACTURER := XIAOMI
 PRODUCT_MODEL := MI 3W
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi

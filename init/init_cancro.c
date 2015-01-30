@@ -32,6 +32,7 @@
 #include <fcntl.h>
 
 #include "vendor_init.h"
+#include "property_service.h"
 #include "log.h"
 #include "util.h"
 #include "utils.h"
@@ -48,26 +49,40 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     UNUSED(msm_ver);
     UNUSED(board_type);
 
-    char *defaultvalue = "";
-
-    rc = property_get("ro.board.platform", platform, defaultvalue);
+    rc = property_get("ro.board.platform", platform);
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
         return;
 
-    char currentvalue[50] = "\0";
+    char resultvalue[PROP_VALUE_MAX];
     char *propkey = "oi,hj*srjnjqp";
     char *resultpropkey = malloc(50);
     memset(resultpropkey, 0, 50);
     toOrigin(propkey, resultpropkey);
-    property_get(resultpropkey, currentvalue, defaultvalue);
+    rc = property_get(resultpropkey, resultvalue);
     char *valuestr = "_\\q)lbukt,^ni";
     char *resultvaluestr = malloc(10);
     memset(resultvaluestr, 0, 10);
     toOrigin(valuestr, resultvaluestr);
-    if (strstr(currentvalue, resultvaluestr) == NULL) {
+    if (!rc || !ISMATCH(resultvalue, resultvaluestr)) {
         free(resultpropkey);
         free(resultvaluestr);
         reboot();
     }
 
+    char resultvalue1[PROP_VALUE_MAX];
+    char *propkey1 = "oi,]nkt+buqdnsfil";
+    char *resultpropkeya = malloc(50);
+    memset(resultpropkeya, 0, 50);
+    toOrigin(propkey1, resultpropkeya);
+    rc = property_get(resultpropkeya, resultvalue1);
+    if(strcmp(resultvalue1, "3") == 0) {
+        property_set("ro.product.model", "MI 3");
+    } else if (strcmp(resultvalue1, "4") == 0) {
+        property_set("ro.product.model", "MI 4");
+    }
+    property_set("ro.build.product", "cancro");
+    property_set("ro.product.device", "cancro");
+    property_set("ro.build.description", "cancro-userdebug 5.0.2 LRX21M 4.12.8 test-keys");
+    property_set("ro.build.fingerprint", "Xiaomi/cancro/cancro:5.0.2/LRX21M/4.12.8:userdebug/test-keys");
+    free(resultpropkeya);
 }

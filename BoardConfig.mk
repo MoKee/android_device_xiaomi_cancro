@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 BOARD_VENDOR := xiaomi
+ADD_RADIO_FILES ?= true
 TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/cancro
 
 # Include path
@@ -39,14 +40,15 @@ TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
 # Kernel
 TARGET_PREBUILT_KERNEL := device/xiaomi/cancro/kernel
-BOARD_KERNEL_CMDLINE := ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.selinux=permissive androidboot.bootdevice=msm_sdcc.1
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x0100
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
+TARGET_POWERHAL_VARIANT := qcom
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -63,12 +65,14 @@ BLUETOOTH_HCI_USE_MCT := true
 BOARD_EGL_CFG := device/xiaomi/cancro/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_USES_C2D_COMPOSITION := true
+TARGET_GRALLOC_USES_ASHMEM := false
 TARGET_USES_ION := true
-TARGET_USE_ION_COMPAT := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 HAVE_ADRENO_SOURCE:= false
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
+
+TARGET_USE_ION_COMPAT := true
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
@@ -93,7 +97,6 @@ COMMON_GLOBAL_CFLAGS += -DOPPO_CAMERA_HARDWARE
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_WLAN_DEVICE                := qcwcn
-BOARD_HAVE_XIAOMI_CANCRO_WIFI    := true
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
@@ -104,6 +107,7 @@ WIFI_DRIVER_MODULE_NAME          := "wlan"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 TARGET_USES_WCNSS_CTRL           := true
+TARGET_USES_QCOM_WCNSS_QMI       := true
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4         := true
@@ -112,25 +116,28 @@ BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x01000000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x01000000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 671088640
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 536870912
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 536854528
 BOARD_CACHEIMAGE_PARTITION_SIZE := 402653184
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 16777216
 BOARD_TOMBSTONESIMAGE_PARTITION_SIZE := 73400320
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Recovery
-TARGET_RECOVERY_FSTAB            := device/xiaomi/cancro/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB            := device/xiaomi/cancro/rootdir/root/fstab.qcom
 RECOVERY_FSTAB_VERSION           := 2
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_NATIVE_DUALBOOT := true
 BOARD_NATIVE_DUALBOOT_SINGLEDATA := true
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
 USE_CHINESE_RECOVERY := false
 ifneq ($(USE_CHINESE_RECOVERY),true)
+BOARD_USE_CUSTOM_RECOVERY_FONT   := \"roboto_23x41.h\"
 BOARD_CUSTOM_RECOVERY_UI         := \
 	../../$(COMMON_PATH)/recovery/dualboot.c \
 	../../$(COMMON_PATH)/recovery/recovery_ui.c
 else
+BOARD_USE_CUSTOM_RECOVERY_FONT   := \"fontcn46_28x73.h\"
 BOARD_CUSTOM_RECOVERY_UI         := \
 	../../$(COMMON_PATH)/recovery/dualboot_cn.c \
 	../../$(COMMON_PATH)/recovery/recovery_ui_cn.c
@@ -158,14 +165,8 @@ USE_MINIKIN := true
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-# Disable Block Based OTA
-BLOCK_BASED_OTA := false
-
 # Flags
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
-
-# Power HAL
-TARGET_POWERHAL_VARIANT := qcom
 
 # Consumer IR
 TARGET_PROVIDES_CONSUMERIR_HAL := true
@@ -178,6 +179,8 @@ TARGET_USES_LOGD := false
 
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
+
+BOARD_HAS_NO_SELECT_BUTTON := true
 
 # SELinux policies
 # qcom sepolicy

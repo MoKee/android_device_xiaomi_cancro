@@ -4,12 +4,9 @@
 #
 # system.prop for cancro
 #
-ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
+ro.vendor.extension_library=libqti-perfd-client.so
 rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
-persist.radio.multisim.config=none
-persist.multisim.config=none
-
 
 mmp.enable.3g2=true
 mm.enable.smoothstreaming=true
@@ -19,29 +16,10 @@ mm.enable.qcom_parser=37491
 # 1:ERROR 2:HIGH 4:LOW 0:NOLOGS 7:AllLOGS
 vidc.debug.level=4
 
+# Telephony property for fix cdma
+ro.telephony.default_network=10
+
 # System property for cabl
 ro.qualcomm.cabl=0
 ro.qcom.ad=1
 ro.qcom.ad.calib.data=/data/calib.cfg
-
-# Force camera API version 1
-camera2.portability.force_api=1
-# qualcomm sensors enable 
-ro.qti.sensors.max_geomag_rotv=60
-ro.qti.sensors.max_gyro_rate=200
-ro.qti.sensors.max_accel_rate=200
-ro.qti.sensors.max_grav=200
-ro.qti.sensors.max_rotvec=200
-ro.qti.sensors.max_orient=200
-ro.qti.sensors.max_linacc=200
-ro.qti.sensors.max_gamerv_rate=200
-ro.qti.sensors.smd=true
-ro.qti.sensors.game_rv=true
-ro.qti.sensors.georv=true
-ro.qti.sensors.smgr_mag_cal_en=true
-ro.qti.sensors.step_detector=true
-ro.qti.sensors.step_counter=true
-persist.debug.sensors.hal=w
-debug.qualcomm.sns.daemon=w
-debug.qualcomm.sns.libsensor1=w
-

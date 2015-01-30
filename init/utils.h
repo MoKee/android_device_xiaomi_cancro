@@ -39,21 +39,6 @@ void int2str(char *str, int integer) {
     }
 }
 
-int property_get(const char *key, char *value, const char *default_value) {
-    int len;
-
-    len = __system_property_get(key, value);
-    if (len > 0) {
-        return len;
-    }
-
-    if (default_value) {
-        len = strlen(default_value);
-        memcpy(value, default_value, len + 1);
-    }
-    return len;
-}
-
 void str2int(char *str, int *integer, int count) {
     int tmp_int = 0, zero_count = 1;
     char *p = str;
