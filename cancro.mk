@@ -45,8 +45,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mount_ext4.sh:system/bin/mount_ext4.sh \
     $(LOCAL_PATH)/rootdir/root/e2fsck_static:root/sbin/e2fsck_static
 
-PRODUCT_PACKAGES += \
-    dualboot_init
+#PRODUCT_PACKAGES += \
+#    dualboot_init
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/modules/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
@@ -329,7 +329,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.logs=0 \
     debug.composition.type=dyn \
-    ro.sf.lcd_density=420 \
+    ro.sf.lcd_density=480 \
     dev.pm.dyn_samplingrate=1 \
     ro.opengles.version=196608 \
     wifi.interface=wlan0 \

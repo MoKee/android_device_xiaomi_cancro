@@ -124,57 +124,6 @@
 # set RLIMIT_NICE to allow priorities from 19 to -20
 #    setrlimit 13 40 40
 
-# Memory management.  Basic kernel parameters, and allow the high
-# level system server to be able to adjust the kernel OOM driver
-# parameters to match how it is managing things.
-    echo 1 > /proc/sys/vm/overcommit_memory
-    echo 4 > /proc/sys/vm/min_free_order_shift
-    chown -h root.system /sys/module/lowmemorykiller/parameters/adj
-    chmod -h 0664 /sys/module/lowmemorykiller/parameters/adj
-    chown -h root.system /sys/module/lowmemorykiller/parameters/minfree
-    chmod -h 0664 /sys/module/lowmemorykiller/parameters/minfree
-
-    # Tweak background writeout
-    echo 200 > /proc/sys/vm/dirty_expire_centisecs
-    echo 5 > /proc/sys/vm/dirty_background_ratio
-
-    # Permissions for System Server and daemons.
-    chown -h radio.system /sys/android_power/state
-    chown -h radio.system /sys/android_power/request_state
-    chown -h radio.system /sys/android_power/acquire_full_wake_lock
-    chown -h radio.system /sys/android_power/acquire_partial_wake_lock
-    chown -h radio.system /sys/android_power/release_wake_lock
-    chown -h system.system /sys/power/autosleep
-    chown -h system.system /sys/power/state
-    chown -h system.system /sys/power/wakeup_count
-    chown -h system.system /sys/power/wake_lock
-    chown -h system.system /sys/power/wake_unlock
-    chmod -h 0664 /sys/power/state
-    chmod -h 0664 /sys/power/wake_lock
-    chmod -h 0664 /sys/power/wake_unlock
-
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-    chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-    chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-    chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-    chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/boost
-    chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/input_boost
-    chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
-    chown -h system.system /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
-    chmod -h 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
-
-    # Assume SMP uses shared cpufreq policy for all CPUs
-    chown -h system.system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod -h 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-
     chown -h system.system /sys/class/timed_output/vibrator/enable
     chown -h system.system /sys/class/leds/keyboard-backlight/brightness
     chown -h system.system /sys/class/leds/lcd-backlight/brightness
@@ -220,14 +169,6 @@
 # Increased technology maximums should be reflected here.
     echo 2097152 > /proc/sys/net/core/rmem_max
     echo 2097152 > /proc/sys/net/core/wmem_max
-
-# Set the property to indicate type of virtual display to 0
-# 0 indicates that virtual display is not a Wifi display and that the
-# session is not exercised through RemoteDisplay in the android framework
-    setprop persist.sys.wfd.virtual 0
-
-# Set this property so surfaceflinger is not started by system_init
-    setprop system_init.startsurfaceflinger 0
 
 # Start the following services needed for fftm
     start config_bluetooth

@@ -20,5 +20,3 @@ vidc.debug.level=4
 ro.qualcomm.cabl=0
 ro.qcom.ad=1
 ro.qcom.ad.calib.data=/data/calib.cfg
-
-qemu.hw.mainkeys=0
