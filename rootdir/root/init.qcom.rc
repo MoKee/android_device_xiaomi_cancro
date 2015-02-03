@@ -208,7 +208,6 @@ on boot
     chown system system /sys/class/leds/green/blink
     chown system system /sys/class/leds/blue/blink
     chown system system /sys/class/leds/flashlight/brightness
-    chown system system /sys/class/leds/flashlight/max_brightness
 
 # Enable manual network selection function and distinguish 2G/3G/4G
     setprop persist.radio.rat_on combine

@@ -16,6 +16,7 @@ PRODUCT_COPY_FILES += \
 
 # USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp \
     camera2.portability.force_api=1
 
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -314,7 +315,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.usb.hvdcp.detect=true \
     ro.nfc.port=I2C \
     ro.fm.transmitter=false \
     persist.sys.root_access=1 \
@@ -341,8 +341,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0 \
-    media.stagefright.use-awesome=true \
+    ro.qualcomm.perf.cores_online=1 \
     debug.mdpcomp.4k2kSplit=1
+
+# Camera configuration
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    camera.disable_zsl_mode=1
 
 # Permissions
 PRODUCT_COPY_FILES += \
