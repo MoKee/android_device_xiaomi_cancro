@@ -20,3 +20,7 @@ vidc.debug.level=4
 ro.qualcomm.cabl=0
 ro.qcom.ad=1
 ro.qcom.ad.calib.data=/data/calib.cfg
+
+ro.qc.sdk.sensors.gestures=true
+ro.qc.sdk.gestures.camera=false
+ro.qc.sdk.camera.facialproc=false

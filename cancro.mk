@@ -237,7 +237,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.sensors.scrn_ortn=true \
     ro.qualcomm.sensors.georv=true \
     ro.qualcomm.sensors.game_rv=true \
-    ro.qti.sdk.sensors.gestures=true \
     ro.qc.sensors.step_detector=true \
     ro.qc.sensors.step_counter=true \
     ro.qc.sensors.max_geomag_rotvec=true \
@@ -317,7 +316,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.nfc.port=I2C \
     ro.fm.transmitter=false \
-    persist.sys.root_access=1 \
     com.qc.hardware=true \
     qcom.bt.dev_power_class=1 \
     bluetooth.hfp.client=1 \
@@ -335,18 +333,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
     wlan.driver.ath=0 \
-    ril.subscription.types=RUIM \
+    ril.subscription.types=NV,RUIM \
     persist.omh.enabled=true \
     persist.sys.ssr.restart_level=3 \
     persist.timed.enable=true \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0 \
-    ro.qualcomm.perf.cores_online=1 \
+    ro.qualcomm.perf.cores_online=2 \
+    persist.sys.media.use-awesome=true \
     debug.mdpcomp.4k2kSplit=1
-
-# Camera configuration
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    camera.disable_zsl_mode=1
 
 # Permissions
 PRODUCT_COPY_FILES += \
