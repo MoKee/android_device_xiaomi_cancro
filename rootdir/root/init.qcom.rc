@@ -216,6 +216,8 @@ on boot
     chown system system /sys/class/leds/green/blink
     chown system system /sys/class/leds/blue/blink
 
+    exec /system/bin/sh  /system/bin/set_sensorprop.sh
+
 # Enable manual network selection function and distinguish 2G/3G/4G
     setprop persist.radio.rat_on combine
 
@@ -606,7 +608,7 @@ service netmgrd /system/bin/netmgrd
     group radio
 
 service sensors /system/bin/sensors.qcom
-    class main
+    class late_start
     user root
     group root
 
@@ -965,3 +967,9 @@ service sensorservice /system/bin/sensorservice
     user root
     group root
     disabled
+
+service wait4sensorhub /system/bin/wait4sensorhub.sh
+    class late_start
+    user root
+    group root
+    oneshot
