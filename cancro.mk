@@ -105,6 +105,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     power.msm8974
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/changepowermode.sh:system/bin/changepowermode.sh \
+
 # WiFi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
