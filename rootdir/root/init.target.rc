@@ -93,26 +93,24 @@ on boot
     chown system system /sys/bus/i2c/devices/2-004a/golden_ref
     chown system system /sys/bus/i2c/devices/2-004a/golden_en
     chown system system /sys/bus/i2c/devices/2-0048/auto_tune
-    write /sys/class/input/input0/enabled 1
-    write /sys/class/input/input1/enabled 1
-    write /sys/class/input/input2/enabled 1
-    write /sys/class/input/input3/enabled 1
-    write /sys/class/input/input4/enabled 1
-    write /sys/class/input/input5/enabled 1
+    chown system system /sys/bus/i2c/devices/2-004b/hover_tune
+    chown system system /sys/bus/i2c/devices/2-004b/hover_from_flash
+    chown system system /sys/devices/fda0c000.qcom,cci/1c.qcom,actuator/bu63163
+    exec /system/bin/sh /system/bin/atmel_hover_tune.sh
 
 # Dynamically modify golden_ref setting
-#on property:persist.atmel.golden.enable=1
-#    write /sys/bus/i2c/devices/2-004a/golden_en 1
+on property:persist.atmel.golden.enable=1
+    write /sys/bus/i2c/devices/2-004a/golden_en 1
 
 #on property:persist.atmel.golden.enable=0
-#    write /sys/bus/i2c/devices/2-004a/golden_en 0
+    write /sys/bus/i2c/devices/2-004a/golden_en 0
 
 # Allow usb charging to be disabled persistently
-#on property:persist.usb.chgdisabled=1
-#    write /sys/class/power_supply/battery/charging_enabled 0
+on property:persist.usb.chgdisabled=1
+    write /sys/class/power_supply/battery/charging_enabled 0
 
-#on property:persist.usb.chgdisabled=0
-#    write /sys/class/power_supply/battery/charging_enabled 1
+on property:persist.usb.chgdisabled=0
+    write /sys/class/power_supply/battery/charging_enabled 1
 
 # NFC
    setprop ro.nfc.port "I2C"
