@@ -28,6 +28,7 @@ PRODUCT_COPY_FILES += \
 # Init
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/fstab.qcom:root/fstab.qcom \
+    $(LOCAL_PATH)/rootdir/root/init.rc:root/init.rc \
     $(LOCAL_PATH)/rootdir/root/init.class_main.sh:root/init.class_main.sh \
     $(LOCAL_PATH)/rootdir/root/init.mdm.sh:root/init.mdm.sh \
     $(LOCAL_PATH)/rootdir/root/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
@@ -107,6 +108,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/changepowermode.sh:system/bin/changepowermode.sh \
+    $(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -342,7 +344,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0 \
-    ro.qualcomm.perf.cores_online=2 \
+    ro.qualcomm.perf.cores_online=1 \
     persist.sys.media.use-awesome=true \
     debug.mdpcomp.4k2kSplit=1
 
