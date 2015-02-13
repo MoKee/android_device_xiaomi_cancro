@@ -19,8 +19,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     camera2.portability.force_api=1
 
-PRODUCT_TAGS += dalvik.gc.type-precise
-
 # Charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/chargeonlymode:root/sbin/chargeonlymode
