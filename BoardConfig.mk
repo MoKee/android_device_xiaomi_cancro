@@ -76,6 +76,11 @@ SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
 
 TARGET_USE_ION_COMPAT := true
 
+# Vendor Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_msm
+TARGET_LIBINIT_DEFINES_FILE := device/xiaomi/cancro/init/init_cancro.c
+
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
 # Increase the size if shaders of size greater than 12KB are used.
@@ -178,16 +183,6 @@ TARGET_USES_LOGD := false
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
-
-# Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),user)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-    endif
-  endif
-endif
-DONT_DEXPREOPT_PREBUILTS := true
 
 # SELinux policies
 # qcom sepolicy

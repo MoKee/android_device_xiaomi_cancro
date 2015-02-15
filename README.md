@@ -1,4 +1,4 @@
-Copyright 2014 - The CyanogenMod Project
+Copyright 2014 - The MoKee OpenSource Project
 
 Xiaomi Mi3
 ==============
@@ -20,4 +20,4 @@ Camera  | 13MPx, LED Flash
 
 ![Xiaomi Mi3](http://cdn.gsmarena.com/vv/reviewsimg/xiaomi-mi-3/gal/gsmarena_004.jpg "Xiaomi Mi3 in black")
 
-This branch is for building CyanogenMod 11 (or Android KitKat 4.4 AOSP based roms) ROMS.
+This branch is for building MoKee OpenSource 50 (or Android Lollipop 5.0 AOSP based roms) ROMS.
