@@ -76,7 +76,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     toOrigin(propkey1, resultpropkeya);
     property_get(resultpropkeya, resultvalue1);
     if(strncmp(resultvalue1, "3", 1) == 0 && strlen(resultvalue1) == 2) {
-        property_set("ro.product.model", "MI 3");
+        property_set("ro.product.model", "MI 3W");
     } else if (strncmp(resultvalue1, "4", 1) == 0 && strlen(resultvalue1) == 2) {
         property_set("ro.product.model", "MI 4");
     }
