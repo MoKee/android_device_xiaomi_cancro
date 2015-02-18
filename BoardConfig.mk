@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 BOARD_VENDOR := xiaomi
-ADD_RADIO_FILES ?= true
-TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/cancro
 
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/cancro/include
