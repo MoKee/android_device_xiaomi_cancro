@@ -52,12 +52,12 @@ case "$target" in
                  echo interactive                          > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
                  echo "20000 1400000:40000 1700000:20000"  > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
                  echo 90                                   > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-                 echo 1190400                              > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+                 echo 1497600                              > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                  echo "85 1500000:90 1800000:70"           > /sys/devices/system/cpu/cpufreq/interactive/target_loads
                  echo 40000                                > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                  echo 20                                   > /sys/module/cpu_boost/parameters/boost_ms
                  echo 1728000                              > /sys/module/cpu_boost/parameters/sync_threshold
-                 echo 1190400                              > /sys/module/cpu_boost/parameters/input_boost_freq
+                 echo 1497600                              > /sys/module/cpu_boost/parameters/input_boost_freq
                  echo 40                                   > /sys/module/cpu_boost/parameters/input_boost_ms
                  echo 578000000                            > /sys/class/kgsl/kgsl-3d0/max_gpuclk
                  echo "cpubw_hwmon"                        > $dev_governor
@@ -79,7 +79,7 @@ case "$target" in
                  echo conservative                            > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
                  echo 0                                    > /sys/module/cpu_boost/parameters/boost_ms
                  echo 960000                               > /sys/module/cpu_boost/parameters/sync_threshold
-                 echo 960000                               > /sys/module/cpu_boost/parameters/input_boost_freq
+                 echo 1497600                               > /sys/module/cpu_boost/parameters/input_boost_freq
                  echo 40                                   > /sys/module/cpu_boost/parameters/input_boost_ms
                  echo 330000000                            > /sys/class/kgsl/kgsl-3d0/max_gpuclk
                  echo "cpubw_hwmon"                        > $dev_governor
@@ -125,15 +125,14 @@ case "$target" in
                  echo 2457600                              > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
                  echo "20000 1400000:40000 1700000:20000"  > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
                  echo 90                                   > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-                 echo 1190400                              > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+                 echo 1497600                              > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                  echo "85 1500000:99"                      > /sys/devices/system/cpu/cpufreq/interactive/target_loads
                  echo 40000                                > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                  echo 20                                   > /sys/module/cpu_boost/parameters/boost_ms
-                 echo 1497600                              > /sys/module/cpu_boost/parameters/sync_threshold
-                 echo 1190400                              > /sys/module/cpu_boost/parameters/input_boost_freq
+                 echo 1728000                              > /sys/module/cpu_boost/parameters/sync_threshold
+                 echo 1497600                              > /sys/module/cpu_boost/parameters/input_boost_freq
                  echo 40                                   > /sys/module/cpu_boost/parameters/input_boost_ms
                  echo 578000000                            > /sys/class/kgsl/kgsl-3d0/max_gpuclk
-                 echo msm-adreno-tz                        > /sys/class/kgsl/kgsl-3d0/devfreq/governor
                  echo "cpubw_hwmon"                        > $dev_governor
                  start mpdecision
              ;;
