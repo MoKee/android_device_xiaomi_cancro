@@ -60,6 +60,7 @@ case "$target" in
                  echo 1497600                              > /sys/module/cpu_boost/parameters/input_boost_freq
                  echo 40                                   > /sys/module/cpu_boost/parameters/input_boost_ms
                  echo 578000000                            > /sys/class/kgsl/kgsl-3d0/max_gpuclk
+                 echo msm-adreno-tz                          > /sys/class/kgsl/kgsl-3d0/devfreq/governor
                  echo "cpubw_hwmon"                        > $dev_governor
              ;;
              "0")
@@ -82,6 +83,7 @@ case "$target" in
                  echo 1497600                               > /sys/module/cpu_boost/parameters/input_boost_freq
                  echo 40                                   > /sys/module/cpu_boost/parameters/input_boost_ms
                  echo 330000000                            > /sys/class/kgsl/kgsl-3d0/max_gpuclk
+                 echo msm-adreno-tz                          > /sys/class/kgsl/kgsl-3d0/devfreq/governor
                  echo "cpubw_hwmon"                        > $dev_governor
               ;;
         esac
@@ -133,6 +135,7 @@ case "$target" in
                  echo 1497600                              > /sys/module/cpu_boost/parameters/input_boost_freq
                  echo 40                                   > /sys/module/cpu_boost/parameters/input_boost_ms
                  echo 578000000                            > /sys/class/kgsl/kgsl-3d0/max_gpuclk
+                 echo msm-adreno-tz                          > /sys/class/kgsl/kgsl-3d0/devfreq/governor
                  echo "cpubw_hwmon"                        > $dev_governor
                  start mpdecision
              ;;
