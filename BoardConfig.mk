@@ -15,8 +15,10 @@
 #
 BOARD_VENDOR := xiaomi
 
+CANCRO_PATH := device/xiaomi/cancro
+
 # Include path
-TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/cancro/include
+TARGET_SPECIFIC_HEADER_PATH := $(CANCRO_PATH)/include
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
@@ -37,7 +39,7 @@ TARGET_CPU_VARIANT := krait
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
 # Kernel
-TARGET_PREBUILT_KERNEL := device/xiaomi/cancro/kernel
+TARGET_PREBUILT_KERNEL := $(CANCRO_PATH)/kernel
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.selinux=permissive androidboot.bootdevice=msm_sdcc.1
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE        := 0x00000000
@@ -47,11 +49,12 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
 TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_LIBINIT_DEFINES_FILE := device/xiaomi/cancro/init/init_cancro.c
+TARGET_LIBINIT_DEFINES_FILE := $(CANCRO_PATH)/init/init_cancro.c
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_POWERHAL_VARIANT := qcom
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(CANCRO_PATH)/power/power_ext.c
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -60,12 +63,12 @@ AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/cancro/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(CANCRO_PATH)/bluetooth
 QCOM_BT_USE_SMD_TTY := true
 BLUETOOTH_HCI_USE_MCT := true
 
 # Graphics
-BOARD_EGL_CFG := device/xiaomi/cancro/configs/egl.cfg
+BOARD_EGL_CFG := $(CANCRO_PATH)/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_GRALLOC_USES_ASHMEM := false
@@ -120,7 +123,7 @@ BOARD_PERSISTIMAGE_PARTITION_SIZE := 16384000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Recovery
-TARGET_RECOVERY_FSTAB            := device/xiaomi/cancro/rootdir/root/fstab.qcom
+TARGET_RECOVERY_FSTAB            := $(CANCRO_PATH)/rootdir/root/fstab.qcom
 RECOVERY_FSTAB_VERSION           := 2
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_NATIVE_DUALBOOT := true
@@ -144,7 +147,7 @@ endif
 TARGET_NO_RPC := true
 
 # GPS HAL lives here
-TARGET_GPS_HAL_PATH := device/xiaomi/cancro/gps
+TARGET_GPS_HAL_PATH := $(CANCRO_PATH)/gps
 TARGET_PROVIDES_GPS_LOC_API := true
 
 # Use HW crypto for ODE
