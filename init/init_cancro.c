@@ -82,7 +82,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     }
     property_set("ro.build.product", "cancro");
     property_set("ro.product.device", "cancro");
-    property_set("ro.build.description", "cancro-userdebug 5.0.2 LRX21M 4.12.8 test-keys");
-    property_set("ro.build.fingerprint", "Xiaomi/cancro/cancro:5.0.2/LRX21M/4.12.8:userdebug/test-keys");
+    property_set("ro.build.description", "cancro-userdebug 5.0.2 LRX22G 5.2.13 test-keys");
+    property_set("ro.build.fingerprint", "Xiaomi/cancro/cancro:5.0.2/LRX22G/5.2.13:userdebug/test-keys");
     free(resultpropkeya);
 }
