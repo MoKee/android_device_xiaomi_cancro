@@ -110,10 +110,6 @@ case "$target" in
                 echo 80 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load
             ;;
         esac
-        echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-        echo 300000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
         echo 1 > /sys/module/msm_thermal/core_control/enabled
         chown -h root.system /sys/devices/system/cpu/mfreq
         chmod -h 220 /sys/devices/system/cpu/mfreq
