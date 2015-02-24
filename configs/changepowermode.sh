@@ -19,10 +19,6 @@ case "$target" in
                  echo 2457600                              > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
                  echo 2457600                              > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
                  echo 2457600                              > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
                  echo performance                          > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
                  echo performance                          > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
                  echo performance                          > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
@@ -41,10 +37,6 @@ case "$target" in
                  echo 2265600                              > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
                  echo 2265600                              > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
                  echo 2265600                              > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
                  echo 1                                    > /sys/devices/system/cpu/sched_mc_power_savings
                  echo interactive                          > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
                  echo interactive                          > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
@@ -69,10 +61,6 @@ case "$target" in
                  echo 1036800                              > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
                  echo 1036800                              > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
                  echo 1036800                              > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-                 echo 300000                               > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
                  echo 2                                    > /sys/devices/system/cpu/sched_mc_power_savings
                  echo conservative                            > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
                  echo conservative                            > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
