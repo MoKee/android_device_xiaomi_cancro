@@ -118,6 +118,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv_x5.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_x5.bin
 
 PRODUCT_PACKAGES += \
+    dhcpcd.conf \
     libwpa_client \
     hostapd \
     wpa_supplicant \
