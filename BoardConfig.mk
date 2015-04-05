@@ -157,8 +157,8 @@ BOARD_CUSTOM_RECOVERY_UI         := \
 	../../$(COMMON_PATH)/recovery/recovery_ui_cn.c
 endif
 
-# CM Hardware
-BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/cmhw
+# MK Hardware
+BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/mkhw
 
 # No old RPC for prop
 TARGET_NO_RPC := true
