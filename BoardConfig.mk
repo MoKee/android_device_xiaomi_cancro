@@ -38,12 +38,15 @@ TARGET_CPU_VARIANT := krait
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
 # Kernel
-TARGET_PREBUILT_KERNEL := $(CANCRO_PATH)/kernel
+BOARD_CUSTOM_BOOTIMG_MK := $(CANCRO_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.selinux=permissive androidboot.bootdevice=msm_sdcc.1
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
+TARGET_KERNEL_SOURCE := kernel/xiaomi/cancro
+TARGET_KERNEL_ARCH := arm
+TARGET_KERNEL_CONFIG := cyanogenmod_cancro_defconfig
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
@@ -105,18 +108,18 @@ COMMON_GLOBAL_CFLAGS += -DOPPO_CAMERA_HARDWARE
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
+BOARD_HAS_QCOM_WLAN_SDK          := true
 BOARD_WLAN_DEVICE                := qcwcn
-BOARD_HAVE_XIAOMI_WIFI := true
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
 BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_NAME          := "wlan"
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 TARGET_USES_WCNSS_CTRL           := true
+TARGET_USES_QCOM_WCNSS_QMI       := true
+TARGET_USES_WCNSS_MAC_ADDR_REV   := true
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4         := true
@@ -124,7 +127,8 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16384000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16384000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 671088640
+#BOARD_SYSTEMIMAGE_PARTITION_SIZE := 671088640
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1306003000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 13291503000
 BOARD_USERDATAEXTRAIMAGE_PARTITION_SIZE := 59914792960
 BOARD_USERDATAEXTRAIMAGE_PARTITION_NAME := 64G
@@ -152,6 +156,9 @@ BOARD_CUSTOM_RECOVERY_UI         := \
 	../../$(COMMON_PATH)/recovery/dualboot_cn.c \
 	../../$(COMMON_PATH)/recovery/recovery_ui_cn.c
 endif
+
+# CM Hardware
+BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/cmhw
 
 # No old RPC for prop
 TARGET_NO_RPC := true
@@ -192,5 +199,8 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # SELinux policies
 # qcom sepolicy
 include device/qcom/sepolicy/sepolicy.mk
+
+BOARD_SEPOLICY_DIRS += \
+        $(CANCRO_PATH)/sepolicy
 
 -include vendor/xiaomi/cancro/BoardConfigVendor.mk

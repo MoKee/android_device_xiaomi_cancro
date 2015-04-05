@@ -1,0 +1,2 @@
+# display tuning
+allow system_server display_sysfs:file rw_file_perms;
