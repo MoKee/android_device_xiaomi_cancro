@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2014 The MoKee OpenSource Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package org.cyanogenmod.hardware;
+package org.mokee.hardware;
 
 import java.io.File;
 import java.util.Scanner;
-import org.cyanogenmod.hardware.util.FileUtils;
+import org.mokee.hardware.util.FileUtils;
 
 public class DisplayColorCalibration {
     private static final String COLOR_FILE = "/sys/class/graphics/fb0/rgb";

@@ -46,7 +46,7 @@ BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 TARGET_KERNEL_SOURCE := kernel/xiaomi/cancro
 TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_CONFIG := cyanogenmod_cancro_defconfig
+TARGET_KERNEL_CONFIG := mokee_cancro_defconfig
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
