@@ -8,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
 MSM8974_DTS_NAMES := msm8974
 
-MSM8974_DTS_FILES = $(wildcard $(TOP)/$(TARGET_KERNEL_SOURCE)/arch/arm/boot/dts/msm8974-v2-qrd-evt*.dts)
+MSM8974_DTS_FILES = $(wildcard $(TOP)/$(TARGET_KERNEL_SOURCE)/arch/arm/boot/dts/msm8974pro*mtp*.dts)
 MSM8974_DTS_FILE = $(lastword $(subst /, ,$(1)))
 DTB_FILE = $(addprefix $(KERNEL_OUT)/arch/arm/boot/,$(patsubst %.dts,%.dtb,$(call MSM8974_DTS_FILE,$(1))))
 ZIMG_FILE = $(addprefix $(KERNEL_OUT)/arch/arm/boot/,$(patsubst %.dts,%-zImage,$(call MSM8974_DTS_FILE,$(1))))
@@ -28,11 +28,14 @@ endef
 DTBTOOL := $(HOST_OUT_EXECUTABLES)/dtbToolCM$(HOST_EXECUTABLE_SUFFIX)
 INSTALLED_DTIMAGE_TARGET := $(PRODUCT_OUT)/dt.img
 
+possible_dtb_dirs = $(KERNEL_OUT)/arch/arm/boot/dts/ $(KERNEL_OUT)/arch/arm/boot/
+dtb_dir = $(firstword $(wildcard $(possible_dtb_dirs)))
+
 $(INSTALLED_DTIMAGE_TARGET): $(DTBTOOL) $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr $(INSTALLED_KERNEL_TARGET)
 	@echo -e ${CL_CYN}"Start DT image: $@"${CL_RST}
 	$(call append-msm8974-dtb)
 	$(call pretty,"Target dt image: $(INSTALLED_DTIMAGE_TARGET)")
-	$(hide) $(DTBTOOL) -2 -o $(INSTALLED_DTIMAGE_TARGET) -s $(BOARD_KERNEL_PAGESIZE) -p $(KERNEL_OUT)/scripts/dtc/ $(KERNEL_OUT)/arch/arm/boot/
+	$(hide) $(DTBTOOL) -2 -o $(INSTALLED_DTIMAGE_TARGET) -s $(BOARD_KERNEL_PAGESIZE) -p $(KERNEL_OUT)/scripts/dtc/ $(dtb_dir)
 	@echo -e ${CL_CYN}"Made DT image: $@"${CL_RST}
 
 
