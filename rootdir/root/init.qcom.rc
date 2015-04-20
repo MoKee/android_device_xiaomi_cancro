@@ -343,6 +343,14 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
+    # Adjust vibrator amplitude
+    write /sys/class/timed_output/vibrator/amp 95
+
+    # Hardware tunables
+    chown root system /sys/class/timed_output/vibrator/amp
+    chmod 0664 /sys/class/timed_output/vibrator/amp
+    restorecon /sys/class/timed_output/vibrator/amp
+
 on charger
     wait /dev/block/platform/msm_sdcc.1/by-name/system
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait ro barrier=1
