@@ -47,9 +47,9 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>1</item>
-        <item>4</item>
-        <item>40</item>
+        <item>10</item>
+        <item>64</item>
+        <item>140</item>
         <item>350</item>
         <item>600</item>
         <item>1000</item>
@@ -237,7 +237,7 @@
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
     <integer-array name="config_keyboardTapVibePattern">
-        <item>10</item>
+        <item>7</item>
     </integer-array>
 
     <!-- Control the behavior when the user long presses the home button.
@@ -312,7 +312,7 @@
             2 - Really go to sleep (don't doze)
             3 - Really go to sleep and go home (don't doze)
     -->
-    <integer name="config_shortPressOnPowerBehavior">3</integer>
+    <integer name="config_shortPressOnPowerBehavior">1</integer>
 
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.
