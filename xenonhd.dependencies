@@ -1,6 +1,8 @@
 [
+   {
     "remote": "th",
     "repository": "android_kernel_xiaomi_cancro",
     "target_path": "kernel/xiaomi/cancro",
     "revision": "lp-mr1"
+   }
 ]
