@@ -354,6 +354,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.media.use-awesome=true \
     debug.mdpcomp.4k2kSplit=1
 
+# Enable Adaptive Multi-Rate Wideband
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ril.enable.amr.wideband=1
+
 # Permissions
 PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
