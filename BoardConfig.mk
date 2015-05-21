@@ -57,6 +57,9 @@ TARGET_UNIFIED_DEVICE := true
 TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_LIBINIT_DEFINES_FILE := $(CANCRO_PATH)/init/init_cancro.c
 
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/cancro/releasetools
+
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_POWERHAL_VARIANT := qcom
@@ -204,5 +207,9 @@ include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
         $(CANCRO_PATH)/sepolicy
+
+# Variant linking script
+PRODUCT_COPY_FILES += \
+        device/xiaomi/cancro/releasetools/makelinks.sh:install/bin/makelinks.sh
 
 -include vendor/xiaomi/cancro/BoardConfigVendor.mk
