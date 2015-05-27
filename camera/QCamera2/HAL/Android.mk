@@ -54,11 +54,6 @@ else
 LOCAL_CFLAGS += -DUSE_KK_CODE
 endif
 
-ifeq ($(TARGET_USE_VENDOR_CAMERA_EXT),true)
-LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/msm8974/libgralloc
-else
-LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/libgralloc
-endif
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/media
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
