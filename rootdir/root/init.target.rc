@@ -79,8 +79,12 @@ on post-fs-data
     chmod 0660 /dev/sysmatdrv
 
     # Torch
-    chown system camera /sys/class/leds/flashlight/brightness
-    chmod 0660 /sys/class/leds/flashlight/brightness
+    chown system camera /sys/class/leds/torch-light/brightness
+    chmod 0660 /sys/class/leds/torch-light/brightness
+
+	# Vibrator permissions
+    chown system system /sys/vibrator/pwmvalue
+    chmod 0644 /sys/vibrator/pwmvalue
 
 on boot
     chown system system /sys/class/input/input0/enabled
