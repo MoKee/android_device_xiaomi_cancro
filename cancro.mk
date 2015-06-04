@@ -300,6 +300,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
+# set USB OTG enabled to add support for USB storage type
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.isUsbOtgEnabled=1
+
 # Misc dependency packages
 PRODUCT_PACKAGES += \
     ebtables \
