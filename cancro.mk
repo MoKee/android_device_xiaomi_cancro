@@ -93,7 +93,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/changepowermode.sh:system/bin/changepowermode.sh
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.perf.cores_online=1
+    ro.qualcomm.perf.cores_online=2
 
 # WiFi
 PRODUCT_COPY_FILES += \
