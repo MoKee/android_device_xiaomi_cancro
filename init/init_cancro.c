@@ -80,8 +80,8 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     property_set("ro.product.name", "cancro");
 
     /* set build fingerprint */
-    property_set("ro.build.description", "cancro-userdebug 5.1.1 LMY48B test-keys");
-    property_set("ro.build.fingerprint", "Xiaomi/cancro/cancro:5.1.1/LMY48B:userdebug/test-keys");
+    property_set("ro.build.description", "cancro-userdebug 5.1.1 LMY48G test-keys");
+    property_set("ro.build.fingerprint", "Xiaomi/cancro/cancro:5.1.1/LMY48G:userdebug/test-keys");
 
     /* get raw ID */
     rc = read_file2(RAW_ID_PATH, tmp, sizeof(tmp));
