@@ -1,5 +1,5 @@
-#
-# Copyright (C) 2013 The Android Open Source Project
+# Copyright (C) 2012 The Android Open Source Project
+# Copyright (C) 2015 The MoKee OpenSource Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,4 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-add_lunch_combo cm_cancro-userdebug
+
+""" Custom OTA commands for cancro devices """
+
+def FullOTA_InstallEnd(info):
+  info.script.Mount("/system")
+  info.script.AppendExtra('assert(run_program("/tmp/install/bin/makelinks.sh") == 0);')
+  info.script.Unmount("/system")

@@ -50,12 +50,15 @@ BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 TARGET_KERNEL_SOURCE := kernel/xiaomi/cancro
 TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_CONFIG := cyanogen_cancro_defconfig
+TARGET_KERNEL_CONFIG := mokee_cancro_defconfig
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
 TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_LIBINIT_DEFINES_FILE := $(CANCRO_PATH)/init/init_cancro.c
+
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/cancro/releasetools
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
@@ -137,8 +140,8 @@ BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
-# CM Hardware
-BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/cmhw
+# MK Hardware
+BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/mkhw
 
 # No old RPC for prop
 TARGET_NO_RPC := true
@@ -187,5 +190,9 @@ include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
         $(CANCRO_PATH)/sepolicy
+
+# Variant linking script
+PRODUCT_COPY_FILES += \
+        device/xiaomi/cancro/releasetools/makelinks.sh:install/bin/makelinks.sh
 
 -include vendor/xiaomi/cancro/BoardConfigVendor.mk
