@@ -1,5 +1,5 @@
-# Copyright (C) 2012 The Android Open Source Project
-# Copyright (C) 2015 The MoKee OpenSource Project
+#
+# Copyright (C) 2013 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,12 @@
 # limitations under the License.
 #
 
-""" Custom OTA commands for cancro devices """
+ifeq ($(BOARD_VENDOR),xiaomi)
+ifeq ($(TARGET_BOARD_PLATFORM),msm8974)
 
-def FullOTA_InstallEnd(info):
-  info.script.Mount("/system")
-  info.script.AppendExtra('assert(run_program("/tmp/install/bin/makelinks.sh") == 0);')
-  info.script.Unmount("/system")
+LOC_PATH := $(call my-dir)
+
+include $(call first-makefiles-under,$(LOC_PATH))
+
+endif
+endif

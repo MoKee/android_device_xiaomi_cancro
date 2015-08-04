@@ -1,0 +1,2 @@
+#============= location ==============
+allow location apk_data_file:sock_file { write read };
