@@ -20,6 +20,9 @@ CANCRO_PATH := device/xiaomi/cancro
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(CANCRO_PATH)/include
 
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := $(CANCRO_PATH)/releasetools
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 TARGET_NO_BOOTLOADER := true
