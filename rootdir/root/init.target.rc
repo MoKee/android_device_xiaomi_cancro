@@ -189,11 +189,6 @@ service thermal-engine /system/bin/thermal-engine
    group root
    disabled
 
-service thermal-perf /system/bin/thermal-engine --config /system/etc/thermal-engine-perf.conf
-   class main
-   user root
-   group radio system
-
 service time_daemon /system/bin/time_daemon
    class late_start
    user root
