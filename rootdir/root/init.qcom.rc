@@ -915,6 +915,7 @@ on property:persist.radio.ramdump_sdcard=1
 
 on property:service.bootanim.exit=1
     setprop sys.perf.profile 1
+    write /sys/block/mmcblk0/queue/scheduler fiops
     start mpdecision
 
 #To enalbe fast dormancy for CU
