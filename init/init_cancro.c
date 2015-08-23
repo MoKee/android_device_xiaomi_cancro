@@ -97,12 +97,17 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     /* MI 4W  */
     if (raw_id==1974) {
         property_set("ro.product.model", "MI 4W");
+        property_set("ro.telephony.default_network", "10");
+        property_set("ro.ril.def.preferred.network", "10");
+        property_set("telephony.lteOnGSMDevice", "1");
     } else
 
     /* MI 4LTE-CU  */
     if (raw_id==1972) {
         property_set("ro.product.model", "MI 4LTE");
         property_set("ro.product.name", "cancro_wc_lte");
+        property_set("ro.telephony.default_network", "8");
+        property_set("telephony.lteOnGSMDevice", "1");
     }
 
     /* ??? */

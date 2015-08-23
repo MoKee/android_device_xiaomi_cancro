@@ -290,7 +290,16 @@ PRODUCT_PACKAGES += \
 
 # power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1
+    persist.radio.apm_sim_not_pwdn=0
+
+#Ril
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.default_network=9 \
+    ro.ril.def.preferred.network=9 \
+    telephony.lteOnGsmDevice=0
+#Wifi
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.cne.feature=0
 
 # Keystore
 PRODUCT_PACKAGES += \
