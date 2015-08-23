@@ -10,5 +10,11 @@
     "repository": "Christopher83/arm-cortex_a15-linux-gnueabihf-linaro_4.9",
     "target_path": "prebuilts/gcc/linux-x86/arm/arm-cortex_a15-linux-gnueabihf-linaro_4.9",
     "revision": "master"
+   },
+   {
+    "remote": "gh",
+    "repository": "android_packages_apps_SnapdragonCamera",
+    "target_path": "packages/apps/SnapdragonCamera",
+    "revision": "cm-12.1-caf"
    }
 ]
