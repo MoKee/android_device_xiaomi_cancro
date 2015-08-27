@@ -48,6 +48,13 @@ ui_print() {
 deletenfc() {
 /tmp/busybox rm -rf /system/app/NfcNci/;
 /tmp/busybox rm -rf /system/priv-app/Tag/;
+/tmp/busybox rm -rf /lib/libnfc_ndef.so/;
+/tmp/busybox rm -rf /lib/nfc_nci.bcm2079x.default.so/;
+/tmp/busybox rm -rf /etc/permissions/android.hardware.nfc.hce.xml/;
+/tmp/busybox rm -rf /etc/permissions/android.hardware.nfc.xml/;
+/tmp/busybox rm -rf /etc/permissions/com.mokee.nfc.enhanced.xml/;
+/tmp/busybox rm -rf /etc/libnfc-brcm.conf/;
+/tmp/busybox rm -rf /etc/nfcee_access.xml/;
 ui_print "NFC Deleted!";
 }
 
