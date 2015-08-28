@@ -15,7 +15,7 @@ Basic   | Mi3                               | Mi4
 -------:|:---------------------------------:|------------------------------
 CPU     | 2.3GHz Quad-Core MSM8974AB        | 2.5GHz Quad-Core MSM8974AC
 GPU     | Adreno 330                        | Adreno 330
-Memory  | 2GB RAM                           | 3GB RAM
+Memory  | 2GB RAM                           | 2/3GB RAM
 Shipped Android Version | 4.3 up to 4.4.4   | 4.4.4
 Storage | 16/64GB                           | 16/64GB
 Battery | 3050 mAh                          | 3080 mAh
