@@ -97,4 +97,59 @@
   <string name="set">Tənzimlə</string>
   <string name="user_defind_band_msg">Ən az 1 kanal aralığı ilə 76.0 - 108.0 MHz arası tezlik daxil edin</string>
   <string name="fm_search_no_results">Uyğun stansiyalar tapılmadı</string>
+
+  <!-- program types -->
+  <!-- RBDS (North America) -->
+    <string name="typ_Weather">Hava</string>
+    <string name="typ_Adult_hits">Yetkin hit</string>
+    <string name="typ_Classical">Klassik</string>
+    <string name="typ_Classic_Rock">Klassik Rok</string>
+    <string name="typ_College">Kollec</string>
+    <string name="typ_Foreign_language">Xarici dil</string>
+    <string name="typ_Nostalgia">Nostalji</string>
+    <string name="typ_Personality">Şəxsiyyət</string>
+    <string name="typ_Public">İctimai</string>
+    <string name="typ_Religious_music">Dini musiqi</string>
+    <string name="typ_Religious_talk">Dini söhbət</string>
+    <string name="typ_Rhythm_and_Blues">Rhythm və Blues</string>
+    <string name="typ_Soft">Soft</string>
+    <string name="typ_Soft_Rock">Soft Rock</string>
+    <string name="typ_Soft_Rhythm_and_Blues">Soft Rhythm and Blues</string>
+    <string name="typ_Sports">İdman</string>
+    <string name="typ_Talk">Söhbət</string>
+    <string name="typ_Top_40">Top 40</string>
+
+  <!-- RDS (Europe) -->
+    <string name="typ_All_stations">Bütün kanallar</string>
+    <string name="typ_Culture">Mədəniyyət</string>
+    <string name="typ_Current_affairs">Hazırki hadisələr</string>
+    <string name="typ_Children">Uşaq proqramları</string>
+    <string name="typ_Country">Country musiqi</string>
+    <string name="typ_Documentary">Sənədli</string>
+    <string name="typ_Drama">Dram</string>
+    <string name="typ_Easy_listening">Asan dinlənən musiqi</string>
+    <string name="typ_Education">Təhsil</string>
+    <string name="typ_Emergency">Təcili</string>
+    <string name="typ_Emergency_test">Təcili test</string>
+    <string name="typ_Finance">Maliyyə</string>
+    <string name="typ_Folk">Xalq musiqisi</string>
+    <string name="typ_Information">İnformasiya</string>
+    <string name="typ_Jazz">Jazz musiqisi</string>
+    <string name="typ_Light_classical">Light klassik</string>
+    <string name="typ_Leisure">Leisure</string>
+    <string name="typ_News">Xəbərlər</string>
+    <string name="typ_National">Milli musiqi</string>
+    <string name="typ_Other">Digər musiqi</string>
+    <string name="typ_Oldies">Köhnə musiqi</string>
+    <string name="typ_Phone_in">Telefondan</string>
+    <string name="typ_Pop">Pop musiqi</string>
+    <string name="typ_Religion">Dini</string>
+    <string name="typ_Rock">Rok musiqi</string>
+    <string name="typ_Science">Elm</string>
+    <string name="typ_Serious_classical">Ciddi klassik</string>
+    <string name="typ_Social_affairs">Sosial işlər</string>
+    <string name="typ_Sport">İdman</string>
+    <string name="typ_Travel">Səyahət</string>
+    <string name="typ_Varied">Müxtəlif</string>
+
 </resources>
