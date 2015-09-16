@@ -127,6 +127,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.enable.amr.wideband=1
 
+# KeyLayout
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keylayout/atmel-maxtouch.kl:system/usr/keylayout/atmel-maxtouch.kl \
+    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl:system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl \
+    $(LOCAL_PATH)/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl
 
 # SoftAP
 PRODUCT_PACKAGES += \
@@ -154,7 +160,7 @@ PRODUCT_PACKAGES += \
     Tag
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/nfcchecker.sh:nfcchecker.sh
+    $(LOCAL_PATH)/nfc/nfcchecker.sh:/install/bin/nfcchecker.sh
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
@@ -254,7 +260,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.speaker=true \
     audio.offload.pcm.enable=false
 
-#Enable more sensor
+# Enable more sensor
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.qmd=true \
     ro.qti.sensors.smd=true \
@@ -305,7 +311,6 @@ PRODUCT_PACKAGES += \
 
 # FM Radio
 PRODUCT_PACKAGES += \
-    libqcomfm_jni \
     qcom.fmradio
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -329,7 +334,7 @@ PRODUCT_PACKAGES += \
     com.dsi.ant.antradio_library \
     libantradio
 
-#Bluetooth
+# Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bt.dev_power_class=1 \
     bluetooth.hfp.client=1 \
@@ -401,10 +406,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/android.software.print.xml:system/etc/permissions/android.software.print.xml
-
-ADDITIONAL_DEFAULT_PROPERTIES += \
-ro.secure=0 \
-ro.adb.secure=0
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
