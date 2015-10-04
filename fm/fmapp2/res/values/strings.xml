@@ -172,12 +172,15 @@
     <string name="typ_Classic_Rock">Classic Rock</string>
     <string name="typ_College">College</string>
     <string name="typ_Foreign_language">Foreign language</string>
+    <string name="typ_Hiphop">Hip Hop</string>
     <string name="typ_Nostalgia">Nostalgia</string>
     <string name="typ_Personality">Personality</string>
     <string name="typ_Public">Public</string>
     <string name="typ_Religious_music">Religious music</string>
     <string name="typ_Religious_talk">Religious talk</string>
     <string name="typ_Rhythm_and_Blues">Rhythm and Blues</string>
+    <string name="typ_Spanish_music">Spanish Music</string>
+    <string name="typ_Spanish_talk">Spanish Talk</string>
     <string name="typ_Soft">Soft</string>
     <string name="typ_Soft_Rock">Soft Rock</string>
     <string name="typ_Soft_Rhythm_and_Blues">Soft Rhythm and Blues</string>
