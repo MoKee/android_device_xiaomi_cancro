@@ -362,6 +362,19 @@ on post-fs-data
     chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
     chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
     restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
+    # HighTouchSensitivity
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
 
     # HighTouchSensitivity
     chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
