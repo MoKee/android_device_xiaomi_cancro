@@ -313,19 +313,7 @@
          rotations as the default behavior. -->
     <bool name="config_allowAllRotations">true</bool>
 
-    <!-- Doze mode -->
-    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
-    <integer name="config_screenBrightnessDoze">10</integer>
-    <bool name="config_dozeAfterScreenOff">true</bool>
-    <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
-
-    <!-- Control the behavior when the user short presses the power button.
-            0 - Nothing
-            1 - Go to sleep (doze)
-            2 - Really go to sleep (don't doze)
-            3 - Really go to sleep and go home (don't doze)
-    -->
-    <integer name="config_shortPressOnPowerBehavior">1</integer>
+    <integer name="config_shortPressOnPowerBehavior">2</integer>
 
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.

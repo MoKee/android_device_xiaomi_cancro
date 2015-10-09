@@ -44,6 +44,10 @@ TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 # Flags
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 
+#Custom GCC
+TARGET_TOOLS_PREFIX  := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/ubertc-arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/ubertc-arm-eabi-4.9/bin/arm-eabi-
+
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK := $(CANCRO_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := console=none vmalloc=340M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
