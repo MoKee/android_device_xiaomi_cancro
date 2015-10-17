@@ -15,6 +15,8 @@
 #
 BOARD_VENDOR := xiaomi
 
+MK_TOOLCHAIN_VARIANT := uber
+
 CANCRO_PATH := device/xiaomi/cancro
 
 # ReleaseTools
