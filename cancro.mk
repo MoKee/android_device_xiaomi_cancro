@@ -194,6 +194,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
     $(LOCAL_PATH)/audio/listen_platform_info.xml:system/etc/listen_platform_info.xml \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_3_1.xml:system/etc/mixer_paths_3_1.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_3_1_forte.xml:system/etc/mixer_paths_3_1_forte.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_3_2.xml:system/etc/mixer_paths_3_2.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_3_2_forte.xml:system/etc/mixer_paths_3_2_forte.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_4_x.xml:system/etc/mixer_paths_4_x.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_4_x_forte.xml:system/etc/mixer_paths_4_x_forte.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_5_x.xml:system/etc/mixer_paths_5_x.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_5_x_forte.xml:system/etc/mixer_paths_5_x_forte.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_auxpcm_3_1.xml:system/etc/mixer_paths_auxpcm_3_1.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_auxpcm_3_2.xml:system/etc/mixer_paths_auxpcm_3_2.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_auxpcm_4_x.xml:system/etc/mixer_paths_auxpcm_4_x.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_auxpcm_5_x.xml:system/etc/mixer_paths_auxpcm_5_x.xml \
     $(LOCAL_PATH)/audio/acdb/MTP/MTP_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb \
     $(LOCAL_PATH)/audio/acdb/MTP/MTP_General_cal.acdb:system/etc/acdbdata/MTP/MTP_General_cal.acdb \
     $(LOCAL_PATH)/audio/acdb/MTP/MTP_Global_cal.acdb:system/etc/acdbdata/MTP/MTP_Global_cal.acdb \
