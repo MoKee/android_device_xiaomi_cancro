@@ -33,6 +33,8 @@
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
 
+static char KEY_QC_MORPHO_HDR[] = "morpho-hdr";
+
 static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
 
@@ -119,6 +121,9 @@ static char *camera_fixup_getparams(int id __attribute__((unused)),
 
 static char *camera_fixup_setparams(int id, const char *settings)
 {
+    bool videoMode = false;
+    bool hdrMode = false;
+
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
@@ -128,6 +133,27 @@ static char *camera_fixup_setparams(int id, const char *settings)
 #endif
 
     params.set(android::CameraParameters::KEY_VIDEO_STABILIZATION, "false");
+
+    /* ZSL */
+    if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
+        videoMode = !strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true");
+    }
+    if (videoMode) {
+        params.set("zsl", "off");
+    } else {
+        params.set("zsl", "on");
+    }
+
+    /* HDR */
+    if (params.get(android::CameraParameters::KEY_SCENE_MODE)) {
+        hdrMode = (!strcmp(params.get(android::CameraParameters::KEY_SCENE_MODE), "hdr"));
+    }
+    if (hdrMode) {
+        params.set(KEY_QC_MORPHO_HDR, "true");
+        params.set(android::CameraParameters::KEY_FLASH_MODE, android::CameraParameters::FLASH_MODE_OFF);
+    } else {
+        params.set(KEY_QC_MORPHO_HDR, "false");
+    }
 
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
