@@ -4452,7 +4452,7 @@ int32_t QCameraParameters::initDefaultParameters()
             ANTIBANDING_MODES_MAP,
             PARAM_MAP_SIZE(ANTIBANDING_MODES_MAP));
     set(KEY_SUPPORTED_ANTIBANDING, antibandingValues);
-    setAntibanding(ANTIBANDING_OFF);
+    setAntibanding(ANTIBANDING_AUTO);
 
     // Set Effect
     String8 effectValues = createValuesString(
@@ -6391,8 +6391,12 @@ int QCameraParameters::getAutoFlickerMode()
 int32_t QCameraParameters::setAntibanding(const char *antiBandingStr)
 {
     if (antiBandingStr != NULL) {
-        int32_t value = lookupAttr(ANTIBANDING_MODES_MAP, PARAM_MAP_SIZE(ANTIBANDING_MODES_MAP),
-                antiBandingStr);
+	int32_t value = lookupAttr(ANTIBANDING_MODES_MAP, PARAM_MAP_SIZE(ANTIBANDING_MODES_MAP),
+							antiBandingStr);
+        if (value == CAM_ANTIBANDING_MODE_OFF) {
+            /* Never disable antibanding */
+            return NO_ERROR;
+        }
         if (value != NAME_NOT_FOUND) {
             CDBG("%s: Setting AntiBanding value %s", __func__, antiBandingStr);
             updateParamEntry(KEY_ANTIBANDING, antiBandingStr);
