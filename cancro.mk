@@ -9,9 +9,8 @@ LOCAL_PATH := device/xiaomi/cancro
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
-# USB
+# Camera
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp \
     camera2.portability.force_api=1
 
 # Quick Charging 2.0
