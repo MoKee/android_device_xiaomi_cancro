@@ -18,6 +18,3 @@ ro.qcom.ad.calib.data=/system/etc/calib.cfg
 ro.qc.sdk.sensors.gestures=true
 ro.qc.sdk.gestures.camera=false
 ro.qc.sdk.camera.facialproc=false
-
-ro.build.description=cancro-userdebug 6.0 MDB08M 5.11.6 test-keys
-ro.build.fingerprint=Xiaomi/cancro/cancro:6.0/MDB08M/5.11.6:userdebug/test-keys
