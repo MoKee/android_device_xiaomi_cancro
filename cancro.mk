@@ -153,9 +153,12 @@ PRODUCT_COPY_FILES += \
 		PRODUCT_COPY_FILES += \
 		    $(LOCAL_PATH)/nfc/removenfc.sh:/install/bin/removenfc.sh
 
-# Thermal config
+# Thermal
+PRODUCT_PACKAGES += \
+    thermanager
+
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine-8974.conf
+	$(LOCAL_PATH)/configs/thermanager.xml:system/etc/thermanager.xml
 
 # Proprietery Firmware
 PRODUCT_COPY_FILES += \
