@@ -54,9 +54,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/mount_ext4.sh:system/bin/mount_ext4.sh \
     $(LOCAL_PATH)/rootdir/root/e2fsck_static:root/sbin/e2fsck_static
 
-#PRODUCT_PACKAGES += \
-#    dualboot_init
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8974
@@ -189,6 +186,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+	$(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
@@ -209,7 +207,8 @@ PRODUCT_PACKAGES += \
     libstagefrighthw \
     qcmediaplayer
 
-PRODUCT_BOOT_JARS += qcmediaplayer
+PRODUCT_BOOT_JARS += \
+    qcmediaplayer
 
 PRODUCT_PACKAGES += \
     audiod \
@@ -230,7 +229,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     tunnel.audio.encode=false \
     persist.audio.init_volume_index=1 \
     audio.offload.buffer.size.kb=32 \
-    av.offload.enable=true \
+	audio.offload.video=true \
+    audio.offload.pcm.16bit.enable=false \
     audio.offload.gapless.enabled=false \
     audio.offload.disable=1 \
     use.dedicated.device.for.voip=false \
@@ -302,14 +302,14 @@ PRODUCT_PACKAGES += \
     keystore.msm8974
 
 # FM Radio
-PRODUCT_PACKAGES += \
-    FM2 \
-    FMRecord \
-    libqcomfm_jni \
-    qcom.fmradio
+#PRODUCT_PACKAGES += \
+#    FM2 \
+#    FMRecord \
+#    libqcomfm_jni \
+#    qcom.fmradio
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    hw.fm.internal_antenna=true
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    hw.fm.internal_antenna=true
 
 # USB
 PRODUCT_PACKAGES += \
@@ -373,6 +373,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.enable.amr.wideband=1
 
+# Keylayout
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keylayout/atmel-maxtouch.kl:system/usr/keylayout/atmel-maxtouch.kl \
+    $(LOCAL_PATH)/keylayout/cyttsp_button.kl:system/usr/keylayout/cyttsp_button.kl \
+    $(LOCAL_PATH)/keylayout/fts.kl:system/usr/keylayout/fts.kl \
+    $(LOCAL_PATH)/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl:system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl \
+    $(LOCAL_PATH)/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl \
+    $(LOCAL_PATH)/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl
+
 # Permissions
 PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
@@ -400,6 +409,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+	frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.print.xml:system/etc/permissions/android.software.print.xml
 
 # Device uses high-density artwork where available

@@ -39,29 +39,27 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := krait
-TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
+
+USE_CLANG_PLATFORM_BUILD := true
 
 # Flags
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 
-#Custom GCC
-TARGET_TOOLS_PREFIX  := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/ubertc-arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/ubertc-arm-eabi-4.9/bin/arm-eabi-
-
 # Kernel
-BOARD_CUSTOM_BOOTIMG_MK := $(CANCRO_PATH)/mkbootimg.mk
-BOARD_KERNEL_CMDLINE := console=none vmalloc=340M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-
+BOARD_KERNEL_CMDLINE := console=none vmalloc=340M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
+BOARD_DTBTOOL_ARGS := -2
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 TARGET_KERNEL_SOURCE := kernel/xiaomi/cancro
 TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_CONFIG := cancro_xenon_defconfig
+TARGET_KERNEL_CONFIG := cancro_custom_defconfig
 
 # Vendor Init
-TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_cancro
+TARGET_INIT_VENDOR_LIB := libinit_msm
+TARGET_LIBINIT_DEFINES_FILE := device/xiaomi/cancro/init/init_cancro.cpp
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
@@ -81,6 +79,7 @@ AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
 AUDIO_FEATURE_ENABLED_USBAUDIO := true
 AUDIO_FEATURE_ENABLED_SPKR_PROTECTION := true
 BOARD_FORTEMEDIA_QDSP_ENABLED := true
+USE_CUSTOM_AUDIO_POLICY := 1
 
 # FM Radio
 QCOM_FM_ENABLED := true
@@ -92,6 +91,7 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(CANCRO_PATH)/bluetooth
 QCOM_BT_USE_SMD_TTY := true
 BLUETOOTH_HCI_USE_MCT := true
+FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
 
 # Graphics
 BOARD_EGL_CFG := $(CANCRO_PATH)/configs/egl.cfg
@@ -104,7 +104,7 @@ HAVE_ADRENO_SOURCE:= false
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
 
-TARGET_USE_ION_COMPAT := true
+TARGET_USE_COMPAT_GRALLOC_PERFORM := true
 
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
@@ -119,20 +119,18 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 # Camera
 USE_CAMERA_STUB := true
 USE_DEVICE_SPECIFIC_CAMERA := true
-COMMON_GLOBAL_CFLAGS += -DOPPO_CAMERA_HARDWARE
+COMMON_GLOBAL_CFLAGS += -DOPPO_CAMERA_HARDWARE -DCAMERA_VENDOR_L_COMPAT
 
 # Wifi
-BOARD_HAS_QCOM_WLAN              := true
-BOARD_WLAN_DEVICE                := qcwcn
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_NAME          := "wlan"
-WIFI_DRIVER_FW_PATH_STA          := "sta"
-WIFI_DRIVER_FW_PATH_AP           := "ap"
+BOARD_HAS_QCOM_WLAN := true
+BOARD_WLAN_DEVICE := qcwcn
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+WIFI_DRIVER_FW_PATH_AP := "ap"
+WIFI_DRIVER_FW_PATH_STA := "sta"
+WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4         := true
@@ -157,19 +155,6 @@ BOARD_NATIVE_DUALBOOT := true
 BOARD_NATIVE_DUALBOOT_SINGLEDATA := true
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
-USE_CHINESE_RECOVERY := false
-ifneq ($(USE_CHINESE_RECOVERY),true)
-BOARD_USE_CUSTOM_RECOVERY_FONT   := \"roboto_23x41.h\"
-BOARD_CUSTOM_RECOVERY_UI         := \
-	../../$(COMMON_PATH)/recovery/dualboot.c \
-	../../$(COMMON_PATH)/recovery/recovery_ui.c
-else
-BOARD_USE_CUSTOM_RECOVERY_FONT   := \"fontcn46_28x73.h\"
-BOARD_CUSTOM_RECOVERY_UI         := \
-	../../$(COMMON_PATH)/recovery/dualboot_cn.c \
-	../../$(COMMON_PATH)/recovery/recovery_ui_cn.c
-endif
-
 # CM Hardware
 BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/cmhw
 
@@ -192,8 +177,12 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
+# Radio
+TARGET_RIL_VARIANT := caf
+
 # Flags
-COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
+COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD -DUSE_RIL_VERSION_10
+COMMON_GLOBAL_CPPFLAGS += -DNO_SECURE_DISCARD -DUSE_RIL_VERSION_10
 
 # Simple time service client
 BOARD_USES_QC_TIME_SERVICES := true
@@ -202,6 +191,9 @@ BOARD_USES_QC_TIME_SERVICES := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+# Keymaster
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
 # SELinux policies
 # qcom sepolicy

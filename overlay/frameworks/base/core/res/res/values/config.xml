@@ -29,11 +29,9 @@
     <bool name="config_dreamsEnabledByDefault">false</bool>
     <bool name="config_dreamsActivatedOnDockByDefault">true</bool>
     <bool name="config_useDevInputEventForAudioJack">true</bool>
-    <bool name="config_radio_reset_on_regular_deactivation">false</bool>
     <bool name="config_hotswapCapable">true</bool>
     <bool translatable="false" name="skip_restoring_network_selection">true</bool>
     <bool name="config_cellBroadcastAppLinks">true</bool>
-    <bool name="config_enable_mms_with_mobile_data_off">true</bool>
 
     <integer name="config_radioScanningTimeout">9000</integer>
 
@@ -174,10 +172,6 @@
         <item>"bluetooth,7,7,2,-1,true"</item>
     </string-array>
 
-    <!-- Boolean indicating if RADIO POWER OFF should be skipped on receiving SIM REFRESH with RESET-->
-    <!-- This will be handled by modem if it is true-->
-    <bool translatable="false" name="skip_radio_power_off_on_sim_refresh_reset">true</bool>
-
     <string-array name="config_mobile_tcp_buffers">
         <item>"lte:2097152,4194304,8388608,262144,524288,1048576"</item>
         <item>"umts:4094,87380,1220608,4096,16384,1220608"</item>
@@ -189,9 +183,6 @@
         <item>"gprs:4092,8760,11680,4096,8760,11680"</item>
         <item>"evdo:4094,87380,524288,4096,16384,262144"</item>
     </string-array>
-
-    <!-- bool value to for enabling motion accelerometer -->
-    <bool name="use_motion_accel">false</bool>
 
     <!-- Enable overlay for all location components. -->
     <!--bool name="config_enableNetworkLocationOverlay" translatable="false">false</bool>
@@ -320,15 +311,14 @@
          The default is false. -->
     <bool name="config_lidControlsSleep">true</bool>
 
-    <!-- Performance profiles -->
-    <string name="config_perf_profile_prop">sys.perf.profile</string>
-    <string name="config_perf_profile_default_entry">1</string>
-
     <!-- Indicate whether to allow the device to suspend when the screen is off
          due to the proximity sensor.  This resource should only be set to true
          if the sensor HAL correctly handles the proximity sensor as a wake-up source.
          Otherwise, the device may fail to wake out of suspend reliably.
          The default is false. -->
     <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
+
+    <!-- Our modem doesn't support this query yet -->
+    <string name="config_radio_access_family">GPRS|EDGE|UMTS|HSDPA|HSUPA|HSPA|LTE|HSPAP|GSM|TD_SCDMA|WCDMA|</string>
 
 </resources>

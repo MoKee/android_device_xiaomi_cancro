@@ -21,8 +21,4 @@
     <bool name="def_screen_brightness_automatic_mode">true</bool>
     <!-- Default screen brightness, from 0 to 255. 87 is 34%. -->
     <integer name="def_screen_brightness">10</integer>
-    <bool name="def_haptic_feedback">false</bool>
-    <bool name="def_usb_mass_storage_enabled">false</bool>
-    <bool name="def_vibrate_when_ringing_enabled">true</bool>
-    <bool name="def_wake_gesture_enabled">false</bool>
 </resources>
