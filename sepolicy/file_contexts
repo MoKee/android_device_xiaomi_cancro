@@ -13,4 +13,3 @@
 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus         u:object_r:display_sysfs:s0
 
 /dev/block/platform/msm_sdcc\.1/by-name/persist   u:object_r:persist_block_device:s0
-/system/bin/thermanager             						 u:object_r:thermanager_exec:s0
