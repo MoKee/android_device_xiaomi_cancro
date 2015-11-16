@@ -54,8 +54,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/e2fsck_static:root/sbin/e2fsck_static
 
 # GPS
-PRODUCT_PACKAGES += \
-    gps.msm8974
+#PRODUCT_PACKAGES += \
+#    gps.msm8974
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
