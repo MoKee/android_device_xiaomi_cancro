@@ -86,8 +86,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += camera.msm8974
 
 # Lights
-PRODUCT_PACKAGES += \
-    lights.msm8974
+PRODUCT_PACKAGES += lights.msm8974
 
 # Power
 PRODUCT_PACKAGES += \

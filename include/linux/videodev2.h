@@ -1910,9 +1910,6 @@ enum v4l2_mpeg_vidc_video_decoder_multi_stream {
 #define V4L2_CID_MPEG_VIDC_VIDEO_CONCEAL_COLOR \
 		(V4L2_CID_MPEG_MSM_VIDC_BASE + 38)
 
-#define V4L2_CID_MPEG_VIDC_VIDEO_LTRMODE \
-                (V4L2_CID_MPEG_MSM_VIDC_BASE + 47)
-
 #define V4L2_CID_MPEG_VIDC_VIDEO_LTRCOUNT \
 		(V4L2_CID_MPEG_MSM_VIDC_BASE + 40)
 
