@@ -301,6 +301,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=0
 
+# Data
+PRODUCT_PACKAGES += \
+    librmnetctl \
+    rmnetcli
+
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8974
