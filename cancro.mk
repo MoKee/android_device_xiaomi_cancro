@@ -83,7 +83,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_3=""
 
 #camera
-PRODUCT_PACKAGES += camera.msm8974
+PRODUCT_PACKAGES += libcancro_camera
 
 # Lights
 PRODUCT_PACKAGES += lights.msm8974
