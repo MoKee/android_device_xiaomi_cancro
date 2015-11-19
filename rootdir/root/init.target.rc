@@ -42,7 +42,7 @@ on init
 
 # import cne init file
 #on post-fs
-#    export LD_PRELOAD /vendor/lib/libNimsWrap.so
+    export LD_SHIM_LIBS "/system/lib/libboringssl-compat.so:/system/lib/libcancro_camera.so"
 
 on fs
     mount_all fstab.qcom

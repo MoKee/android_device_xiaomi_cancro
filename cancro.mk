@@ -83,7 +83,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_3=""
 
 #camera
-PRODUCT_PACKAGES += libcancro_camera
+PRODUCT_PACKAGES += \
+	camera.msm8974 \
+	libcancro_camera
+
+# BoringSSL compatability wrapper
+PRODUCT_PACKAGES += \
+    libboringssl-compat
 
 # Lights
 PRODUCT_PACKAGES += lights.msm8974
