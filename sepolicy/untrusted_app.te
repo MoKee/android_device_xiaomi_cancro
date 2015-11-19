@@ -1,0 +1,3 @@
+#============= untrusted_app ==============
+allow untrusted_app healthd_service:service_manager find;
+allow untrusted_app self:udp_socket ioctl;
