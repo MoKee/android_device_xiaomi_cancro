@@ -321,14 +321,12 @@ PRODUCT_PACKAGES += \
     keystore.msm8974
 
 # FM Radio
-#PRODUCT_PACKAGES += \
-#    FM2 \
-#    FMRecord \
-#    libqcomfm_jni \
-#    qcom.fmradio
+PRODUCT_PACKAGES += \
+    FMRadio \
+    libfmjni
 
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    hw.fm.internal_antenna=true
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.fm.transmitter=false
 
 # USB
 PRODUCT_PACKAGES += \
