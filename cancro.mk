@@ -91,6 +91,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libboringssl-compat
 
+# Radio
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig
+
 # Lights
 PRODUCT_PACKAGES += lights.msm8974
 
