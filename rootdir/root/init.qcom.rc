@@ -592,12 +592,12 @@ service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps qcom_diag
+    group radio audio bluetooth gps wakelock qcom_diag
     disabled
 
 service netmgrd /system/bin/netmgrd
     class main
-    group radio system
+    group radio system wakelock
 
 service sensors /system/bin/sensors.qcom
     class late_start
