@@ -32,16 +32,7 @@ on early-init
     symlink /data/tombstones /tombstones
 
 on init
-    # Set the property to indicate type of virtual display to 0
-    # 0 indicates that virtual display is not a Wifi display and that the
-    # session is not exercised through RemoteDisplay in the android framework
-    setprop persist.sys.wfd.virtual 0
-    # Immersion
-    export VIBE_PIPE_PATH /dev/pipes
-    mkdir /dev/pipes 0771 system system
-
-# import cne init file
-#on post-fs
+    export LD_PRELOAD /system/lib/libcancro_camera.so
     export LD_SHIM_LIBS "/system/lib/libboringssl-compat.so:/system/lib/libcancro_camera.so"
 
 on fs

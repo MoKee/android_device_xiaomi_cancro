@@ -85,7 +85,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #camera
 PRODUCT_PACKAGES += \
 	camera.msm8974 \
-	libcancro_camera
+	libcancro_camera \
+    libxml2
 
 # BoringSSL compatability wrapper
 PRODUCT_PACKAGES += \
@@ -164,8 +165,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/nfcee_access_debug.xml:system/etc/nfcee_access.xml
 
 # NFC remover script for Mi4
-		PRODUCT_COPY_FILES += \
-		    $(LOCAL_PATH)/nfc/removenfc.sh:/install/bin/removenfc.sh
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/nfc/removenfc.sh:/install/bin/removenfc.sh
 
 # Thermal config
 PRODUCT_COPY_FILES += \
@@ -216,7 +217,6 @@ PRODUCT_PACKAGES += \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
     libOmxVdec \
-    libOmxVdecHevc \
     libOmxVenc \
     libstagefrighthw \
     qcmediaplayer
@@ -286,9 +286,6 @@ PRODUCT_PACKAGES += \
     e2fsck_static \
     mke2fs_static \
     resize2fs_static
-
-PRODUCT_PACKAGES += \
-    libxml2
 
 # Graphics
 PRODUCT_PACKAGES += \

@@ -19,5 +19,3 @@ Display | 5.0" 1920 x 1080 px
 Camera  | 13MPx, LED Flash
 
 ![Xiaomi Mi3](http://cdn.gsmarena.com/vv/reviewsimg/xiaomi-mi-3/gal/gsmarena_004.jpg "Xiaomi Mi3 in black")
-
-This branch is for building XenonHD (Android Lollipop 5.0 AOSP) ROMS.
