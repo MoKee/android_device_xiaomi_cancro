@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
 
 # Inherit from those products. Most specific first.

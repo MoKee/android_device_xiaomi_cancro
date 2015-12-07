@@ -1,13 +1,44 @@
+# Copyright (C) 2014 The CyanogenMod Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Common QCOM configuration tools
 $(call inherit-product, device/qcom/common/Android.mk)
+
+# call dalvik heap config
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
+
+# call hwui memory config
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+
+# call the proprietary setup
+$(call inherit-product, vendor/xiaomi/cancro/cancro-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/xiaomi/cancro/overlay
 
 LOCAL_PATH := device/xiaomi/cancro
 
 PRODUCT_CHARACTERISTICS := nosdcard
+
+# Device uses high-density artwork where available
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
 
 # Camera
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -16,6 +47,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Quick Charging 2.0
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.usb.hvdcp.detect=true
+
+# Art
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-swap=false
 
 # Charger
 PRODUCT_COPY_FILES += \
@@ -65,32 +100,22 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qc_nlp_in_use=1 \
-    persist.loc.nlp_name=com.qualcomm.services.location \
-    ro.gps.agps_provider=1 \
-    ro.qc.sdk.izat.premium_enabled=1 \
-    ro.qc.sdk.izat.service_mask=0x5
+    ro.gps.agps_provider=1
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.rild.nitz_plmn="" \
-    persist.rild.nitz_long_ons_0="" \
-    persist.rild.nitz_long_ons_1="" \
-    persist.rild.nitz_long_ons_2="" \
-    persist.rild.nitz_long_ons_3="" \
-    persist.rild.nitz_short_ons_0="" \
-    persist.rild.nitz_short_ons_1="" \
-    persist.rild.nitz_short_ons_2="" \
-    persist.rild.nitz_short_ons_3=""
 
 #camera
 PRODUCT_PACKAGES += \
 	camera.msm8974 \
-	libcancro_camera \
+	libcamera_shim \
     libxml2
 
 # BoringSSL compatability wrapper
 PRODUCT_PACKAGES += \
     libboringssl-compat
+
+# Compatibility with older blobs
+PRODUCT_PACKAGES += \
+    libstlport
 
 # Radio
 PRODUCT_PACKAGES += \
@@ -102,12 +127,6 @@ PRODUCT_PACKAGES += lights.msm8974
 # Power
 PRODUCT_PACKAGES += \
     power.msm8974
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/changepowermode.sh:system/bin/changepowermode.sh
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.perf.cores_online=1
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -135,16 +154,6 @@ PRODUCT_PACKAGES += \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     wcnss_service
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15 \
-    wlan.driver.ath=0 \
-	persist.data.qmi.adb_logmask=0 \
-    ro.use_data_netmgrd=true \
-    persist.data.netmgrd.qos.enable=true \
-    persist.data.tcpackprio.enable=true \
-    ro.data.large_tcp_window_size=true
 
 # IPC router config
 PRODUCT_COPY_FILES += \
@@ -206,11 +215,10 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
-# Media & Audio
+# Media
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libdivxdrmdecrypt \
-    libdashplayer \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
@@ -218,11 +226,7 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
-    libstagefrighthw \
-    qcmediaplayer
-
-PRODUCT_BOOT_JARS += \
-    qcmediaplayer
+    libstagefrighthw
 
 PRODUCT_PACKAGES += \
     audiod \
@@ -236,26 +240,6 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     tinymix
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.speaker.prot.enable=true \
-    qcom.hw.aac.encoder=false \
-    tunnel.audio.encode=false \
-    persist.audio.init_volume_index=1 \
-    audio.offload.buffer.size.kb=32 \
-	audio.offload.video=true \
-    audio.offload.pcm.16bit.enable=false \
-    audio.offload.gapless.enabled=false \
-    audio.offload.disable=1 \
-    use.dedicated.device.for.voip=false \
-    use.voice.path.for.pcm.voip=true \
-    media.aac_51_output_enabled=true \
-    ro.qc.sdk.audio.ssr=false \
-    ro.qc.sdk.audio.fluencetype=fluence \
-    persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.voicerec=false \
-    persist.audio.fluence.speaker=true \
-    audio.offload.pcm.enable=false
 
 #Enable more sensor
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -299,11 +283,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=0
 
-#Ril
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.default_network=9 \
-    ro.ril.def.preferred.network=9 \
-    telephony.lteOnGsmDevice=0
 #Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=0
@@ -321,9 +300,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     FMRadio \
     libfmjni
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.fm.transmitter=false
 
 # USB
 PRODUCT_PACKAGES += \
@@ -361,27 +337,20 @@ endif
 
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.nfc.port=I2C \
-    ro.fm.transmitter=false \
-    com.qc.hardware=true \
-    persist.demo.hdmirotationlock=false \
-    ro.hdmi.enable=true \
-    debug.sf.hw=1 \
-    debug.egl.hw=1 \
     persist.hwc.mdpcomp.enable=true \
-    debug.mdpcomp.logs=0 \
-    debug.composition.type=dyn \
-    ro.sf.lcd_density=480 \
-    dev.pm.dyn_samplingrate=1 \
-    ro.opengles.version=196608 \
-    ril.subscription.types=NV,RUIM \
-    persist.omh.enabled=true \
-    persist.sys.ssr.restart_level=3 \
     persist.timed.enable=true \
-    persist.debug.wfd.enable=1 \
-    persist.sys.wfd.virtual=0 \
-    persist.sys.media.use-awesome=true \
-    debug.mdpcomp.4k2kSplit=1
+    ro.opengles.version=196608 \
+    ro.use_data_netmgrd=true \
+    persist.data.netmgrd.qos.enable=true \
+    persist.data.tcpackprio.enable=true \
+    ro.data.large_tcp_window_size=true \
+    telephony.lteOnGsmDevice=1 \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=15 \
+    ro.qualcomm.perf.cores_online=2 \
+    ro.vendor.extension_library=libqti-perfd-client.so \
+    ro.telephony.call_ring.multiple=0 \
+    ro.telephony.default_network=9
 
 # Enable Adaptive Multi-Rate Wideband
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -425,20 +394,3 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
 	frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.print.xml:system/etc/permissions/android.software.print.xml
-
-# Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-
-ifneq ($(QCPATH),)
-$(call inherit-product-if-exists, $(QCPATH)/prebuilt_HY11/target/product/msm8974/prebuilt.mk)
-endif
-
-# call dalvik heap config
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
-
-# call hwui memory config
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
-
-# call the proprietary setup
-$(call inherit-product, vendor/xiaomi/cancro/cancro-vendor.mk)

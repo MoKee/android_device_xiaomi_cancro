@@ -48,6 +48,7 @@ on early-boot
     # Allow subsystem (modem etc) debugging
     #write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
     write /sys/kernel/boot_adsp/boot 1
+    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on boot
     # bring CPUs online
@@ -756,8 +757,8 @@ service lowi-server /system/bin/lowi-server
 
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
-    user root
-    group system fm_radio
+    user system
+    group system
     disabled
     oneshot
 
