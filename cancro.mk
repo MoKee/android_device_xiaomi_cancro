@@ -330,10 +330,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bluetooth.alwaysbleon=true \
     qcom.bt.dev_power_class=1
 
-ifneq ($(QCPATH),)
-# proprietary wifi display, if available
-PRODUCT_BOOT_JARS += WfdCommon
-endif
+# Optional CM packages
+PRODUCT_PACKAGES += \
+    LiveWallpapers \
+    LiveWallpapersPicker \
+    MagicSmokeWallpapers \
+
+# Extra tools in CM
+PRODUCT_PACKAGES += \
+    7z \
+    bash \
+    bzip2 \
+    curl \
+    powertop \
+    unrar \
+    unzip \
+    vim \
+    wget \
+    zip
 
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
