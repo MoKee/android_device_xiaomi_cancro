@@ -102,20 +102,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.gps.agps_provider=1
 
-
 #camera
 PRODUCT_PACKAGES += \
-	camera.msm8974 \
-	libcamera_shim \
     libxml2
-
-# BoringSSL compatability wrapper
-PRODUCT_PACKAGES += \
-    libboringssl-compat
-
-# Compatibility with older blobs
-PRODUCT_PACKAGES += \
-    libstlport
 
 # Radio
 PRODUCT_PACKAGES += \
