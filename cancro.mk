@@ -104,6 +104,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #camera
 PRODUCT_PACKAGES += \
+    camera.msm8974 \
     libxml2
 
 # Radio
@@ -142,6 +143,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libqsap_sdk \
     libQWiFiSoftApCfg \
+    libwcnss_qmi \
     wcnss_service
 
 # IPC router config
