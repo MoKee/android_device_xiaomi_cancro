@@ -55,6 +55,7 @@ TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_CONFIG := cancro_custom_defconfig
 
 # Vendor Init
+TARGET_UNIFIED_DEVICE := true
 TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_LIBINIT_DEFINES_FILE := device/xiaomi/cancro/init/init_cancro.cpp
 
