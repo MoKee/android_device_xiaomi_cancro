@@ -58,9 +58,9 @@ logi "Version : $version"
 #
 case $mode in
   "normal")
-        logi "inserting the radio transport module"
-        echo 1 > /sys/module/radio_iris_transport/parameters/fmsmd_set
-        /system/bin/fm_qsoc_patches $version 0
+   logi "inserting the radio transport module"
+   echo 1 > /sys/module/radio_iris_transport/parameters/fmsmd_set
+   /system/bin/fm_qsoc_patches $version 0
      ;;
   "wa_enable")
    /system/bin/fm_qsoc_patches $version 1
