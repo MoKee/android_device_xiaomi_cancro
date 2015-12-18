@@ -25,4 +25,8 @@
     <!-- Ambient lux at which to enable outdoor mode when LiveDisplay is enabled -->
     <integer name="config_outdoorAmbientLux">12000</integer>
 
+    <!-- Does the device have multiple LEDs ?
+         Used to decide if the user can change the multiple LEDs settings -->
+    <bool name="config_multipleNotificationLeds">true</bool>
+
 </resources>
