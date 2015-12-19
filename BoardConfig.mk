@@ -140,8 +140,8 @@ BOARD_NATIVE_DUALBOOT := true
 BOARD_NATIVE_DUALBOOT_SINGLEDATA := true
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
-# CM Hardware
-BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/cmhw
+# MK Hardware
+BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/mkhw
 
 # No old RPC for prop
 TARGET_NO_RPC := true
