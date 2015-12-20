@@ -4834,7 +4834,7 @@ static cam_dimension_t new_vid_sizes_cam0[CAM0_VID_TBL_SIZE] = {
     {320, 240}
 };
 
-#define CAM0_PRVW_TBL_SIZE 16
+#define CAM0_PRVW_TBL_SIZE 13
 static cam_dimension_t new_prvw_sizes_cam0[CAM0_PRVW_TBL_SIZE] = {
     {4096, 2160},
     {3840, 2160},
@@ -4843,13 +4843,10 @@ static cam_dimension_t new_prvw_sizes_cam0[CAM0_PRVW_TBL_SIZE] = {
     {1440, 1080},
     {1280, 960},
     {1280, 720},
-    {864, 480},
-    {800, 480},
     {768, 432},
     {720, 480},
     {640, 480},
     {576, 432},
-    {480, 320},
     {384, 288},
     {320, 240}
 };
@@ -4868,20 +4865,18 @@ static cam_dimension_t new_vid_sizes_cam1[CAM1_VID_TBL_SIZE] = {
     {320, 240}
 };
 
-#define CAM1_PRVW_TBL_SIZE 13
+#define CAM1_PRVW_TBL_SIZE 11
 static cam_dimension_t new_prvw_sizes_cam1[CAM1_PRVW_TBL_SIZE] = {
     {2560, 1440},
     {1920, 1080},
     {1440, 1080},
     {1280, 960},
     {1280, 720},
-    {864, 480},
-    {800, 480},
     {768, 432},
     {720, 480},
     {640, 480},
     {576, 432},
-    {480, 320},
+    {384, 288},
     {320, 240}
 };
 
