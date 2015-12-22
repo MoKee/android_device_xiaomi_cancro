@@ -52,9 +52,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false
 
-# Charger (healthd)
-PRODUCT_PACKAGES += \
-    charger_res_images
+# Charger
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/root/chargeonlymode:root/sbin/chargeonlymode
 
 # Ramdisk
 PRODUCT_PACKAGES += \
