@@ -168,10 +168,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/removenfc.sh:/install/bin/removenfc.sh
 
-# Thermal config
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine-8974.conf
-
 # Proprietery Firmware
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/android_model_facea.dat:system/etc/android_model_facea.dat \
