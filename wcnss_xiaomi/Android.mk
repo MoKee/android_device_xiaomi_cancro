@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-ifeq ($(TARGET_DEVICE),dior)
+ifeq ($(TARGET_DEVICE),cancro)
 
 LOCAL_PATH := $(call my-dir)
 
