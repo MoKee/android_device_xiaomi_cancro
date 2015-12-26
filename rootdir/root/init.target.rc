@@ -77,6 +77,43 @@ on post-fs-data
     chown system graphics /sys/class/graphics/fb0/dynamic_fps
     chmod 0664 /sys/class/graphics/fb0/dynamic_fps
 
+    #  KeyDisabler
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
+
+    # HighTouchSensitivity
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
+    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
+    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
+    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
+
+    # Enable writing to led blink node from userspace
+    chown system system /sys/class/leds/button-backlight/brightness
+    chown system system /sys/class/leds/button-backlight1/brightness
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/red/duty_pcts
+    chown system system /sys/class/leds/red/ramp_step_ms
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/green/duty_pcts
+    chown system system /sys/class/leds/green/ramp_step_ms
+    chown system system /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/blue/duty_pcts
+    chown system system /sys/class/leds/blue/ramp_step_ms
+
+    chown system system /sys/class/graphics/fb0/rgb
+
 on boot
     chown system system /sys/class/input/input0/enabled
     chown system system /sys/class/input/input1/enabled
