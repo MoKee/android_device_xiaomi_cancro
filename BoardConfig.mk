@@ -141,7 +141,6 @@ BOARD_NATIVE_DUALBOOT_SINGLEDATA := true
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
 # MK Hardware
-BOARD_USES_MOKEE_HARDWARE := true
 BOARD_HARDWARE_CLASS += \
     hardware/mokee/mkhw \
     $(CANCRO_PATH)/mkhw

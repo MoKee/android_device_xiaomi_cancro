@@ -48,7 +48,6 @@ on early-boot
 
 on boot
     # bring CPUs online
-    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -200,19 +199,15 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/sys_cap_freq
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/thermal_cap_freq
     chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
     chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
     chown system system /sys/devices/system/cpu/cpu1/cpufreq/sys_cap_freq
-    chown system system /sys/devices/system/cpu/cpu1/cpufreq/thermal_cap_freq
     chown system system /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
     chown system system /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
     chown system system /sys/devices/system/cpu/cpu2/cpufreq/sys_cap_freq
-    chown system system /sys/devices/system/cpu/cpu2/cpufreq/thermal_cap_freq
     chown system system /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
     chown system system /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
     chown system system /sys/devices/system/cpu/cpu3/cpufreq/sys_cap_freq
-    chown system system /sys/devices/system/cpu/cpu3/cpufreq/thermal_cap_freq
     chown system system /sys/class/devfreq/qcom,cpubw*/governor
     chmod 0664 /sys/class/devfreq/qcom,cpubw*/governor
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
