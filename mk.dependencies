@@ -12,10 +12,6 @@
     "target_path": "kernel/xiaomi/cancro"
   },
   {
-    "repository": "android_vendor_qcom_opensource_dataservices",
-    "target_path": "vendor/qcom/opensource/dataservices"
-  },
-  {
     "repository": "android_external_connectivity",
     "target_path": "external/connectivity"
   }
