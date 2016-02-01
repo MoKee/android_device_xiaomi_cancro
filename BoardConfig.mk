@@ -51,7 +51,7 @@ BOARD_KERNEL_PAGESIZE              := 2048
 BOARD_MKBOOTIMG_ARGS               := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 TARGET_KERNEL_SOURCE               := kernel/xiaomi/cancro
 TARGET_KERNEL_ARCH                 := arm
-TARGET_KERNEL_CONFIG               := cyanogen_cancro_defconfig
+TARGET_KERNEL_CONFIG               := mokee_cancro_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 BOARD_DTBTOOL_ARGS                 := -2
 
@@ -135,9 +135,9 @@ TARGET_RECOVERY_FSTAB              := $(CANCRO_PATH)/rootdir/root/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT       := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
-# CM Hardware
+# MK Hardware
 BOARD_HARDWARE_CLASS += \
-    $(CANCRO_PATH)/cmhw
+    $(CANCRO_PATH)/mkhw
 
 # No old RPC for prop
 TARGET_NO_RPC := true

@@ -4,7 +4,7 @@
 /sbin/chargeonlymode                                         u:object_r:chargeonlymode:s0
 /sys/devices/virtual/graphics/fb0/color_enhance              u:object_r:display_sysfs:s0
 
-#============= cmhw ==============
+#============= mkhw ==============
 /sys/vibrator/pwmvalue                                       u:object_r:vibeamp_sysfs:s0
 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off            u:object_r:display_sysfs:s0
 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off       u:object_r:display_sysfs:s0
