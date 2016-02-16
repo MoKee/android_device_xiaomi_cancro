@@ -136,8 +136,10 @@ TARGET_RECOVERY_PIXEL_FORMAT       := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
 # MK Hardware
+BOARD_USES_MOKEE_HARDWARE = true
 BOARD_HARDWARE_CLASS += \
-    $(CANCRO_PATH)/mkhw
+    $(CANCRO_PATH)/mkhw \
+    hardware/mokee/mkhw
 
 # No old RPC for prop
 TARGET_NO_RPC := true
