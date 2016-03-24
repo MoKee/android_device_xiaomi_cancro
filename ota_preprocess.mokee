@@ -16,7 +16,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-FILES="app/NfcNci priv-app/Tag etc/acdbdata/MTP etc/acdbdata/MTP_4 etc/MTP_4 etc/mixer_paths.xml etc/mixer_paths_4.xml etc/libnfc-brcm-20791b05.conf etc/libnfc-brcm.conf etc/nfcee_access.xml etc/permissions/android.hardware.nfc.hce.xml etc/permissions/android.hardware.nfc.xml etc/permissions/com.mokee.nfc.enhanced.xml vendor/etc/diracmobile.config vendor/etc/diracmobile_4.config vendor/firmware/bcm2079x-b5_firmware.ncd vendor/firmware/bcm2079x-b5_pre_firmware.ncd"
+FILES="app/NfcNci priv-app/Tag etc/acdbdata/MTP etc/acdbdata/MTP_4 etc/MTP_4 etc/mixer_paths.xml etc/mixer_paths_4.xml etc/libnfc-brcm-20791b05.conf etc/libnfc-brcm.conf etc/nfcee_access.xml etc/permissions/android.hardware.nfc.hce.xml etc/permissions/android.hardware.nfc.xml etc/permissions/com.mokee.nfc.enhanced.xml vendor/etc/diracmobile.config vendor/etc/diracmobile_4.config vendor/firmware/bcm2079x-b5_firmware.ncd vendor/firmware/bcm2079x-b5_pre_firmware.ncd lib/hw/nfc_nci.bcm2079x.default.so"
 
 for i in $FILES;do
 	if [ -e z2/system/$i ];then
