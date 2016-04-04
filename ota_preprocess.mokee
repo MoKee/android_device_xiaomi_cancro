@@ -16,20 +16,32 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-FILES="app/NfcNci priv-app/Tag etc/acdbdata/MTP etc/acdbdata/MTP_4 etc/MTP_4 etc/mixer_paths.xml etc/mixer_paths_4.xml etc/libnfc-brcm-20791b05.conf etc/libnfc-brcm.conf etc/nfcee_access.xml etc/permissions/android.hardware.nfc.hce.xml etc/permissions/android.hardware.nfc.xml etc/permissions/com.mokee.nfc.enhanced.xml vendor/etc/diracmobile.config vendor/etc/diracmobile_4.config vendor/firmware/bcm2079x-b5_firmware.ncd vendor/firmware/bcm2079x-b5_pre_firmware.ncd lib/hw/nfc_nci.bcm2079x.default.so"
+SCRIPT=$ANDROID_BUILD_TOP/device/xiaomi/cancro/releasetools/device_check.sh
+FILES=("system/app/NfcNci"
+"system/priv-app/Tag"
+"system/etc/*nfc*"
+"system/etc/permissions/*nfc*"
+"system/framework/*nfc*"
+"system/lib/*nfc*"
+"system/vendor/firmware/*bcm*"
+"system/etc/acdbdata/MTP"
+"system/etc/acdbdata/MTP_4"
+"system/etc/mixer_paths.xml"
+"system/etc/mixer_paths_4.xml"
+"system/vendor/etc/diracmobile.config"
+"system/vendor/etc/diracmobile_4.config")
 
-if [ -e z2/install/bin/device_check.sh ];then
-	mkdir -p out/install/bin 2> /dev/null
-	cp z2/install/bin/device_check.sh out/install/bin/device_check.sh
+if [ -f $SCRIPT ];then
+	cp $SCRIPT out/
 fi
 
-for i in $FILES;do
-	if [ -e z2/system/$i ];then
-		mkdirp `dirname out/system/$i` 2> /dev/null
-		cp -R z2/system/$i out/system/$i
-		rm -r z2/system/$i
+for i in "${FILES[@]}"; do
+	parent=$(dirname $i)
+	if [ -e z2/$i ];then
+		mkdirp out/$parent 2> /dev/null
+		mv z2/$i out/$parent/
 	fi
-	if [ -e z1/system/$i ];then
-		rm -r z1/system/$i
+	if [ -e z1/$i ];then
+		rm -r z1/$i
 	fi
 done
