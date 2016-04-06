@@ -37,11 +37,11 @@ fi
 
 for i in "${FILES[@]}"; do
 	parent=$(dirname $i)
-	if [ -e z2/$i ];then
+	if [ ! -z $(check_f z2/$i) ];then
 		mkdirp out/$parent 2> /dev/null
 		mv z2/$i out/$parent/
 	fi
-	if [ -e z1/$i ];then
+	if [ ! -z $(check_f z1/$i) ];then
 		rm -r z1/$i
 	fi
 done
