@@ -58,7 +58,7 @@ case "$target" in
         echo 1 > /sys/module/msm_pm/modes/cpu1/retention/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu2/retention/idle_enabled
         echo 1 > /sys/module/msm_pm/modes/cpu3/retention/idle_enabled
-        echo 1 > /sys/module/msm_thermal/core_control/enabled
+        echo 1 > /sys/kernel/msm_thermal/enabled
         echo Y > /sys/module/clock_krait_8974/parameters/boost
         stop mpdecision
         echo 1 > /sys/devices/system/cpu/cpu1/online
@@ -79,8 +79,8 @@ case "$target" in
                 echo "interactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
                 echo "interactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
                 echo "interactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-                echo "20000 1400000:40000 1700000:20000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-                echo 90 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+                echo "19000 1400000:39000 1700000:19000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+                echo 99 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
                 echo 1497600 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                 echo 1497600 > /sys/devices/system/cpu/cpufreq/interactive/input_boost_freq
                 echo 1 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
@@ -110,7 +110,7 @@ case "$target" in
                 echo 80 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load
             ;;
         esac
-        echo 1 > /sys/module/msm_thermal/core_control/enabled
+        echo 1 > /sys/kernel/msm_thermal/enabled
         chown -h root.system /sys/devices/system/cpu/mfreq
         chmod -h 220 /sys/devices/system/cpu/mfreq
         chown -h root.system /sys/devices/system/cpu/cpu1/online
