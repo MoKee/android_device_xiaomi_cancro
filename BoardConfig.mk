@@ -189,3 +189,4 @@ BOARD_SEPOLICY_DIRS += \
         $(CANCRO_PATH)/sepolicy
 
 -include vendor/xiaomi/cancro/BoardConfigVendor.mk
+include device/xiaomi/cancro/rootdir/recovery.mk
