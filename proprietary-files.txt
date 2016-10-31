@@ -1,5 +1,4 @@
 # Bluetooth
-bin/btnvtool
 bin/hci_qcomm_init
 vendor/lib/libbtnv.so
 vendor/lib/libaptX_encoder.so|b03772672144d4b750a5672c2922aded93bb0512

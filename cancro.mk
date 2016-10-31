@@ -176,6 +176,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/bl_lut.txt:system/etc/bl_lut.txt
 
+PRODUCT_PACKAGES += \
+    bdaddr_xiaomi
+
 # Media profile
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
