@@ -823,7 +823,7 @@ service profiler_daemon /system/bin/profiler_daemon
     group root
     disabled
 
-service charger /sbin/healthd -c
+service charger /charger
     class charger
     critical
     seclabel u:r:charger:s0
@@ -845,9 +845,6 @@ service fastmmisrv /system/bin/sh /init.qcom.factory.sh
 
 on ffbm
     start fastmmisrv
-
-service charger /charger
-    class charger
 
 service hvdcp /system/bin/hvdcp
     class core
