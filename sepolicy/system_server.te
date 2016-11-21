@@ -1,4 +1,4 @@
-#============= cmhw ==============
+#============= mkhw ==============
 allow system_server display_sysfs:file { read write };
 allow system_server livedisplay_sysfs:file { read write };
 allow system_server mediaserver:unix_stream_socket write;
