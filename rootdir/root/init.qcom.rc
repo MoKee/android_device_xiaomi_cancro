@@ -270,6 +270,9 @@ on boot
     chmod 0664 /sys/class/power_supply/battery/voltage_min
     chmod 0664 /sys/module/qpnp_charger/parameters/charger_monitor
 
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+
 on enable-low-power
     write /sys/kernel/msm_thermal/enabled 0
     write /sys/kernel/msm_thermal/zone0 "1728000 39 38"
