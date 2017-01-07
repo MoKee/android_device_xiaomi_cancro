@@ -120,12 +120,9 @@ void vendor_load_properties()
             property_set("ro.product.model", "MI 4");
             break;
         case 1972:
-            property_set("ro.product.model", "MI 4 LTE");
-            property_set("ro.telephony.default_network", "22");
+            property_set("ro.product.model", "MI 4LTE");
+            property_set("ro.telephony.default_network", "8");
             property_set("telephony.lteOnGSMDevice", "1");
-            property_set("ril.subscription.types", "NV,RUIM");
-            property_set("persist.radio.force_on_dc", "true");
-            property_set("persist.omh.enabled", "true");
             break;
         default:
             // Other unsupported variants
