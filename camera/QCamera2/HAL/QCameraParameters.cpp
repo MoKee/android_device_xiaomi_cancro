@@ -4382,9 +4382,9 @@ int32_t QCameraParameters::initDefaultParameters()
     set(KEY_QC_MAX_FOCUS_POS_INDEX, m_pCapability->max_focus_pos[CAM_MANUAL_FOCUS_MODE_INDEX]);
 
     m_pCapability->min_focus_pos[CAM_MANUAL_FOCUS_MODE_DAC_CODE] = 0;
-    m_pCapability->max_focus_pos[CAM_MANUAL_FOCUS_MODE_DAC_CODE] = 1023;
+    m_pCapability->max_focus_pos[CAM_MANUAL_FOCUS_MODE_DAC_CODE] = 717;
     set(KEY_QC_MIN_FOCUS_POS_DAC, m_pCapability->min_focus_pos[CAM_MANUAL_FOCUS_MODE_DAC_CODE]);
-    set(KEY_QC_MIN_FOCUS_POS_DAC, m_pCapability->max_focus_pos[CAM_MANUAL_FOCUS_MODE_DAC_CODE]);
+    set(KEY_QC_MAX_FOCUS_POS_DAC, m_pCapability->max_focus_pos[CAM_MANUAL_FOCUS_MODE_DAC_CODE]);
 
     // Set Saturation
     set(KEY_QC_MIN_SATURATION, m_pCapability->saturation_ctrl.min_value);
@@ -4502,10 +4502,10 @@ int32_t QCameraParameters::initDefaultParameters()
     setISOValue(ISO_AUTO);
 
     // Set exposure time, we should get them from m_pCapability
-    m_pCapability->min_exposure_time = 200;
-    m_pCapability->max_exposure_time = 2000000;
-    set(KEY_QC_MIN_EXPOSURE_TIME, m_pCapability->min_exposure_time);
-    set(KEY_QC_MAX_EXPOSURE_TIME, m_pCapability->max_exposure_time);
+    m_pCapability->min_exposure_time = 0.200000;
+    m_pCapability->max_exposure_time = 2000.000000;
+    setFloat(KEY_QC_MIN_EXPOSURE_TIME, m_pCapability->min_exposure_time);
+    setFloat(KEY_QC_MAX_EXPOSURE_TIME, m_pCapability->max_exposure_time);
     //setExposureTime("0");
 
     // Set HFR
