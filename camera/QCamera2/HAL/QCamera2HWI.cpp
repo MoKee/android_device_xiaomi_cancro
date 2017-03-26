@@ -709,6 +709,8 @@ int QCamera2HardwareInterface::take_picture(struct camera_device *device)
     }
 
     hw->unlockAPI();
+    hw->mLastCaptureTime = systemTime();
+
     CDBG_HIGH("[KPI Perf] %s: X", __func__);
     return ret;
 }
@@ -1097,7 +1099,9 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
       mPreviewFrameSkipValid(0),
       mAdvancedCaptureConfigured(false),
       mNumPreviewFaces(-1),
-      mVideoMem(NULL)
+      mVideoMem(NULL),
+      mLastAFScanTime(0),
+      mLastCaptureTime(0)
 {
     getLogLevel();
     ATRACE_CALL();
