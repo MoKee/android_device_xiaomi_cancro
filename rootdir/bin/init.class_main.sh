@@ -1,5 +1,5 @@
-#!/system/bin/sh
-# Copyright (c) 2009-2011, 2015, The Linux Foundation. All rights reserved.
+#!/vendor/bin/sh
+# Copyright (c) 2013, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,65 +26,48 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-setprop hw.fm.init 0
-
-mode=`getprop hw.fm.mode`
-version=199217
-
-LOG_TAG="qcom-fm"
-LOG_NAME="${0}:"
-
-loge ()
-{
-  /system/bin/log -t $LOG_TAG -p e "$LOG_NAME $@"
-}
-
-logi ()
-{
-  /system/bin/log -t $LOG_TAG -p i "$LOG_NAME $@"
-}
-
-failed ()
-{
-  loge "$1: exit code $2"
-  exit $2
-}
-
-logi "In FM shell Script"
-logi "mode: $mode"
-logi "Version : $version"
-
-#$fm_qsoc_patches <fm_chipVersion> <enable/disable WCM>
 #
-case $mode in
-  "normal")
-        logi "inserting the radio transport module"
-        echo 1 > /sys/module/radio_iris_transport/parameters/fmsmd_set
-        /vendor/bin/fm_qsoc_patches $version 0
-     ;;
-  "wa_enable")
-   /vendor/bin/fm_qsoc_patches $version 1
-     ;;
-  "wa_disable")
-   /vendor/bin/fm_qsoc_patches $version 2
-     ;;
-   *)
-    logi "Shell: Default case"
-    /vendor/bin/fm_qsoc_patches $version 0
-    ;;
+# start ril-daemon only for targets on which radio is present
+#
+baseband=`getprop ro.baseband`
+netmgr=`getprop ro.use_data_netmgrd`
+sgltecsfb=`getprop persist.radio.sglte_csfb`
+
+case "$baseband" in
+    "apq")
+    setprop ro.radio.noril yes
+    stop ril-daemon
 esac
 
-exit_code_fm_qsoc_patches=$?
+case "$baseband" in
+    "msm" | "csfb" | "svlte2a" | "mdm" | "sglte" | "sglte2" | "dsda2" | "unknown")
+    start qmuxd
+    case "$baseband" in
+        "svlte2a" | "csfb")
+          start qmiproxy
+        ;;
+        "sglte" | "sglte2" )
+          if [ "x$sgltecsfb" != "xtrue" ]; then
+              start qmiproxy
+          else
+              setprop persist.radio.voice.modem.index 0
+          fi
+        ;;
+        "dsda2")
+          setprop persist.radio.multisim.config dsda
+    esac
 
-case $exit_code_fm_qsoc_patches in
-   0)
-	logi "FM QSoC calibration and firmware download succeeded"
-   ;;
-  *)
-	failed "FM QSoC firmware download and/or calibration failed" $exit_code_fm_qsoc_patches
-   ;;
+    multisim=`getprop persist.radio.multisim.config`
+
+    if [ "$multisim" = "dsds" ] || [ "$multisim" = "dsda" ]; then
+        start ril-daemon2
+    elif [ "$multisim" = "tsts" ]; then
+        start ril-daemon2
+        start ril-daemon3
+    fi
+
+    case "$netmgr" in
+        "true")
+        start netmgrd
+    esac
 esac
-
-setprop hw.fm.init 1
-
-exit 0

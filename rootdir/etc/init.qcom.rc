@@ -25,8 +25,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.qcom.usb.rc
-import init.target.rc
+import /vendor/etc/init/hw/init.qcom.usb.rc
+import /vendor/etc/init/hw/init.target.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -50,7 +50,7 @@ on early-boot
     # Allow subsystem (modem etc) debugging
     write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
     write /sys/kernel/boot_adsp/boot 1
-    exec /init.qcom.early_boot.sh
+    exec /vendor/bin/init.qcom.early_boot.sh
 
 on boot
     # bring CPUs online
@@ -451,12 +451,12 @@ on property:persist.debug.trace=1
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
 
-service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
+service qcom-c_core-sh /vendor/bin/sh /vendor/bin/init.qcom.class_core.sh
     class core
     user root
     oneshot
 
-service qcom-c_main-sh /system/bin/sh /init.class_main.sh
+service qcom-c_main-sh /vendor/bin/sh /vendor/bin/init.class_main.sh
     class main
     user root
     oneshot
@@ -498,7 +498,7 @@ service rfs_access /vendor/bin/rfs_access
 on property:ro.boot.emmc=true
     start rfs_access
 
-service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
+service hciattach /vendor/bin/sh /vendor/bin/init.qcom.bt.sh
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
@@ -550,7 +550,7 @@ service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
     
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
+service fm_dl /vendor/bin/sh /vendor/bin/init.qcom.fm.sh
     class late_start
     user system
     group system
@@ -561,12 +561,12 @@ on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
      insmod /system/lib/modules/qcedev.ko
 
-service qcom-sh /system/bin/sh /init.qcom.sh
+service qcom-sh /vendor/bin/sh /vendor/bin/init.qcom.sh
     class late_start
     user root
     oneshot
 
-service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
+service qcom-post-boot /vendor/bin/sh /vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
     disabled
@@ -608,9 +608,9 @@ service charger /charger
 
 # SSR setting
 on property:persist.sys.ssr.restart_level=*
-    exec /system/bin/sh /init.qcom.ssr.sh ${persist.sys.ssr.restart_level}
+    exec /vendor/bin/sh /vendor/bin/init.qcom.ssr.sh ${persist.sys.ssr.restart_level}
 
-service fastmmisrv /system/bin/sh /init.qcom.factory.sh
+service fastmmisrv /vendor/bin/sh /vendor/bin/init.qcom.factory.sh
     user root
     disabled
     oneshot

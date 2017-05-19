@@ -13,18 +13,19 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.target.rc \
     init.qcom.usb.rc \
-    ueventd.qcom.rc \
+    ueventd.qcom.rc
+
+# QCOM Config Script
+PRODUCT_PACKAGES += \
+    changepowermode.sh \
+    init.qcom.bt.sh \
+    init.qcom.fm.sh \
+    init.class_main.sh \
     init.qcom.early_boot.sh \
     init.qcom.factory.sh \
     init.qcom.sh \
     init.qcom.ssr.sh \
-    init.qcom.usb.sh
-
-# QCOM Config Script
-PRODUCT_PACKAGES += \
-    init.qcom.bt.sh \
-    init.qcom.fm.sh \
-    init.class_main.sh \
+    init.qcom.usb.sh \
     init.qcom.class_core.sh \
     init.qcom.post_boot.sh \
     usf_post_boot.sh
@@ -68,9 +69,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libshim_atomic \
     android.hardware.power@1.0-service-qti
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/changepowermode.sh:system/bin/changepowermode.sh
 
 # Vibrator
 PRODUCT_PACKAGES += \

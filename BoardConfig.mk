@@ -171,7 +171,7 @@ DEVICE_MATRIX_FILE := $(LOCAL_PATH)/compatibility_matrix.xml
 # Recovery
 RECOVERY_FSTAB_VERSION             := 2
 TARGET_RECOVERY_DENSITY            := xhdpi
-TARGET_RECOVERY_FSTAB              := $(LOCAL_PATH)/rootdir/root/fstab.full
+TARGET_RECOVERY_FSTAB              := $(LOCAL_PATH)/rootdir/etc/fstab.full
 TARGET_RECOVERY_PIXEL_FORMAT       := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 

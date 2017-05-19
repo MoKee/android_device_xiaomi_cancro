@@ -199,7 +199,7 @@ service adsprpcd /vendor/bin/adsprpcd
    user media
    group media
 
-service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
+service usf-post-boot /vendor/bin/sh /vendor/bin/usf_post_boot.sh
     class late_start
     user root
     disabled
@@ -223,7 +223,7 @@ service ppd /vendor/bin/mm-pp-daemon
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
-service changepowermode /system/bin/changepowermode.sh
+service changepowermode /vendor/bin/changepowermode.sh
     user root
     oneshot
     disabled
