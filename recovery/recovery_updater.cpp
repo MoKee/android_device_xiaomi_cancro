@@ -25,6 +25,9 @@
 #include <string.h>
 #include <unistd.h>
 
+#include <string>
+#include <vector>
+
 #include "edify/expr.h"
 #include "updater/install.h"
 
@@ -151,38 +154,33 @@ err_ret:
 }
 
 /* verify_baseband("BASEBAND_VERSION", "BASEBAND_VERSION", ...) */
-Value * VerifyBasebandFn(const char *name, State *state, int argc, Expr *argv[]) {
+Value *VerifyBasebandFn(const char *name, State *state, const std::vector<std::unique_ptr<Expr>> &argv) {
     char current_baseband_version[BASEBAND_VER_BUF_LEN];
-    char *baseband_version;
-    int i, ret;
+    std::vector<std::string> args;
+    int ret;
 
     ret = get_baseband_version(current_baseband_version, BASEBAND_VER_BUF_LEN);
     if (ret) {
-        return ErrorAbort(state, "%s() failed to read current BASEBAND version: %d",
+        return ErrorAbort(state, kFreadFailure, "%s() failed to read current BASEBAND version: %d",
                 name, ret);
     }
 
-    for (i = 0; i < argc; i++) {
-        baseband_version = Evaluate(state, argv[i]);
-        if (baseband_version < 0) {
-            return ErrorAbort(state, "%s() error parsing arguments: %d",
-                name, baseband_version);
-        }
+    if (!ReadArgs(state, argv, &args)) {
+        return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments: %d", name);
+    }
 
-        uiPrintf(state, "Checking for BASEBAND version %s", baseband_version);
+    ret = 0;
+    for (auto& baseband_version : args) {
+        uiPrintf(state, "Comparing BASEBAND version %s to %s",
+                baseband_version.c_str(), current_baseband_version);
 
-        /**
-         * @param count is hardcoded to 11 to check "MPSS.DI.?.0" value only
-         *   because xiaomi changes the other 8 chars every weekly update
-         *   and we just need a MPSS.DI.4.0 baseband
-         */
-        if (strncmp(baseband_version, current_baseband_version, 11) == 0) {
-            return StringValue(strdup("1"));
+        if (strncmp(baseband_version.c_str(), current_baseband_version, baseband_version.length()) == 0) {
+            ret = 1;
+            break;
         }
     }
 
-    uiPrintf(state, "ERROR: It appears you are running an unsupported baseband. Please visit   http://bit.ly/cancroCMBaseband   to learn how to update.");
-    return StringValue(strdup("0"));
+    return StringValue(strdup(ret ? "1":"0"));
 }
 
 void Register_librecovery_updater_cancro() {
