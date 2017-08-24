@@ -3,7 +3,9 @@ $(call inherit-product, device/qcom/common/Android.mk)
 
 LOCAL_PATH := device/xiaomi/cancro
 
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-lineage
 
 # Ramdisk
 PRODUCT_PACKAGES += \
