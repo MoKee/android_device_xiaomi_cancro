@@ -840,7 +840,7 @@ service profiler_daemon /system/bin/profiler_daemon
 service charger /sbin/healthd -c
     class charger
     critical
-    seclabel u:r:healthd:s0
+    seclabel u:r:charger:s0
 
 # SSR setting
 on property:persist.sys.ssr.restart_level=*
