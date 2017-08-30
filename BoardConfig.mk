@@ -156,9 +156,6 @@ TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness
 BOARD_HARDWARE_CLASS += \
     $(CANCRO_PATH)/lineagehw
 
-# No old RPC for prop
-TARGET_NO_RPC := true
-
 # GPS HAL lives here
 TARGET_GPS_HAL_PATH         := $(CANCRO_PATH)/gps
 TARGET_PROVIDES_GPS_LOC_API := true
