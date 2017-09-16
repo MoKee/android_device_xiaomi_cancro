@@ -50,6 +50,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+    libshim_atomic \
     camera.msm8974 \
     libxml2 \
     Snap \
