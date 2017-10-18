@@ -53,14 +53,4 @@
          policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
      -->
     <!-- <integer name="config_longPressOnAppSwitchBehavior">1</integer> -->
-
-    <!-- Enable blur support -->
-    <bool name="config_uiBlurEnabled">true</bool>
-
-    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <!-- <bool name="config_intrusiveBatteryLed">true</bool> -->
-
-    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveNotificationLed">true</bool>
-
 </resources>
