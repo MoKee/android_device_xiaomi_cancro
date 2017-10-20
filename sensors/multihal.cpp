@@ -14,29 +14,27 @@
  * limitations under the License.
  */
 
-#include <hardware/sensors.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <dirent.h>
-#include <math.h>
-#include <poll.h>
-#include <pthread.h>
-#include <cutils/atomic.h>
+#include "SensorEventQueue.h"
 
 #define LOG_NDEBUG 1
 #include <cutils/log.h>
+#include <cutils/atomic.h>
+#include <hardware/sensors.h>
 
 #include <vector>
 #include <string>
 #include <fstream>
 #include <map>
-#include <string>
 
-#include <stdio.h>
+#include <dirent.h>
 #include <dlfcn.h>
-#include <SensorEventQueue.h>
-
+#include <errno.h>
+#include <fcntl.h>
 #include <limits.h>
+#include <math.h>
+#include <poll.h>
+#include <pthread.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 static pthread_mutex_t init_modules_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -152,7 +150,11 @@ void *writerTask(void* ptr) {
         ALOGV("writerTask before poll() - bufferSize = %d", bufferSize);
         eventsPolled = device->poll(device, buffer, bufferSize);
         ALOGV("writerTask poll() got %d events.", eventsPolled);
-        if (eventsPolled == 0) {
+        if (eventsPolled <= 0) {
+            if (eventsPolled < 0) {
+                ALOGV("writerTask ignored error %d from %s", eventsPolled, device->common.module->name);
+                ALOGE("ERROR: Fix %s so it does not return error from poll()", device->common.module->name);
+            }
             continue;
         }
         pthread_mutex_lock(&queue_mutex);
@@ -412,18 +414,13 @@ static int device__batch(struct sensors_poll_device_1 *dev, int handle,
         int flags, int64_t period_ns, int64_t timeout) {
     sensors_poll_context_t* ctx = (sensors_poll_context_t*) dev;
     // HACK: the sensor HAL doesn't like batch mode, so call setDelay instead
-#if 0
-    return ctx->batch(handle, flags, period_ns, timeout);
-#else
-    (void)(flags);
-    (void)(timeout);
-    return ctx->setDelay(handle, period_ns);
-#endif
+    ctx->setDelay(handle, period_ns);
+
+    return 0;
 }
 
 static int device__flush(struct sensors_poll_device_1 *dev, int handle) {
-    sensors_poll_context_t* ctx = (sensors_poll_context_t*) dev;
-    return ctx->flush(handle);
+    return -EINVAL;
 }
 
 static int open_sensors(const struct hw_module_t* module, const char* name,
@@ -477,6 +474,34 @@ static void lazy_init_modules() {
     dlerror(); // clear any old errors
     add_so_module("libsensors.msm8974.so");
     pthread_mutex_unlock(&init_modules_mutex);
+}
+
+/*
+ * Fix the fields of the sensor to be compliant with the API version
+ * reported by the wrapper.
+ */
+static void fix_sensor_fields(sensor_t& sensor) {
+    /*
+     * Becasue batching and flushing don't work modify the
+     * sensor fields to not report any fifo counts.
+     */
+    sensor.fifoReservedEventCount = 0;
+    sensor.fifoMaxEventCount = 0;
+
+    switch (sensor.type) {
+    /*
+     * Use the flags suggested by the sensors documentation.
+     */
+    case SENSOR_TYPE_TILT_DETECTOR:
+        sensor.flags = SENSOR_FLAG_WAKE_UP | SENSOR_FLAG_ON_CHANGE_MODE;
+        break;
+    /*
+     * Report a proper range to fix doze proximity check.
+     */
+    case SENSOR_TYPE_PROXIMITY:
+        sensor.maxRange = 5.0;
+        break;
+    }
 }
 
 /*
@@ -538,11 +563,7 @@ static void lazy_init_sensors_list() {
             ALOGV("module_index %d, local_handle %d, global_handle %d",
                     module_index, local_handle, global_handle);
 
-            // HACK: Report a proper range to fix doze proximity check
-            if (mutable_sensor_list[mutable_sensor_index].type == SENSOR_TYPE_PROXIMITY) {
-                ALOGV("override proximity range");
-                mutable_sensor_list[mutable_sensor_index].maxRange = 5.0;
-            }
+            fix_sensor_fields(mutable_sensor_list[mutable_sensor_index]);
 
             mutable_sensor_index++;
         }
@@ -575,7 +596,7 @@ struct sensors_module_t HAL_MODULE_INFO_SYM = {
     .common = {
         .tag = HARDWARE_MODULE_TAG,
         .version_major = 1,
-        .version_minor = 0,
+        .version_minor = 1,
         .id = SENSORS_HARDWARE_MODULE_ID,
         .name = "MultiHal Sensor Module",
         .author = "Google, Inc",
