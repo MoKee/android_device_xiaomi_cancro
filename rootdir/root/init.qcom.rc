@@ -50,7 +50,7 @@ on early-boot
     # Allow subsystem (modem etc) debugging
     write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
     write /sys/kernel/boot_adsp/boot 1
-    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
+    exec /init.qcom.early_boot.sh
 
 on boot
     # bring CPUs online
