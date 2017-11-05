@@ -349,6 +349,7 @@ vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
 vendor/lib/librpmb.so
 vendor/lib/libssd.so
+vendor/lib/liboemcrypto.so|ed97a68cd9a604db43aa1267b4d525693b27afdf
 
 # Firmware
 vendor/firmware/bcm2079x-b5_firmware.ncd
@@ -506,13 +507,8 @@ etc/firmware/venus.b04
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
 
-# Widevine
-vendor/lib/drm/libdrmwvmplugin.so
-vendor/lib/liboemcrypto.so
-vendor/lib/libwvm.so
-vendor/lib/libwvdrm_L1.so
-vendor/lib/libWVStreamControlAPI_L1.so
-vendor/lib/mediadrm/libwvdrmengine.so
+# Widevine - from angler - OPR6.170623.017 factory image
+vendor/lib/mediadrm/libwvdrmengine.so|66ba66d047044f92eb0eada1faf6a5799ded90ab
 
 # WiFi
 bin/wcnss_service
