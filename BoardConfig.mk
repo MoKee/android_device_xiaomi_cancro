@@ -41,6 +41,9 @@ TARGET_CPU_ABI2     := armeabi
 TARGET_CPU_SMP      := true
 TARGET_CPU_VARIANT  := krait
 
+# Binder API version
+TARGET_USES_64_BIT_BINDER := true
+
 # Flags
 BOARD_GLOBAL_CFLAGS   += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 
