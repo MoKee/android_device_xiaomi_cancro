@@ -393,9 +393,9 @@ vendor/lib/libllvm-qcom.so
 vendor/lib/libOpenCL.so
 vendor/lib/libscale.so
 vendor/lib/libsc-a3xx.so
-vendor/lib/libRSDriver_adreno.so
-vendor/lib/librs_adreno.so
-vendor/lib/librs_adreno_sha1.so
+vendor/lib/libRSDriver_adreno.so|b7cea69e2fe30185ee9681eaf44c1ab9
+vendor/lib/librs_adreno.so|f5ac8b20525eb3794f11559f4566731a
+vendor/lib/librs_adreno_sha1.so|66862f5cc9fd096840545fc3654f2830
 
 # Graphics firmware
 etc/firmware/a330_pfp.fw
