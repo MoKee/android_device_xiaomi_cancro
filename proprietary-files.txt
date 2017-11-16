@@ -365,11 +365,7 @@ bin/fm_qsoc_patches
 
 # GPS
 bin/loc_launcher
-lib/hw/gps.msm8974.so
 lib/libloc_api_v02.so
-lib/libgps.utils.so
-lib/libloc_core.so
-lib/libloc_eng.so
 vendor/lib/hw/flp.default.so
 vendor/lib/libflp.so
 vendor/lib/libgeofence.so
