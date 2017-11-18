@@ -247,7 +247,7 @@ service imsdatadaemon /system/bin/imsdatadaemon
     group system wifi radio inet net_raw log qcom_diag net_admin
     disabled
 
-service wcnss-service /system/bin/wcnss_service
+service wcnss-service /vendor/bin/wcnss_service
     class main
     user system
     group system wifi radio
