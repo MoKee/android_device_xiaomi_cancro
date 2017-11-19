@@ -354,7 +354,5 @@ on property:persist.sys.display_idle=0
 on property:persist.radio.modem=LTE-X5-ALL
     setprop telephony.lteOnCdmaDevice 1
     setprop persist.radio.disable_flexmap 0
-    setprop ro.sys.oosenhance.timer 20000
 on property:persist.radio.modem=LTE-X5
     setprop persist.radio.disable_flexmap 1
-    setprop ro.sys.oosenhance.timer 20000
