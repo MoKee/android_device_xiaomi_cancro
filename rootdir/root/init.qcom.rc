@@ -583,7 +583,7 @@ service bt-sap /system/bin/sapd 15
 service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
     class late_start
     user root
-    group bluetooth net_bt_admin misc bluetooth qcom_diag
+    group bluetooth net_bt_admin misc bluetooth oem_2950
     disabled
     oneshot
 
@@ -591,7 +591,7 @@ service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps wakelock qcom_diag
+    group radio audio bluetooth gps wakelock oem_2950
     disabled
 
 service netmgrd /system/bin/netmgrd
@@ -698,13 +698,13 @@ service gpsone_daemon /system/bin/gpsone_daemon
 service quipc_igsn /system/bin/quipc_igsn
     class late_start
     user gps
-    group inet gps qcom_diag
+    group inet gps oem_2950
     disabled
 
 service quipc_main /system/bin/quipc_main
     class late_start
     user gps
-    group gps net_admin wifi inet qcom_diag
+    group gps net_admin wifi inet oem_2950
     disabled
 
 service location_mq /system/bin/location-mq
@@ -728,7 +728,7 @@ service xtwifi_client /system/bin/xtwifi-client
 service lowi-server /system/bin/lowi-server
     class late_start
     user gps
-    group gps net_admin wifi inet qcom_diag
+    group gps net_admin wifi inet oem_2950
     disabled
     
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
@@ -791,7 +791,7 @@ service ril-daemon2 /system/vendor/bin/hw/rild -c 2
     socket rild-debug2 stream 660 radio system
     user root
     disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log net_raw
+    group radio cache inet misc audio sdcard_r sdcard_rw diag oem_2950 log net_raw
 
 service ril-daemon3 /system/vendor/bin/hw/rild -c 3
     class main
@@ -799,7 +799,7 @@ service ril-daemon3 /system/vendor/bin/hw/rild -c 3
     socket rild-debug3 stream 660 radio system
     user root
     disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log net_raw
+    group radio cache inet misc audio sdcard_r sdcard_rw diag oem_2950 log net_raw
 
 on property:usb_uicc.spi_bridge_enabled=1
     insmod /system/lib/modules/ice40-hcd.ko
@@ -865,14 +865,14 @@ on property:sys.qbcharger.enable=false
 service diag_mdlog_start /system/bin/diag_mdlog -c -n 20
     class late_start
     user shell
-    group system qcom_diag sdcard_rw sdcard_r media_rw
+    group system oem_2950 sdcard_rw sdcard_r media_rw
     disabled
     oneshot
 
 service diag_mdlog_stop /system/bin/diag_mdlog -k
     class late_start
     user shell
-    group system qcom_diag sdcard_rw sdcard_r media_rw
+    group system oem_2950 sdcard_rw sdcard_r media_rw
     disabled
     oneshot
 
