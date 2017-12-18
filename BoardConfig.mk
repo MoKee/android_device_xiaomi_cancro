@@ -16,13 +16,13 @@
 #
 BOARD_VENDOR := xiaomi
 
-LOCAL_PATH := device/xiaomi/cancro
+DEVICE_PATH := device/xiaomi/cancro
 
 # ReleaseTools
-TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)/releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)/releasetools
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_cancro
 
-TARGET_BOARD_INFO_FILE := $(LOCAL_PATH)/board-info.txt
+TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
@@ -51,7 +51,7 @@ TARGET_EXFAT_DRIVER := exfat
 BOARD_GLOBAL_CFLAGS   += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 
 # Filesystem
-TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # Kernel
 BOARD_KERNEL_CMDLINE               := console=none vmalloc=340M androidboot.hardware=qcom msm_rtb.filter=0x3b7 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
@@ -69,7 +69,7 @@ BOARD_DTBTOOL_ARGS                 := -2
 
 # Vendor Init
 TARGET_INIT_VENDOR_LIB      := libinit_cancro
-TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_cancro.cpp
+TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_cancro.cpp
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE            := true
@@ -78,7 +78,7 @@ BOARD_USES_QCOM_HARDWARE            := true
 TARGET_HAS_LEGACY_POWER_STATS := true
 TARGET_HAS_NO_WIFI_STATS := true
 TARGET_USES_INTERACTION_BOOST := true
-TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(DEVICE_PATH)/power/power_ext.c
 
 # Audio
 BOARD_USES_ALSA_AUDIO                      := true
@@ -103,7 +103,7 @@ TARGET_FM_LEGACY_PATCHLOADER := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH                        := true
 BOARD_HAVE_BLUETOOTH_QCOM                   := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 QCOM_BT_USE_SMD_TTY                         := true
 BLUETOOTH_HCI_USE_MCT                       := true
 
@@ -165,21 +165,21 @@ BOARD_FLASH_BLOCK_SIZE              := 131072
 
 
 # HIDL
-DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(LOCAL_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # Recovery
 RECOVERY_FSTAB_VERSION             := 2
 TARGET_RECOVERY_DENSITY            := xhdpi
-TARGET_RECOVERY_FSTAB              := $(LOCAL_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB              := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT       := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
 # MK Hardware
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/mkhw
+BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/mkhw
 
 # GPS HAL lives here
-TARGET_GPS_HAL_PATH         := $(LOCAL_PATH)/gps
+TARGET_GPS_HAL_PATH         := $(DEVICE_PATH)/gps
 TARGET_PROVIDES_GPS_LOC_API := true
 
 # Lights
@@ -218,6 +218,6 @@ DONT_DEXPREOPT_PREBUILTS := true
 include device/qcom/sepolicy/sepolicy.mk
 include device/qcom/sepolicy/legacy-sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += device/xiaomi/cancro/sepolicy
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 -include vendor/xiaomi/cancro/BoardConfigVendor.mk
