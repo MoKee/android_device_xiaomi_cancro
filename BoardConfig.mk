@@ -176,6 +176,7 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Use HW crypto for ODE
 TARGET_HW_DISK_ENCRYPTION := true
+TARGET_LEGACY_HW_DISK_ENCRYPTION := true
 
 # Simple time service client
 BOARD_USES_QC_TIME_SERVICES := true
