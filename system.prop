@@ -118,5 +118,3 @@ ro.qualcomm.bluetooth.map=true
 ro.qualcomm.bluetooth.nap=true
 ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.pbap=true
-
-ro.sys.sdcardfs=true
