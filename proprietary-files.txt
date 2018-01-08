@@ -267,7 +267,6 @@ vendor/lib/libchromatix_skuf_ov5648_p5v23c_snapshot.so
 vendor/lib/libFaceProc.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
-vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libmmcamera2_frame_algorithm.so
@@ -399,11 +398,8 @@ etc/firmware/a330_pm4.fw
 
 # Media
 lib/libOmxVdecHevc.so
-vendor/lib/libDivxDrm.so
 vendor/lib/libHevcSwDecoder.so
-vendor/lib/libI420colorconvert.so
 vendor/lib/libmmosal.so
-vendor/lib/libSHIMDivxDrm.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libOmxEvrcDec.so
