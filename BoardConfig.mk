@@ -51,9 +51,9 @@ BOARD_KERNEL_SEPARATED_DT          := true
 BOARD_KERNEL_BASE                  := 0x00000000
 BOARD_KERNEL_PAGESIZE              := 2048
 BOARD_MKBOOTIMG_ARGS               := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
-TARGET_KERNEL_SOURCE               := kernel/xiaomi/cancro
+TARGET_KERNEL_SOURCE               := kernel/xiaomi/virgo
 TARGET_KERNEL_ARCH                 := arm
-TARGET_KERNEL_CONFIG               := lineageos_cancro_defconfig
+TARGET_KERNEL_CONFIG               := cancro_user_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 BOARD_DTBTOOL_ARGS                 := -2
 
