@@ -1,5 +1,6 @@
 # Bluetooth
 bin/btnvtool
+bin/hci_qcomm_init
 vendor/lib/libbtnv.so
 
 # ADSP
@@ -17,26 +18,30 @@ vendor/lib/libscve.so
 vendor/lib/libscve_stub.so
 
 # Audio
+lib/soundfx/libdirac.so
+lib/libDiracAPI_SHARED.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
 vendor/lib/libadiertac.so
-vendor/lib/libDiracAPI_SHARED.so
 vendor/lib/libaudcal.so
 vendor/lib/libaudioalsa.so
-vendor/lib/libsrsprocessing.so
+vendor/lib/liblistenhardware.so
+vendor/lib/liblistenjni.so
+vendor/lib/liblisten.so
+vendor/lib/liblistensoundmodel.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
-vendor/lib/soundfx/libdirac.so
 
 # Camera
 bin/mm-qcamera-daemon
 etc/android_model_facea.dat
 etc/android_model_faceg.dat
+etc/people_gender.dat
 etc/sdm_200_HOG3x3_Grid3x3_bin5_noproj_zero_reduced.bin
 etc/sdm_200_HOG3x3_Grid3x3_bin5_noproj_zero_reduced.bin.pca
-lib/hw/camera.vendor.msm8974.so
-lib/libc2dcolorconvert.so
+etc/watermark_font_2300_3199.dat
+lib/hw/camera.msm8974.so:lib/hw/camera.vendor.msm8974.so
 lib/libchromatix_imx135_liveshot.so
 lib/libchromatix_imx214_liveshot.so
 lib/libchromatix_imx215_liveshot.so
@@ -45,9 +50,9 @@ lib/libchromatix_imx224_liveshot.so
 lib/libchromatix_imx225_liveshot.so
 lib/libchromatix_imx226_liveshot.so
 lib/libchromatix_s5k3m2_liveshot.so
+lib/libmm-qcamera.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
-lib/libOmxVenc.so
 lib/libqomx_core.so
 lib/libRecoFace.so
 vendor/lib/libAKM8963.so
@@ -258,12 +263,10 @@ vendor/lib/libchromatix_skuf_ov5648_p5v23c_common.so
 vendor/lib/libchromatix_skuf_ov5648_p5v23c_default_video.so
 vendor/lib/libchromatix_skuf_ov5648_p5v23c_preview.so
 vendor/lib/libchromatix_skuf_ov5648_p5v23c_snapshot.so
-vendor/lib/libFaceDeform.so
 vendor/lib/libFaceProc.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libmm-color-convertor.so
-vendor/lib/libmm-hdcpmgr.so
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libmmcamera2_frame_algorithm.so
@@ -322,13 +325,12 @@ vendor/lib/libmmcamera_x4_s5k3m2_eeprom.so
 vendor/lib/libmmcamera_x5_imx214_eeprom.so
 vendor/lib/libmmipl.so
 vendor/lib/libmmjpeg.so
+vendor/lib/libmmparser.so
 vendor/lib/libmmqjpeg_codec.so
-vendor/lib/libmmQSM.so
 vendor/lib/liboemcamera.so
-vendor/lib/liboptizoom.so
-vendor/lib/libqct_resampler.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc.so
+vendor/lib/libt2tmanager.so
 vendor/lib/libubifocus.so
 
 # Charger
@@ -340,18 +342,14 @@ lib/hw/consumerir.msm8974.so
 
 # DRM
 bin/qseecomd
-lib/libdrmdecrypt.so
-vendor/lib/libdrmdecrypt.2.so
-vendor/lib/liboemcrypto.so
 vendor/lib/libQSEEComAPI.so
+vendor/lib/libdrmdiag.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
 vendor/lib/librpmb.so
 vendor/lib/libssd.so
-vendor/lib/mediadrm/libdrmclearkeyplugin.so
 
 # Firmware
-lib/libstm-log.so
 vendor/firmware/bcm2079x-b5_firmware.ncd
 vendor/firmware/bcm2079x-b5_pre_firmware.ncd
 vendor/firmware/keymaster/keymaster.b00
@@ -365,23 +363,16 @@ bin/fm_qsoc_patches
 
 # GPS
 bin/loc_launcher
-bin/quipc_igsn
-bin/quipc_main
 lib/hw/gps.msm8974.so
 lib/libloc_api_v02.so
-lib/libloc_ds_api.so
 lib/libgps.utils.so
 lib/libloc_core.so
 lib/libloc_eng.so
 vendor/lib/hw/flp.default.so
+vendor/lib/libflp.so
 vendor/lib/libgeofence.so
 vendor/lib/libizat_core.so
 vendor/lib/liblbs_core.so
-vendor/lib/liblocationservice.so
-vendor/lib/libquipc_os_api.so
-vendor/lib/libquipc_ulp_adapter.so
-vendor/lib/libulp2.so
-vendor/lib/libxtadapter.so
 
 # Graphics
 vendor/lib/egl/eglsubAndroid.so
@@ -398,32 +389,36 @@ vendor/lib/libCB.so
 vendor/lib/libgsl.so
 vendor/lib/libllvm-qcom.so
 vendor/lib/libOpenCL.so
-vendor/lib/libOpenVG.so
-vendor/lib/libsc-a2xx.so
+vendor/lib/libscale.so
 vendor/lib/libsc-a3xx.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
-vendor/lib/libuiblur.so
 
 # Graphics firmware
 etc/firmware/a330_pfp.fw
 etc/firmware/a330_pm4.fw
 
 # Media
+lib/libOmxVdecHevc.so
 vendor/lib/libDivxDrm.so
 vendor/lib/libHevcSwDecoder.so
 vendor/lib/libI420colorconvert.so
-vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
 vendor/lib/libSHIMDivxDrm.so
+vendor/lib/libOmxAacDec.so
+vendor/lib/libOmxAmrwbplusDec.so
+vendor/lib/libOmxEvrcDec.so
+vendor/lib/libOmxQcelp13Dec.so
+vendor/lib/libOmxWmaDec.so
 
 # Perf
 bin/mpdecision
-bin/qosmgr
+vendor/lib/libqc-opt.so
 vendor/lib/libqti-perfd-client.so
 
 # Postprocessing
+bin/mm-pp-daemon
 vendor/lib/libdisp-aba.so
 vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
@@ -431,7 +426,6 @@ vendor/lib/libmm-abl-oem.so
 # Qualcomm framework
 bin/irsc_util
 etc/data/qmi_config.xml
-vendor/lib/libt2tmanager.so
 -vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
 -vendor/lib/libdsutils.so
@@ -480,11 +474,13 @@ vendor/lib/lib-rtpcommon.so
 vendor/lib/lib-rtpcore.so
 vendor/lib/lib-rtpdaemoninterface.so
 vendor/lib/lib-rtpsl.so
+vendor/qcril.db
 
 # Sensors
 bin/sensors.qcom
 etc/sensor_def_qcomdev.conf
-vendor/lib/hw/activity_recognition.msm8974.so
+etc/sensor_diag.cfg
+lib/hw/activity_recognition.msm8974.so
 vendor/lib/hw/sensors.msm8974.so:vendor/lib/libsensors.msm8974.so
 vendor/lib/libasn1cper.so
 vendor/lib/libasn1crt.so
@@ -510,17 +506,15 @@ etc/firmware/venus.mbn
 etc/firmware/venus.mdt
 
 # Widevine
-vendor/lib/libwvdrm_L3.so
-vendor/lib/libWVphoneAPI.so
-vendor/lib/libWVStreamControlAPI_L3.so
+vendor/lib/drm/libdrmwvmplugin.so
+vendor/lib/liboemcrypto.so
+vendor/lib/libwvm.so
+vendor/lib/libwvdrm_L1.so
+vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # WiFi
-bin/lowi-server
-bin/wcnss_filter
 bin/wcnss_service
-bin/xtwifi-client
-bin/xtwifi-inet-agent
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
@@ -533,6 +527,3 @@ etc/firmware/wcnss.b07
 etc/firmware/wcnss.b08
 etc/firmware/wcnss.b09
 etc/firmware/wcnss.mdt
-vendor/lib/libwifiscanner.so
-vendor/lib/libxtwifi_ulp_adaptor.so
-vendor/lib/libxtwifi_zpp_adaptor.so
