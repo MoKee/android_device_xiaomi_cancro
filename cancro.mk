@@ -213,6 +213,10 @@ PRODUCT_PACKAGES += \
     libnl_2 \
     libbson
 
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.msm8974
+
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService \
