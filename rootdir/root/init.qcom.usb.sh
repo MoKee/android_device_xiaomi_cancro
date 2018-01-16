@@ -67,7 +67,7 @@ case "$usb_config" in
                          if [ -z "$debuggable" -o "$debuggable" = "1" ]; then
                              setprop persist.sys.usb.config mtp,adb
                          else
-                             setprop persist.sys.usb.config mtp
+                             setprop persist.sys.usb.config mtp,adb
                          fi
             ;;
         esac

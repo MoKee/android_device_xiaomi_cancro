@@ -36,9 +36,13 @@ on init
     # 0 indicates that virtual display is not a Wifi display and that the
     # session is not exercised through RemoteDisplay in the android framework
     setprop persist.sys.wfd.virtual 0
-    # set logd.radio buffer size
-    setprop persist.logd.size.radio "4M"
-    setprop persist.logd.prunelist "1013"
+    # Immersion
+    export VIBE_PIPE_PATH /dev/pipes
+    mkdir /dev/pipes 0771 system system
+
+# import cne init file
+#on post-fs
+#    export LD_PRELOAD /vendor/lib/libNimsWrap.so
 
 on fs
     mount_all fstab.qcom
@@ -47,15 +51,13 @@ on fs
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
 
-    wait /dev/block/bootdevice/by-name/persist
-    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
     restorecon_recursive   /persist
     mkdir /persist/data 0700 system system
     mkdir /persist/data/sfs 0700 system system
     mkdir /persist/data/tz 0700 system system
+    mkdir /persist/audio 0771 media audio
 
-    wait /dev/block/bootdevice/by-name/modem
-    mount vfat /dev/block/bootdevice/by-name/modem /firmware ro context=u:object_r:firmware_file:s0,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro context=u:object_r:firmware_file:s0,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
 
 on post-fs-data
     mkdir /data/tombstones 0771 system system
@@ -63,7 +65,7 @@ on post-fs-data
     mkdir /tombstones/lpass 0771 system system
     mkdir /tombstones/wcnss 0771 system system
     mkdir /tombstones/dsps 0771 system system
-    mkdir /data/usf 0700 system system
+    chmod 777 /data/qmi-framework-tests/qmi_xiaomi_id_test
     mkdir /persist/property 0700 root root
 
     chmod 0600 /dev/bcm2079x
@@ -82,43 +84,13 @@ on post-fs-data
     chown system camera /sys/class/leds/torch-light/brightness
     chmod 0660 /sys/class/leds/torch-light/brightness
 
-    # Dynamic FPS
-    chown system graphics /sys/class/graphics/fb0/dynamic_fps
-    chmod 0644 /sys/class/graphics/fb0/dynamic_fps
-
-    # VibratorHW
-    chown root system /sys/class/timed_output/vibrator/amp
-    chmod 0664 /sys/class/timed_output/vibrator/amp
-    restorecon /sys/class/timed_output/vibrator/amp
-
-    #  KeyDisabler
-    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off
-    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off
-    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off
-    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
-    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
-    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off
-
-    # HighTouchSensitivity
-    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
-    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
-    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode
-    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
-    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
-    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode
-    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
-    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
-    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus
-    chown root system /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
-    chmod 0664 /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
-    restorecon /sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus
-
     # RBG calibration
     chown system system /sys/devices/virtual/graphics/fb0/rgb
     chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
     restorecon /sys/devices/virtual/graphics/fb0/rgb
 
 on boot
+    insmod /system/lib/modules/adsprpc.ko
     chown system system /sys/class/input/input0/enabled
     chown system system /sys/class/input/input1/enabled
     chown system system /sys/class/input/input2/enabled
@@ -126,6 +98,8 @@ on boot
     chown system system /sys/class/input/input4/enabled
     chown system system /sys/class/input/input5/enabled
     chown system system /sys/class/input/input6/enabled
+    chown system system /sys/class/leds/button-backlight/max_brightness
+    chown system system /sys/class/leds/button-backlight1/max_brightness
     chown system system /sys/bus/i2c/devices/2-004a/golden_ref
     chown system system /sys/bus/i2c/devices/2-004a/golden_en
     chown system system /sys/bus/i2c/devices/2-0048/auto_tune
@@ -134,16 +108,16 @@ on boot
     chown system system /sys/devices/fda0c000.qcom,cci/1c.qcom,actuator/bu63163
     exec /system/bin/sh /system/bin/atmel_hover_tune.sh
     # update foreground cpuset now that processors are up
-    write /dev/cpuset/foreground/cpus 0-3
-    write /dev/cpuset/foreground/boost/cpus 0-3
-    write /dev/cpuset/background/cpus 0
-    write /dev/cpuset/system-background/cpus 0-1
+    # write /dev/cpuset/foreground/cpus 0-3
+    # write /dev/cpuset/foreground/boost/cpus 0-3
+    # write /dev/cpuset/background/cpus 0
+    # write /dev/cpuset/system-background/cpus 0-1
 
 # Dynamically modify golden_ref setting
 on property:persist.atmel.golden.enable=1
     write /sys/bus/i2c/devices/2-004a/golden_en 1
 
-#on property:persist.atmel.golden.enable=0
+on property:persist.atmel.golden.enable=0
     write /sys/bus/i2c/devices/2-004a/golden_en 0
 
 # Allow usb charging to be disabled persistently
@@ -154,7 +128,7 @@ on property:persist.usb.chgdisabled=0
     write /sys/class/power_supply/battery/charging_enabled 1
 
 # NFC
-    setprop ro.nfc.port "I2C"
+   setprop ro.nfc.port "I2C"
     chmod 0600 /dev/bcm2079x
     chown nfc nfc /dev/bcm2079x
     mkdir /data/nfc
@@ -181,21 +155,6 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet input graphics
 
-service qrngd /system/bin/qrngd -f
-    class main
-    user root
-    group root
-
-service qrngp /system/bin/qrngp
-    class main
-    user root
-    group root
-    oneshot
-    disabled
-
-on property:sys.boot_completed=1
-    start qrngp
-
 service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
@@ -212,6 +171,17 @@ service mpdecision /system/bin/mpdecision --avg_comp
    group system
    disabled
 
+# Disable security-check to save 400M+ free buffers.
+service security-check1 /sbin/security_boot_check system
+    class core
+    oneshot
+    disabled
+
+service security-check2 /sbin/security_boot_check recovery
+    class core
+    oneshot
+    disabled
+
 service time_daemon /system/bin/time_daemon
    class late_start
    user root
@@ -227,6 +197,41 @@ service audiod /system/bin/audiod
    user system
    group system
 
+service usf_tester /system/bin/usf_tester
+    user system
+    group system inet
+    disabled
+
+service usf_epos /system/bin/usf_epos
+    user system
+    group system inet
+    disabled
+
+service usf_gesture /system/bin/usf_gesture
+    user system
+    group system inet
+    disabled
+
+service usf_p2p /system/bin/usf_p2p
+    user system
+    group system inet
+    disabled
+
+service usf_hovering /system/bin/usf_hovering
+    user system
+    group system inet
+    disabled
+
+service usf_sync_gesture /system/bin/usf_sync_gesture
+    user system
+    group system inet audio
+    disabled
+
+service usf_proximity /system/bin/usf_proximity
+    user system
+    group system inet audio
+    disabled
+
 service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
     class late_start
     user root
@@ -236,17 +241,11 @@ service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
 on property:init.svc.bootanim=stopped
     start usf-post-boot
 
-service imsqmidaemon /system/bin/imsqmidaemon
-    class main
-    user system
-    socket ims_qmid stream 0660 system radio
-    group ims radio net_raw log qcom_diag
-
 service imsdatadaemon /system/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
-    group system ims wifi radio inet net_raw log qcom_diag net_admin
+    group system wifi radio inet net_raw log qcom_diag net_admin
     disabled
 
 service wcnss-service /system/bin/wcnss_service
@@ -278,16 +277,22 @@ on property:sys.ims.QMI_DAEMON_STATUS=1
 service ims_rtp_daemon /system/bin/ims_rtp_daemon
    class main
    user system
-   socket ims_rtpd stream 0660 system ims
-   group ims net_raw diag qcom_diag log
+   socket ims_rtpd stream 0660 system radio
+   group radio net_raw diag qcom_diag log
+   disabled
+
+service imscmservice /system/bin/imscmservice
+   class main
+   user system
+   group radio net_raw diag qcom_diag log
    disabled
 
 on property:sys.ims.DATA_DAEMON_STATUS=1
-    start ims_rtp_daemon
+   start ims_rtp_daemon
+   start imscmservice
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
-    disabled
     user system
     socket pps stream 0660 system system
     group system graphics
@@ -295,20 +300,11 @@ service ppd /system/bin/mm-pp-daemon
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
-on property:init.svc.surfaceflinger=running
-    start ppd
-
-service nqs /system/bin/nqs
-    class late_start
-    socket nqs_qsb_comm stream 660 system system
-    user system
-    group drmrpc
-
 service changepowermode /system/bin/changepowermode.sh
     user root
     oneshot
     disabled
-
+    
 on property:persist.sys.display_prefer=0
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0x2
 on property:persist.sys.display_prefer=1
@@ -326,6 +322,15 @@ on property:persist.sys.display_ce=10
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xF0
 on property:persist.sys.display_ce=11
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0x10
+
+on property:persist.sys.display_cabc=0
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xF00
+on property:persist.sys.display_cabc=1
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0x200
+on property:persist.sys.display_cabc=2
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0x300
+on property:persist.sys.display_cabc=3
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0x400
 
 on property:persist.sys.display_level=0
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xF000
@@ -346,3 +351,11 @@ on property:persist.sys.display_idle=1
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xA0000
 on property:persist.sys.display_idle=0
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xF0000
+
+on property:persist.radio.modem=LTE-X5-ALL
+    setprop telephony.lteOnCdmaDevice 1
+    setprop persist.radio.disable_flexmap 0
+    setprop ro.sys.oosenhance.timer 20000
+on property:persist.radio.modem=LTE-X5
+    setprop persist.radio.disable_flexmap 1
+    setprop ro.sys.oosenhance.timer 20000

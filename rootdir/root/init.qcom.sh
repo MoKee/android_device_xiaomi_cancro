@@ -38,23 +38,19 @@ fi
 start_sensors()
 {
     if [ -c /dev/msm_dsps -o -c /dev/sensors ]; then
-        mkdir -p /data/system/sensors
-        chown -h system.system /data/system/sensors
-        restorecon -r /data/system/sensors
-        touch /data/system/sensors/settings
-        chmod -h 775 /data/system/sensors
-        chmod -h 664 /data/system/sensors/settings
-        chown -h system /data/system/sensors/settings
-
         mkdir -p /data/misc/sensors
         chmod -h 775 /data/misc/sensors
         mkdir -p /persist/misc/sensors
         chmod 775 /persist/misc/sensors
 
-        if [ ! -s /data/system/sensors/settings ]; then
+        touch /persist/misc/sensors/settings
+        chmod -h 664 /data/system/sensors/settings
+        chown -h system /persist/misc/sensors/settings
+
+        if [ ! -s /persist/misc/sensors/settings ]; then
             # If the settings file is empty, enable sensors HAL
             # Otherwise leave the file with it's current contents
-            echo 1 > /data/system/sensors/settings
+            echo 1 > /persist/misc/sensors/settings
         fi
         start sensors
     fi
@@ -81,15 +77,15 @@ start_charger_monitor()
 {
 	if ls /sys/module/qpnp_charger/parameters/charger_monitor; then
 		chown -h root.system /sys/module/qpnp_charger/parameters/*
-		chown root.system /sys/class/power_supply/battery/input_current_max
-		chown root.system /sys/class/power_supply/battery/input_current_trim
-		chown root.system /sys/class/power_supply/battery/input_current_settled
-		chown root.system /sys/class/power_supply/battery/voltage_min
-		chmod 0664 /sys/class/power_supply/battery/input_current_max
-		chmod 0664 /sys/class/power_supply/battery/input_current_trim
-		chmod 0664 /sys/class/power_supply/battery/input_current_settled
-		chmod 0664 /sys/class/power_supply/battery/voltage_min
-		chmod 0664 /sys/module/qpnp_charger/parameters/charger_monitor
+		chown -h root.system /sys/class/power_supply/battery/input_current_max
+		chown -h root.system /sys/class/power_supply/battery/input_current_trim
+		chown -h root.system /sys/class/power_supply/battery/input_current_settled
+		chown -h root.system /sys/class/power_supply/battery/voltage_min
+		chmod  0664 /sys/class/power_supply/battery/input_current_max
+		chmod  0664 /sys/class/power_supply/battery/input_current_trim
+		chmod  0664 /sys/class/power_supply/battery/input_current_settled
+		chmod  0664 /sys/class/power_supply/battery/voltage_min
+		chmod  0664 /sys/module/qpnp_charger/parameters/charger_monitor
 		start charger_monitor
 	fi
 }
@@ -138,16 +134,16 @@ rightvalue=`getprop permanent.button.bl.rightvalue`
 
 # update the brightness to meet the requirement from HW
 if [ $(getprop ro.boot.hwversion | grep -e 5[0-9]) ]; then
-    if [ "$leftvalue" = "" ]; then
-        echo 15 > /sys/class/leds/button-backlight1/max_brightness
-    else
-        echo $leftvalue > /sys/class/leds/button-backlight1/max_brightness
-    fi
-    if [ "$rightvalue" = "" ]; then
-        echo 9 > /sys/class/leds/button-backlight/max_brightness
-    else
-        echo $rightvalue > /sys/class/leds/button-backlight/max_brightness
-    fi
+	if [ "$leftvalue" = "" ]; then
+		echo 15 > /sys/class/leds/button-backlight1/max_brightness
+	else
+		echo $leftvalue > /sys/class/leds/button-backlight1/max_brightness
+	fi
+	if [ "$rightvalue" = "" ]; then
+		echo 9 > /sys/class/leds/button-backlight/max_brightness
+	else
+		echo $rightvalue > /sys/class/leds/button-backlight/max_brightness
+	fi
 fi
 
 # Update the panel color property
