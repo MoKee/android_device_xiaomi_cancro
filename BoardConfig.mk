@@ -196,8 +196,8 @@ endif
 DONT_DEXPREOPT_PREBUILTS := true
 
 # qcom sepolicy
-include device/qcom/sepolicy/legacy-sepolicy.mk
 include device/qcom/sepolicy/sepolicy.mk
+include device/qcom/sepolicy/legacy-sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
         $(CANCRO_PATH)/sepolicy
