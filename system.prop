@@ -1,14 +1,16 @@
 ro.vendor.extension_library=libqti-perfd-client.so
 rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
+persist.radio.apm_sim_not_pwdn=0
 
 mmp.enable.3g2=true
 mm.enable.smoothstreaming=true
-
+mm.enable.qcom_parser=37491
 ro.ril.enable.amr.wideband=1
 ro.telephony.default_network=9
 
 wifi.interface=wlan0
+ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 persist.data.tcpackprio.enable=true
 ro.data.large_tcp_window_size=true
@@ -25,10 +27,10 @@ bluetooth.hfp.client=1
 ro.bluetooth.alwaysbleon=true
 
 # System property for cabl
-ro.qualcomm.cabl=1
+ro.qualcomm.cabl=0
 ro.qcom.ad=1
 ro.qcom.ad.calib.data=/system/etc/calib.cfg
-
+ro.qcom.ad.sensortype=2
 ro.qualcomm.sensors.qmd=true
 ro.qualcomm.sensors.smd=true
 ro.qualcomm.sensors.cmc=true
@@ -51,14 +53,38 @@ ro.qc.sdk.camera.facialproc=false
 
 ro.qc.sdk.audio.ssr=false
 ro.qc.sdk.audio.fluencetype=fluence
-audio.offload.video=false
 use.voice.path.for.pcm.voip=true
+media.aac_51_output_enabled=true
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
-persist.audio.fluence.speaker=false
+persist.audio.fluence.speaker=true
 af.fast_track_multiplier=1
 audio_hal.period_size=192
+persist.speaker.prot.enable=true
+qcom.hw.aac.encoder=false
+tunnel.audio.encode=false
+persist.audio.init_volume_index=1
+audio.offload.buffer.size.kb=32
+audio.offload.video=true
+audio.offload.gapless.enabled=false
+audio.offload.disable=1
+audio.offload.pcm.enable=true
+audio.offload.pcm.24bit.enable=true
+audio.offload.pcm.16bit.enable=true
 
+persist.audio.vns.mode=2
+
+# Enalbe modem fast dormancy function
+persist.env.fastdorm.enabled=true
+persist.radio.data_no_toggle=1
+persist.fd.scroff.timer=3000
+persist.fd.scron.timer=10000
+# Disable DSD in this product line due to some DSD limitation
+persist.radio.dont_use_dsd=true
+# For specail cdma card sms issue
+persist.radio.force_on_dc=true
+# For sglte CT's operator name
+persist.radio.sglte.eons_domain=ps
 ro.qualcomm.perf.cores_online=1
 dalvik.vm.dex2oat-swap=false
 ro.gps.agps_provider=1
