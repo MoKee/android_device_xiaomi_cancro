@@ -29,15 +29,15 @@ if [ $RAW_ID == 1974 ] || [ $RAW_ID == 1972 ]; then
     # Use Mi4 audio configs
     rm -f /system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
     mv /system/etc/acdbdata/MTP/MTP_Speaker_cal_4.acdb /system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
-    rm -f /system/etc/mixer_paths.xml
-    mv /system/etc/mixer_paths_4.xml /system/etc/mixer_paths.xml
+    rm -f /system/vendor/etc/mixer_paths.xml
+    mv /system/vendor/etc/mixer_paths_4.xml /system/vendor/etc/mixer_paths.xml
     # Mi4 libdirac config
     rm -f /system/vendor/etc/diracmobile.config
     mv /system/vendor/etc/diracmobile_4.config /system/vendor/etc/diracmobile.config
 else
     # Remove Mi4 audio configs
     rm -rf /system/etc/acdbdata/MTP/MTP_Speaker_cal_4.acdb
-    rm -f /system/etc/mixer_paths_4.xml
+    rm -f /system/vendor/etc/mixer_paths_4.xml
     # Remove Mi4 libdirac config
     rm -f /system/vendor/etc/diracmobile_4.config
 fi
