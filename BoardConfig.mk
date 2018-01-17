@@ -161,8 +161,7 @@ TARGET_RECOVERY_PIXEL_FORMAT       := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
 # Lineage Hardware
-BOARD_HARDWARE_CLASS += \
-    $(LOCAL_PATH)/lineagehw
+BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/lineagehw
 
 # GPS HAL lives here
 TARGET_GPS_HAL_PATH         := $(LOCAL_PATH)/gps
