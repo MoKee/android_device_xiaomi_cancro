@@ -123,6 +123,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
+# IR
+PRODUCT_PACKAGES += \
+    android.hardware.ir@1.0-impl
+
 # NFC
 PRODUCT_PACKAGES += \
     nfc_nci.bcm2079x.default \
