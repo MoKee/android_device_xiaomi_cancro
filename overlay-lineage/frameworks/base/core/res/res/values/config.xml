@@ -12,5 +12,5 @@
 -->
 
 <resources>
-    <!-- <bool name="config_deviceHasVariableButtonBrightness">true</bool> -->
+    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
 </resources>
