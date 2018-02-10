@@ -127,6 +127,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifest_mi4.xml:system/vendor/manifest_mi4.xml
+
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-impl-bcm \
