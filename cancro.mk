@@ -5,7 +5,7 @@ LOCAL_PATH := device/xiaomi/cancro
 
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay-mokee
 
 # Ramdisk
 PRODUCT_PACKAGES += \

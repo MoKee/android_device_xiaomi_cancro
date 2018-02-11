@@ -169,8 +169,8 @@ TARGET_RECOVERY_FSTAB              := $(LOCAL_PATH)/rootdir/root/fstab.full
 TARGET_RECOVERY_PIXEL_FORMAT       := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
-# Lineage Hardware
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/lineagehw
+# MK Hardware
+BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/mkhw
 
 # GPS HAL lives here
 TARGET_GPS_HAL_PATH         := $(LOCAL_PATH)/gps
