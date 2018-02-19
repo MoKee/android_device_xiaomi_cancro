@@ -45,7 +45,7 @@ TARGET_CPU_VARIANT  := krait
 TARGET_USES_64_BIT_BINDER := true
 
 # Extended filesystem support
-TARGET_EXFAT_DRIVER := exfat
+TARGET_EXFAT_DRIVER := sdfat
 
 # Flags
 BOARD_GLOBAL_CFLAGS   += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
