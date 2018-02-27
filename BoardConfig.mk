@@ -189,6 +189,9 @@ TARGET_LEGACY_HW_DISK_ENCRYPTION := true
 # Simple time service client
 BOARD_USES_QC_TIME_SERVICES := true
 
+# Shim
+TARGET_LD_SHIM_LIBS := /system/lib/libcutils.so|libshim_atomic.so
+
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
