@@ -18,7 +18,7 @@ vendor/lib/libscve.so
 vendor/lib/libscve_stub.so
 
 # Audio
-lib/soundfx/libdirac.so
+lib/soundfx/libdirac.so:vendor/lib/soundfx/libdirac.so
 lib/libDiracAPI_SHARED.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
