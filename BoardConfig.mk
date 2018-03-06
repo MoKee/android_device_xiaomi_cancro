@@ -135,9 +135,6 @@ TARGET_HAS_LEGACY_CAMERA_HAL1          := true
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 USE_DEVICE_SPECIFIC_CAMERA             := true
 
-# USB
-TARGET_USES_LEGACY_ADB_INTERFACE := true
-
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_WLAN_DEVICE                := qcwcn
