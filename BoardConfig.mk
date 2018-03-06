@@ -44,6 +44,9 @@ TARGET_CPU_VARIANT  := krait
 # Binder API version
 TARGET_USES_64_BIT_BINDER := true
 
+# Extended filesystem support
+TARGET_EXFAT_DRIVER := exfat
+
 # Flags
 BOARD_GLOBAL_CFLAGS   += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 
