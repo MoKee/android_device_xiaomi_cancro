@@ -132,16 +132,10 @@ on boot
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
 
-
     setprop ro.telephony.call_ring.multiple false
-
-    #Set SUID bit for usbhub
-    chmod 4755 /system/bin/usbhub
-    chmod 755 /system/bin/usbhub_init
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
-
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
@@ -431,18 +425,8 @@ on post-fs-data
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
 
-# Export GPIO56 for fusion targets to enable/disable hub
-service usbhub_init /system/bin/usbhub_init
-   class late_start
-   user root
-   disabled
-   oneshot
-
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-
-on property:persist.radio.atfwd.start=false
-    stop atfwd
 
 # corefile limit and ETB enabling
 on property:persist.debug.trace=1
@@ -464,29 +448,8 @@ on property:persist.debug.trace=1
     write /sys/bus/coresight/devices/coresight-etm2/enable 1
     write /sys/bus/coresight/devices/coresight-etm3/enable 1
 
-on property:ro.board.platform=msm7630_fusion
-    start usbhub_init
-
-on property:init.svc.wpa_supplicant=stopped
-    stop dhcpcd
-
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
-
-on property:bluetooth.sap.status=running
-    start bt-sap
-
-on property:bluetooth.sap.status=stopped
-    stop bt-sap
-
-on property:bluetooth.dun.status=running
-    start bt-dun
-
-on property:bluetooth.dun.status=stopped
-    stop bt-dun
-
-on property:ro.bluetooth.ftm_enabled=true
-    start ftmd
 
 service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
     class core
@@ -535,18 +498,6 @@ service rfs_access /system/bin/rfs_access
 on property:ro.boot.emmc=true
     start rfs_access
 
-on property:bluetooth.start_hci=true
-    start start_hci_filter
-
-on property:bluetooth.start_hci=false
-    stop start_hci_filter
-
-service start_hci_filter /system/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth
-    disabled
-
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
@@ -559,34 +510,6 @@ on property:bluetooth.hciattach=true
 
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
-
-service hciattach_ath3k /system/bin/sh /system/etc/init.ath3k.bt.sh
-     class late_start
-     user bluetooth
-     group system bluetooth net_bt_admin misc
-     disabled
-     oneshot
-
-service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin inet
-    disabled
-    oneshot
-
-service bt-sap /system/bin/sapd 15
-    user bluetooth
-    group bluetooth net_bt_admin
-    class late_start
-    disabled
-    oneshot
-
-service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
-    class late_start
-    user root
-    group bluetooth net_bt_admin misc bluetooth oem_2950
-    disabled
-    oneshot
 
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
@@ -626,111 +549,6 @@ service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
-
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKLG
-    class late_start
-    disabled
-    oneshot
-
-service dhcpcd_p2p /system/bin/dhcpcd -ABKLG
-    class late_start
-    disabled
-    oneshot
-
-service iprenew_wlan0 /system/bin/dhcpcd -n
-    class late_start
-    disabled
-    oneshot
-
-service iprenew_p2p /system/bin/dhcpcd -n
-    class late_start
-    disabled
-    oneshot
-
-service ptt_socket_app /system/bin/ptt_socket_app -d -f
-    class main
-    user root
-    group root
-    disabled
-    oneshot
-
-service ptt_ffbm /system/bin/ptt_socket_app -f -d
-    user root
-    group root
-    disabled
-    oneshot
-
-service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
-    class late_start
-    disabled
-    oneshot
-
-service iprenew_bt-pan /system/bin/dhcpcd -n
-    class late_start
-    disabled
-    oneshot
-
-service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
-    disabled
-    oneshot
-
-service dhcpcd_bnep1 /system/bin/dhcpcd -BKLG
-    disabled
-    oneshot
-
-service dhcpcd_bnep2 /system/bin/dhcpcd -BKLG
-    disabled
-    oneshot
-
-service dhcpcd_bnep3 /system/bin/dhcpcd -BKLG
-    disabled
-    oneshot
-
-service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
-    disabled
-    oneshot
-
-service gpsone_daemon /system/bin/gpsone_daemon
-    class late_start
-    user gps
-    group gps inet net_raw
-    disabled
-
-service quipc_igsn /system/bin/quipc_igsn
-    class late_start
-    user gps
-    group inet gps oem_2950
-    disabled
-
-service quipc_main /system/bin/quipc_main
-    class late_start
-    user gps
-    group gps net_admin wifi inet oem_2950
-    disabled
-
-service location_mq /system/bin/location-mq
-    class late_start
-    user gps
-    group gps
-    disabled
-
-service xtwifi_inet /system/bin/xtwifi-inet-agent
-    class late_start
-    user gps
-    group inet gps
-    disabled
-
-service xtwifi_client /system/bin/xtwifi-client
-    class late_start
-    user gps
-    group net_admin wifi inet gps
-    disabled
-
-service lowi-server /system/bin/lowi-server
-    class late_start
-    user gps
-    group gps net_admin wifi inet oem_2950
-    disabled
     
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
@@ -742,18 +560,6 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
 on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
      insmod /system/lib/modules/qcedev.ko
-
-service drmdiag /system/bin/drmdiagapp
-    class late_start
-     user root
-     disabled
-     oneshot
-
-on property:drmdiag.load=1
-    start drmdiag
-
-on property:drmdiag.load=0
-    stop drmdiag
 
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
@@ -769,22 +575,9 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
 on property:sys.boot_completed=1
     start qcom-post-boot
 
-service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
-    class late_start
-    group net_bt_admin inet radio wifi
-    disabled
-
-on property:persist.ims.regmanager.mode=1
-    start ims_regmanager
-
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
-
-service battery_monitor /system/bin/battery_monitor
-    user system
-    group system
-    disabled
 
 service ril-daemon2 /system/vendor/bin/hw/rild -c 2
     class main
@@ -808,12 +601,6 @@ on property:usb_uicc.spi_bridge_enabled=1
 on property:usb_uicc.spi_bridge_enabled=0
     rmmod /system/lib/modules/ice40-hcd.ko
 
-service profiler_daemon /system/bin/profiler_daemon
-    class late_start
-    user root
-    group root
-    disabled
-
 service charger /charger
     class charger
     critical
@@ -822,12 +609,6 @@ service charger /charger
 # SSR setting
 on property:persist.sys.ssr.restart_level=*
     exec /system/bin/sh /init.qcom.ssr.sh ${persist.sys.ssr.restart_level}
-
-# Define fastmmi
-service fastmmi /system/bin/mmi
-    user root
-    group root
-    disabled
 
 service fastmmisrv /system/bin/sh /init.qcom.factory.sh
     user root
@@ -862,44 +643,6 @@ on property:sys.qbcharger.enable=true
 
 on property:sys.qbcharger.enable=false
     stop qbcharger
-
-service diag_mdlog_start /system/bin/diag_mdlog -c -n 20
-    class late_start
-    user shell
-    group system oem_2950 sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
-
-service diag_mdlog_stop /system/bin/diag_mdlog -k
-    class late_start
-    user shell
-    group system oem_2950 sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
-
-service modem_dump /system/bin/subsystem_ramdump 2 0
-    group system radio
-    disabled
-
-on property:persist.radio.ramdump_sdcard=1
-    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
-    start modem_dump
-
-service qlogd /system/xbin/qlogd
-    class main
-    disabled
-on property:persist.sys.qlogd=1
-    start qlogd
-on property:persist.sys.qlogd=0
-    stop qlogd
-
-service rootagent /system/bin/sh /system/etc/init.qcom.rootagent.sh
-    disabled
-    oneshot
-on property:persist.sys.rootagent=1
-    start rootagent
-on property:persist.sys.rootagent=0
-    stop rootagent
     
 on property:service.bootanim.exit=1
     start mpdecision
@@ -913,10 +656,3 @@ on property:persist.radio.modem=LTE-CU
     setprop persist.radio.data_no_toggle 1
     setprop persist.fd.scroff.timer 3000
     setprop persist.fd.scron.timer 10000
-
-service mmbn-daemon /system/bin/mmbn-daemon
-    disabled
-    oneshot
-
-on property:persist.radio.modem=LTE-X5-ALL
-    start mmbn-daemon
