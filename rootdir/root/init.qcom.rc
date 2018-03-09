@@ -476,7 +476,7 @@ service irsc_util /vendor/bin/irsc_util "/etc/sec_config"
     user root
     oneshot
 
-service bdaddr /system/bin/bdaddr_xiaomi
+service bdaddr /vendor/bin/bdaddr_xiaomi
     class core
     user root
     group system
