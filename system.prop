@@ -96,7 +96,6 @@ ro.sf.lcd_density=480
 persist.hwc.mdpcomp.enable=true
 persist.timed.enable=true
 persist.sys.wfd.virtual=0
-persist.usb.hvdcp.detect=true
 
 persist.camera.cpp.duplication=false
 camera2.portability.force_api=1
