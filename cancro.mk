@@ -149,9 +149,9 @@ PRODUCT_COPY_FILES += \
 
 # Proprietery Firmware
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/xtwifi.conf:system/etc/xtwifi.conf \
-    $(LOCAL_PATH)/rootdir/etc/calib.cfg:system/etc/calib.cfg \
-    $(LOCAL_PATH)/rootdir/etc/modem/Diag.cfg:system/etc/modem/Diag.cfg
+    $(LOCAL_PATH)/configs/xtwifi.conf:system/etc/xtwifi.conf \
+    $(LOCAL_PATH)/configs/calib.cfg:system/etc/calib.cfg \
+    $(LOCAL_PATH)/configs/modem/Diag.cfg:system/etc/modem/Diag.cfg
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -174,7 +174,7 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/bl_lut.txt:system/etc/bl_lut.txt
+    $(LOCAL_PATH)/configs/bl_lut.txt:system/etc/bl_lut.txt
 
 PRODUCT_PACKAGES += \
     bdaddr_xiaomi
