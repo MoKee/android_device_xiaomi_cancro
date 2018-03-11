@@ -42,9 +42,9 @@ esac
 
 if [$BDADDR == ""]
 then
-/system/bin/hci_qcomm_init -e $PWR_CLASS
+/vendor/bin/hci_qcomm_init -e $PWR_CLASS
 else
-/system/bin/hci_qcomm_init -b $BDADDR -e $PWR_CLASS
+/vendor/bin/hci_qcomm_init -b $BDADDR -e $PWR_CLASS
 fi
 
 case $? in

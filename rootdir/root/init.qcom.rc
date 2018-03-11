@@ -471,7 +471,7 @@ on property:vold.decrypt=trigger_restart_framework
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
@@ -482,7 +482,7 @@ service bdaddr /system/bin/bdaddr_xiaomi
     group system
     oneshot
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
@@ -490,7 +490,7 @@ service rmt_storage /system/bin/rmt_storage
 on property:ro.boot.emmc=true
     start rmt_storage
 
-service rfs_access /system/bin/rfs_access
+service rfs_access /vendor/bin/rfs_access
    class core
    user system
    group system net_raw
@@ -512,17 +512,17 @@ on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
 # QMUX must be in multiple groups to support external process connections
-service qmuxd /system/bin/qmuxd
+service qmuxd /vendor/bin/qmuxd
     class main
     user radio
     group radio audio bluetooth gps wakelock oem_2950
     disabled
 
-service netmgrd /system/bin/netmgrd
+service netmgrd /vendor/bin/netmgrd
     class main
     group radio system wakelock
 
-service sensors /system/bin/sensors.qcom
+service sensors /vendor/bin/sensors.qcom
     class late_start
     user root
     group root
@@ -618,7 +618,7 @@ service fastmmisrv /system/bin/sh /init.qcom.factory.sh
 on ffbm
     start fastmmisrv
 
-service hvdcp /system/bin/hvdcp
+service hvdcp /vendor/bin/hvdcp
     class core
     user root
     disabled
@@ -629,7 +629,7 @@ on property:persist.usb.hvdcp.detect=true
 on property:persist.usb.hvdcp.detect=false
     stop hvdcp
 
-service charger_monitor /system/bin/charger_monitor
+service charger_monitor /vendor/bin/charger_monitor
     user system
     group system
     disabled

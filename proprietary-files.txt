@@ -1,10 +1,10 @@
 # Bluetooth
-bin/hci_qcomm_init
+bin/hci_qcomm_init:vendor/bin/hci_qcomm_init
 vendor/lib/libbtnv.so
 vendor/lib/libaptX_encoder.so|b03772672144d4b750a5672c2922aded93bb0512
 
 # ADSP
-bin/adsprpcd
+bin/adsprpcd:vendor/bin/adsprpcd
 lib/rfsa/adsp/libapps_mem_heap.so
 lib/rfsa/adsp/libdspCV_skel.so
 lib/rfsa/adsp/libfastcvadsp.so
@@ -34,7 +34,7 @@ vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 
 # Camera
-bin/mm-qcamera-daemon
+bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
 etc/android_model_facea.dat
 etc/android_model_faceg.dat
 etc/people_gender.dat
@@ -333,14 +333,14 @@ vendor/lib/libt2tmanager.so
 vendor/lib/libubifocus.so
 
 # Charger
-bin/charger_monitor
-bin/hvdcp
+bin/charger_monitor:vendor/bin/charger_monitor
+bin/hvdcp:vendor/bin/hvdcp
 
 # ConsumerIR
 lib/hw/consumerir.msm8974.so
 
 # DRM
-bin/qseecomd
+bin/qseecomd:vendor/bin/qseecomd
 vendor/lib/libQSEEComAPI.so
 vendor/lib/libdrmdiag.so
 vendor/lib/libdrmfs.so
@@ -359,10 +359,10 @@ vendor/firmware/keymaster/keymaster.b03
 vendor/firmware/keymaster/keymaster.mdt
 
 # FM
-bin/fm_qsoc_patches
+bin/fm_qsoc_patches:vendor/bin/fm_qsoc_patches
 
 # GPS
-bin/loc_launcher
+bin/loc_launcher:vendor/bin/loc_launcher
 lib/libloc_api_v02.so
 vendor/lib/hw/flp.default.so
 vendor/lib/libflp.so
@@ -406,18 +406,18 @@ vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxWmaDec.so
 
 # Perf
-bin/mpdecision
+bin/mpdecision:vendor/bin/mpdecision
 vendor/lib/libqc-opt.so
 vendor/lib/libqti-perfd-client.so
 
 # Postprocessing
-bin/mm-pp-daemon
+bin/mm-pp-daemon:vendor/bin/mm-pp-daemon
 vendor/lib/libdisp-aba.so
 vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 
 # Qualcomm framework
-bin/irsc_util
+bin/irsc_util:vendor/bin/irsc_util
 etc/data/qmi_config.xml
 -vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
@@ -441,11 +441,11 @@ vendor/lib/libsystem_health_mon.so
 # Radio
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 -app/shutdownlistener/shutdownlistener.apk
-bin/netmgrd
-bin/qmuxd
-bin/radish
-bin/rfs_access
-bin/rmt_storage
+bin/netmgrd:vendor/bin/netmgrd
+bin/qmuxd:vendor/bin/qmuxd
+bin/radish:vendor/bin/radish
+bin/rfs_access:vendor/bin/rfs_access
+bin/rmt_storage:vendor/bin/rmt_storage
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
 etc/permissions/qcnvitems.xml
@@ -470,7 +470,7 @@ vendor/lib/lib-rtpsl.so
 vendor/qcril.db
 
 # Sensors
-bin/sensors.qcom
+bin/sensors.qcom:vendor/bin/sensors.qcom
 etc/sensor_def_qcomdev.conf
 etc/sensor_diag.cfg
 lib/hw/activity_recognition.msm8974.so
@@ -484,7 +484,7 @@ vendor/lib/libsensor_test.so
 vendor/lib/libsensor_user_cal.so
 
 # Time services
-bin/time_daemon
+bin/time_daemon:vendor/bin/time_daemon
 -vendor/lib/libtime_genoff.so
 -vendor/lib/libTimeService.so
 -app/TimeService/TimeService.apk
