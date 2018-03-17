@@ -13,6 +13,5 @@ allow bdaddr bluetooth_data_file:file create_file_perms;
 allow bdaddr diag_device:chr_file rw_file_perms;
 
 allow bdaddr self:capability { fsetid dac_override };
-allow bdaddr self:socket create_socket_perms;
 
 allow bdaddr smem_log_device:chr_file rw_file_perms;
