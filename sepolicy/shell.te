@@ -1,4 +1,3 @@
 #============= shell ==============
 allow shell init_exec:file getattr;
-allow shell livedisplay_sysfs:file getattr;
 allow shell sysfs_graphics:file getattr;
