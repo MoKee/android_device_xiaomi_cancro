@@ -403,10 +403,6 @@ on post-fs-data
 
     mkdir /data/audio/ 0770 media audio
 
-    # Vibrator permissions
-    chown system system /sys/vibrator/pwmvalue
-    chmod 0644 /sys/vibrator/pwmvalue
-
     # Key disabler
     chown root system /sys/bus/i2c/drivers/cyttsp_streetfighter/2-0028/keys_off
     chmod 0664 /sys/bus/i2c/drivers/cyttsp_streetfighter/2-0028/keys_off
