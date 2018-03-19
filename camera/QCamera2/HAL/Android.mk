@@ -29,10 +29,6 @@ endif
 #Debug logs are enabled
 #LOCAL_CFLAGS += -DDISABLE_DEBUG_LOG
 
-ifeq ($(TARGET_USE_VENDOR_CAMERA_EXT),true)
-LOCAL_CFLAGS += -DUSE_VENDOR_CAMERA_EXT
-endif
-
 #ifeq ($(TARGET_USES_AOSP),true)
 #LOCAL_CFLAGS += -DVANILLA_HAL
 #endif
