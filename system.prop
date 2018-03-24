@@ -53,24 +53,13 @@ ro.qc.sdk.camera.facialproc=false
 
 ro.qc.sdk.audio.ssr=false
 ro.qc.sdk.audio.fluencetype=fluence
+audio.offload.video=false
 use.voice.path.for.pcm.voip=true
-media.aac_51_output_enabled=true
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
-persist.audio.fluence.speaker=true
+persist.audio.fluence.speaker=false
 af.fast_track_multiplier=1
 audio_hal.period_size=192
-persist.speaker.prot.enable=true
-qcom.hw.aac.encoder=false
-tunnel.audio.encode=false
-persist.audio.init_volume_index=1
-audio.offload.buffer.size.kb=32
-audio.offload.video=true
-audio.offload.gapless.enabled=false
-audio.offload.disable=1
-audio.offload.pcm.enable=true
-audio.offload.pcm.24bit.enable=true
-audio.offload.pcm.16bit.enable=true
 
 persist.audio.vns.mode=2
 
