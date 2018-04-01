@@ -126,27 +126,27 @@ void vendor_load_properties()
         raw_id = strtoul(tmp, NULL, 0);
     }
 
-    property_override("ro.product.device", "cancro");
-    property_override("ro.product.name", "cancro");
-    property_override("ro.build.fingerprint", "Xiaomi/cancro/cancro:6.0.1/MMB29M/V8.1.6.0.MXDMIDI:user/release-keys");
+    property_override_dual("ro.product.device", "ro.vendor.product.device", "cancro");
+    property_override_dual("ro.product.name", "ro.vendor.product.name", "cancro");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Xiaomi/cancro/cancro:6.0.1/MMB29M/V8.1.6.0.MXDMIDI:user/release-keys");
     property_override("ro.build.description", "cancro-user 6.0.1 MMB29M V8.1.6.0.MXDMIDI release-keys");
 
     switch (raw_id) {
         case 1978:
-            property_override("ro.product.model", "MI 3W");
+            property_override_dual("ro.product.model", "ro.vendor.product.model", "MI 3W");
             property_set("ro.nfc.port", "I2C");
             break;
         case 1974:
-            property_override("ro.product.model", "MI 4");
+            property_override_dual("ro.product.model", "ro.vendor.product.model", "MI 4");
             break;
         case 1972:
-            property_override("ro.product.model", "MI 4LTE");
+            property_override_dual("ro.product.model", "ro.vendor.product.model", "MI 4LTE");
             property_set("ro.telephony.default_network", "8");
             property_set("telephony.lteOnGSMDevice", "1");
             break;
         default:
             // Other unsupported variants
-            property_override("ro.product.model", "Unsupported MI Cancro");
+            property_override_dual("ro.product.model", "ro.vendor.product.model", "Unsupported MI Cancro");
             break;
     }
 
