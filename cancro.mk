@@ -71,7 +71,8 @@ PRODUCT_PACKAGES += \
 # Power
 PRODUCT_PACKAGES += \
     libshim_atomic \
-    android.hardware.power@1.0-service-qti
+    android.hardware.power@1.0-impl \
+    power.msm8974
 
 # Vibrator
 PRODUCT_PACKAGES += \
