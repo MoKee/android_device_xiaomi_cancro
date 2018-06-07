@@ -15,5 +15,6 @@ TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID          := true
 TW_NO_LEGACY_PROPS                              := true
 TW_NO_SCREEN_TIMEOUT                            := true
 TW_NO_SCREEN_BLANK                              := true
+TW_EXTRA_LANGUAGES                              := true
 
 PRODUCT_COPY_FILES += device/xiaomi/virgo/twrp/twrp.fstab:recovery/root/etc/twrp.fstab
