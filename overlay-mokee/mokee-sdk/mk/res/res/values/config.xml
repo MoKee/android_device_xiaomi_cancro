@@ -66,4 +66,9 @@
          policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
      -->
     <integer name="config_longPressOnAppSwitchBehavior">1</integer>
+
+    <!-- Indicate whether encryption causes significant performances loss.
+         This MUST NOT be set to true on devices produced in 2016 or later -->
+    <bool name="config_trustLegacyEncryption">true</bool>
+
 </resources>
