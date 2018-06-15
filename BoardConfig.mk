@@ -192,7 +192,7 @@ TARGET_LEGACY_HW_DISK_ENCRYPTION := true
 BOARD_USES_QC_TIME_SERVICES := true
 
 # Shim
-TARGET_LD_SHIM_LIBS := /system/lib/libcutils.so|libshim_atomic.so:/system/vendor/lib/libFaceProc.so|libshim_dso_handle.so
+TARGET_LD_SHIM_LIBS := /system/vendor/lib/libFaceProc.so|libshim_dso_handle.so
 
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
