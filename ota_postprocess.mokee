@@ -16,7 +16,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-echo "package_extract_file(\"device_check.sh\", \"/tmp/device_check.sh\");" >> updater-script
-echo "set_metadata(\"/tmp/device_check.sh\", \"uid\", 0, \"gid\", 0, \"mode\", 0755);" >> updater-script
-echo "run_program(\"/tmp/device_check.sh\");" >> updater-script
-echo "delete(\"/tmp/device_check.sh\");" >> updater-script
+echo "package_extract_file(\"device_check.sh\", \"/tmp/device_check.sh\");" >> post.txt
+echo "set_metadata(\"/tmp/device_check.sh\", \"uid\", 0, \"gid\", 0, \"mode\", 0755);" >> post.txt
+echo "run_program(\"/tmp/device_check.sh\");" >> post.txt
+echo "delete(\"/tmp/device_check.sh\");" >> post.txt
