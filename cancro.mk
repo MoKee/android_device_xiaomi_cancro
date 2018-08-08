@@ -278,6 +278,10 @@ PRODUCT_PACKAGES += \
     sensors.msm8974 \
     android.hardware.sensors@1.0-impl
 
+# XiaomiParts
+PRODUCT_PACKAGES += \
+    XiaomiParts
+
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService \
