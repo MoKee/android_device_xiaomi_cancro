@@ -39,7 +39,13 @@ case "$powermode" in
         echo performance   > /sys/class/kgsl/kgsl-3d0/devfreq/governor
         echo "msm_cpufreq" > $dev_governor
         case "$target" in
-            "MI NOTE LTE"*)
+            "MI 3W")
+                echo 2265600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+                echo 2265600 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+                echo 2265600 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+                echo 2265600 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+                ;;
+            "MI 4"*)
                 echo 2457600 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
                 echo 2457600 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
                 echo 2457600 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
@@ -70,7 +76,14 @@ case "$powermode" in
         echo msm-adreno-tz                       > /sys/class/kgsl/kgsl-3d0/devfreq/governor
         echo "cpubw_hwmon"                       > $dev_governor
         case "$target" in
-            "MI NOTE LTE"*)
+            "MI 3W")
+                echo 2265600                    > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+                echo 2265600                    > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+                echo 2265600                    > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+                echo 2265600                    > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+                echo "85 1500000:90 1800000:70" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
+                ;;
+            "MI 4"*)
                 echo 2457600         > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
                 echo 2457600         > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
                 echo 2457600         > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
