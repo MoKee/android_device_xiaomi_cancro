@@ -40,7 +40,7 @@ if [ $RAW_ID == 1974 ] || [ $RAW_ID == 1972 ]; then
     mv /system/vendor/etc/diracmobile_4.config /system/vendor/etc/diracmobile.config
 else
     # Remove Mi4 consumerir support
-    rm -rf /system/etc/permissions/android.hardware.consumerir.xml
+    rm -rf /system/vendor/etc/permissions/android.hardware.consumerir.xml
     rm -rf /system/vendor/lib/hw/consumerir.msm8974.so
     rm -rf /system/vendor/lib/hw/android.hardware.ir@*.so
     rm -rf /system/vendor/bin/hw/android.hardware.ir@*.so
