@@ -26,7 +26,7 @@ BOARD_HAVE_QCOM_FM := true
 TARGET_FM_LEGACY_PATCHLOADER := true
 
 # MK Hardware
-BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/mkhw
+JAVA_SOURCE_OVERLAYS := org.mokee.hardware|$(DEVICE_PATH)/mkhw|**/*.java
 
 # ReleaseTools
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)/releasetools
