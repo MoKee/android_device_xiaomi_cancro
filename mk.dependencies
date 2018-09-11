@@ -1,0 +1,10 @@
+[
+ {
+   "repository": "android_device_xiaomi_msm8974-common",
+   "target_path": "device/xiaomi/msm8974-common"
+ },
+ {
+   "repository": "android_vendor_xiaomi_cancro",
+   "target_path": "vendor/xiaomi/cancro"
+ }
+]

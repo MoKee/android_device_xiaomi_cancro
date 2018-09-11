@@ -1,0 +1,13 @@
+# ConsumerIR
+lib/hw/consumerir.msm8974.so:vendor/lib/hw/consumerir.msm8974.so
+
+# FM
+bin/fm_qsoc_patches:vendor/bin/fm_qsoc_patches
+
+# NFC frimware
+vendor/firmware/bcm2079x-b5_firmware.ncd
+vendor/firmware/bcm2079x-b5_pre_firmware.ncd
+
+
+# Sensors
+vendor/lib/hw/sensors.msm8974.so:vendor/lib/libsensors.msm8974.so
