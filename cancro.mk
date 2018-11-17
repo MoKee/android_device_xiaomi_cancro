@@ -59,7 +59,8 @@ PRODUCT_COPY_FILES += \
 
 # KeyLayout
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/keylayout/gpio-keys.kl:system/vendor/usr/keylayout/gpio-keys.kl
+    $(DEVICE_PATH)/keylayout/gpio-keys.kl:system/vendor/usr/keylayout/gpio-keys.kl \
+    $(DEVICE_PATH)/keylayout/synaptics_dsx.kl:system/vendor/usr/keylayout/synaptics_dsx.kl
 
 # Ramdisk
 PRODUCT_PACKAGES += \
