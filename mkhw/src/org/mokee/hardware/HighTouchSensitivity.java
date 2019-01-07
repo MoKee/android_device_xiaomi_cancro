@@ -18,48 +18,24 @@ package org.mokee.hardware;
 
 import org.mokee.internal.util.FileUtils;
 
-import java.io.File;
-
-/**
- * High touch sensitivity
- *
- * TS     = Mi3w
- * TS_640 = Mi4
- */
 public class HighTouchSensitivity {
 
     // Atmel Glove Mode
-    private static String GLOVE_PATH_TS = "/sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode";
-    private static String GLOVE_PATH_TS_640 = "/sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode";
+    private static String GLOVE_PATH_TS = "/proc/touchscreen/sensitive_mode";
     // Atmel Stylus mode
-    private static String STYLUS_PATH_TS = "/sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus";
-    private static String STYLUS_PATH_TS_640 = "/sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus";
-
-    private static String sensitiveMode_path() {
-        File glove_ts = new File(GLOVE_PATH_TS);
-        if (glove_ts.exists()) {
-            return GLOVE_PATH_TS;
-        } else {
-            return GLOVE_PATH_TS_640;
-        }
-    };
-
-    private static String stylus_path() {
-        File stylus_ts = new File(STYLUS_PATH_TS);
-        if (stylus_ts.exists()) {
-            return STYLUS_PATH_TS;
-        } else {
-            return STYLUS_PATH_TS_640;
-        }
-    };
-
+    private static String STYLUS_PATH_TS = "/proc/touchscreen/stylus";
 
     /**
      * Whether device supports high touch sensitivity.
      *
      * @return boolean Supported devices must return always true
      */
-    public static boolean isSupported() { return true; }
+    public static boolean isSupported() {
+        return FileUtils.isFileReadable(GLOVE_PATH_TS) &&
+            FileUtils.isFileWritable(GLOVE_PATH_TS) &&
+            FileUtils.isFileReadable(STYLUS_PATH_TS) &&
+            FileUtils.isFileWritable(STYLUS_PATH_TS);
+     }
 
     /**
      * This method return the current activation status of high touch sensitivity
@@ -68,7 +44,7 @@ public class HighTouchSensitivity {
      * or the operation failed while reading the status; true in any other case.
      */
     public static boolean isEnabled() {
-        return (FileUtils.readOneLine(sensitiveMode_path()).equals("1")) && FileUtils.readOneLine(stylus_path()).equals("1");
+        return (FileUtils.readOneLine(GLOVE_PATH_TS).equals("1")) && FileUtils.readOneLine(STYLUS_PATH_TS).equals("1");
     }
 
     /**
@@ -79,7 +55,7 @@ public class HighTouchSensitivity {
      * failed; true in any other case.
      */
     public static boolean setEnabled(boolean state) {
-        return FileUtils.writeLine(sensitiveMode_path(), (state ? "1" : "0")) && FileUtils.writeLine(stylus_path(), (state ? "1" : "0"));
+        return FileUtils.writeLine(GLOVE_PATH_TS, (state ? "1" : "0")) && FileUtils.writeLine(STYLUS_PATH_TS, (state ? "1" : "0"));
     }
 
 }

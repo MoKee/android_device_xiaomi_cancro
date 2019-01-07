@@ -18,7 +18,6 @@ package org.mokee.hardware;
 
 import org.mokee.internal.util.FileUtils;
 
-import java.io.File;
 /*
  * Disable capacitive keys
  *
@@ -26,36 +25,23 @@ import java.io.File;
  * can be fully disabled for replacement with a soft navbar. You
  * really should not be using this on a device with mechanical or
  * otherwise visible-when-inactive keys
- *
- * TS     = Mi3w
- * TS_640 = Mi4
  */
 
 public class KeyDisabler {
 
-    // Mi3w
-    private static String CONTROL_PATH_TS = "/sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off";
-    // Mi4
-    private static String CONTROL_PATH_TS_640 = "/sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off";
+    private static String CONTROL_PATH = "/proc/touchscreen/nav_button_enable";
 
-    private static String KeyDisabler_path() {
-        File ts = new File(CONTROL_PATH_TS);
-        if (ts.exists()) {
-            return CONTROL_PATH_TS;
-        } else {
-            return CONTROL_PATH_TS_640;
-        }
-    };
-
-    public static boolean isSupported() { return FileUtils.isFileReadable(KeyDisabler_path()) &&
-        FileUtils.isFileWritable(KeyDisabler_path()); }
+    public static boolean isSupported() {
+        return FileUtils.isFileReadable(CONTROL_PATH) &&
+            FileUtils.isFileWritable(CONTROL_PATH);
+    }
 
     public static boolean isActive() {
-        return (FileUtils.readOneLine(KeyDisabler_path()).equals("0"));
+        return FileUtils.readOneLine(CONTROL_PATH).equals("0");
     }
 
     public static boolean setActive(boolean state) {
-        return FileUtils.writeLine(KeyDisabler_path(), (state ? "1" : "0"));
+        return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"));
     }
 
 }
