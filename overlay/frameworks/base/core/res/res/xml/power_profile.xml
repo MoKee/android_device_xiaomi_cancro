@@ -37,7 +37,8 @@
         <value>3</value>
         <value>3</value>
     </array>
-    <array name="cpu.speeds">
+    <item name="cpu.clusters.cores">4</item>
+    <array name="cpu.core_speeds.cluster0">
         <value>300000</value>
         <value>422400</value>
         <value>652800</value>
@@ -54,9 +55,9 @@
         <value>2265600</value>
         <value>2457600</value>
     </array>
-	<item name="cpu.idle">2.8</item>
+	<item name="cpu.suspend">2.8</item>
     <item name="cpu.awake">17.4</item>
-    <array name="cpu.active">
+    <array name="cpu.core_power.cluster0">
         <value>66.6</value>
         <value>84</value>
         <value>90.8</value>
