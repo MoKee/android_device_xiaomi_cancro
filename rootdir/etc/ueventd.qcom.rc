@@ -181,6 +181,9 @@
 /dev/uio1                 0660   system     system
 /dev/uio2                 0660   system     system
 
+# for lirc
+/dev/lirc0          0660   system     system
+
 # sensor hub
 /dev/iio:device*        0660    system  system
 /sys/devices/f9968000.i2c/i2c-12/12-0042/0018:0483:5702.0001/HID-SENSOR-200031.6/iio:device*    buffer/enable                           0660    system  radio
