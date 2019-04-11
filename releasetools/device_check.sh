@@ -24,9 +24,9 @@ if [ $RAW_ID == 1974 ] || [ $RAW_ID == 1972 ]; then
     rm -rf /system/priv-app/Tag
     rm -rf /system/lib/*nfc*
     rm -rf /system/etc/*nfc*
-    rm -rf /system/etc/permissions/*nfc*
-    rm -rf /system/vendor/firmware/BCM20791B5_002.006.013.0011.0104_Customers_China_NCD_Unsigned_configdata.ncd
-    rm -rf /system/vendor/firmware/PreI2C_v470.ncd
+    rm -rf /system/vendor/etc/permissions/*nfc*
+    rm -rf /system/vendor/firmware/bcm2079x-b5_firmware.ncd
+    rm -rf /system/vendor/firmware/bcm2079x-b5_pre_firmware.ncd
     rm -rf /system/vendor/lib/hw/android.hardware.nfc@1.0-impl-bcm.so
     # Use Mi4 audio configs
     rm -f /system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
@@ -39,10 +39,8 @@ if [ $RAW_ID == 1974 ] || [ $RAW_ID == 1972 ]; then
 else
     # Remove Mi4 consumerir support
     rm -rf /system/vendor/etc/permissions/android.hardware.consumerir.xml
-    rm -rf /system/vendor/lib/hw/consumerir.msm8974.so
-    rm -rf /system/vendor/lib/hw/android.hardware.ir@*.so
-    rm -rf /system/vendor/bin/hw/android.hardware.ir@*.so
-    rm -rf /system/vendor/manifest_mi4.xml
+    rm -rf /system/vendor/bin/hw/android.hardware.ir@1.0-service.cancro
+    rm -rf /system/vendor/etc/init/android.hardware.ir@1.0-service.cancro.rc
     # Remove Mi4 audio configs
     rm -rf /system/etc/acdbdata/MTP/MTP_Speaker_cal_4.acdb
     rm -f /system/vendor/etc/mixer_paths_4.xml
@@ -50,8 +48,8 @@ else
     rm -f /system/vendor/etc/diracmobile_4.config
 fi
 
-if [ $RAW_ID == 1978 ] || [ $RAW_ID == 1974 ]; then
-    # Supported device (Mi3w - 1978 or Mi4 - 1974)
+if [ $RAW_ID == 1978 ] || [ $RAW_ID == 1972 ] || [ $RAW_ID == 1974 ]; then
+    # Supported device (Mi3w - 1978 or Mi4 - 1972, 1974)
     return 0
 else
     # Unsupported device
