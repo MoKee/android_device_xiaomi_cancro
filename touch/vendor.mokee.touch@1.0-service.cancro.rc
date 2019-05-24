@@ -1,0 +1,18 @@
+on init
+    # KeyDisabler
+    chown root system /proc/touchscreen/nav_button_enable
+    chmod 0664 /proc/touchscreen/nav_button_enable
+    restorecon /proc/touchscreen/nav_button_enable
+
+    # Glove Mode
+    chown root system /proc/touchscreen/sensitive_mode
+    chmod 0664 /proc/touchscreen/sensitive_mode
+    restorecon /proc/touchscreen/sensitive_mode
+    chown root system /proc/touchscreen/stylus
+    chmod 0664 /proc/touchscreen/stylus
+    restorecon /proc/touchscreen/stylus
+
+service vendor.touch-hal-1-0 /vendor/bin/hw/vendor.mokee.touch@1.0-service.cancro
+    class hal
+    user system
+    group system
