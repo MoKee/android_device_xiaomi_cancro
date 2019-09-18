@@ -17,26 +17,26 @@
 #
 
 SCRIPT=$ANDROID_BUILD_TOP/device/xiaomi/cancro/releasetools/device_check.sh
-FILES=("system/app/NfcNci"
-"system/priv-app/Tag"
-"system/etc/*nfc*"
-"system/vendor/etc/permissions/*nfc*"
-"system/framework/*nfc*"
-"system/lib/*nfc*"
-"system/vendor/firmware/bcm2079x-b5_firmware.ncd"
-"system/vendor/firmware/bcm2079x-b5_pre_firmware.ncd"
-"system/etc/MTP/MTP_Speaker_cal.acdb"
-"system/etc/MTP/MTP_Speaker_cal_4.acdb"
-"system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb"
-"system/etc/acdbdata/MTP/MTP_Speaker_cal_4.acdb"
-"system/vendor/etc/mixer_paths.xml"
-"system/vendor/etc/mixer_paths_4.xml"
-"system/vendor/etc/diracmobile.config"
-"system/vendor/etc/diracmobile_4.config"
-"system/vendor/etc/permissions/android.hardware.consumerir.xml"
-"system/vendor/lib/hw/android.hardware.nfc@1.0-impl-bcm.so"
-"system/vendor/bin/hw/android.hardware.ir@1.0-service.cancro"
-"system/vendor/etc/init/android.hardware.ir@1.0-service.cancro.rc")
+FILES=("system/system/app/NfcNci"
+"system/system/priv-app/Tag"
+"system/system/etc/*nfc*"
+"system/system/vendor/etc/permissions/*nfc*"
+"system/system/framework/*nfc*"
+"system/system/lib/*nfc*"
+"system/system/vendor/firmware/bcm2079x-b5_firmware.ncd"
+"system/system/vendor/firmware/bcm2079x-b5_pre_firmware.ncd"
+"system/system/etc/MTP/MTP_Speaker_cal.acdb"
+"system/system/etc/MTP/MTP_Speaker_cal_4.acdb"
+"system/system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb"
+"system/system/etc/acdbdata/MTP/MTP_Speaker_cal_4.acdb"
+"system/system/vendor/etc/mixer_paths.xml"
+"system/system/vendor/etc/mixer_paths_4.xml"
+"system/system/vendor/etc/diracmobile.config"
+"system/system/vendor/etc/diracmobile_4.config"
+"system/system/vendor/etc/permissions/android.hardware.consumerir.xml"
+"system/system/vendor/lib/hw/android.hardware.nfc@1.0-impl-bcm.so"
+"system/system/vendor/bin/hw/android.hardware.ir@1.0-service.cancro"
+"system/system/vendor/etc/init/android.hardware.ir@1.0-service.cancro.rc")
 
 if [ -f $SCRIPT ];then
 	cp $SCRIPT out/
