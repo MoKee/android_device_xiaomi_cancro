@@ -1,0 +1,17 @@
+type audiohq, domain;
+typeattribute audiohq coredomain;
+type audiohq_exec, exec_type, file_type, system_file_type;
+
+init_daemon_domain(audiohq)
+
+binder_use(audiohq)
+binder_call(audiohq, binderservicedomain)
+binder_call(audiohq, appdomain)
+binder_service(audiohq)
+
+wakelock_use(audiohq)
+
+allow audioserver default_android_service:service_manager find;
+allow priv_app default_android_service:service_manager find;
+allow audiohq system_server:file rw_dir_perms;
+allow audiohq system_server:dir rw_dir_perms;

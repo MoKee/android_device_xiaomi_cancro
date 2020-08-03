@@ -1,3 +1,15 @@
+cancro device tree with audiohq for exthm
+如果需要自动获取build cancro需要的其他文件，请按以下步骤执行
+1.下载项目中的cancro.xml,放在aosp源码/.repo/local_manifests中
+
+2.repo sync
+
+3.source build/env_setup.sh
+
+4.breakfast cancro
+
+-------------------------------------------------
+
 Copyright 2015 - The CyanogenMod Project
 
 Xiaomi Mi3 and Mi4

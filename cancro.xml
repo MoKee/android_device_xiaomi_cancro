@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote  name="device"
+          fetch="https://github.com"
+          revision="mkq" />
+
+    <remote  name="vendor"
+           fetch="https://github.com"
+           revision="mkq" />
+
+    <remote  name="kernel"
+           fetch="https://github.com"
+           revision="mkn-mr1" />
+
+	<remote  name="kernel_virgo"
+           fetch="https://github.com"
+           revision="mkq" />
+
+    <remote  name="qcom_common_vendor"
+           fetch="https://github.com"
+           revision="mkq" />
+
+	<remote  name="qcom_common_device"
+           fetch="https://github.com"
+           revision="mkq" />
+           
+	<project path="device/xiaomi/msm8974-common" name="Mokee/android_device_xiaomi_msm8974-common" remote="qcom_common_device"/>
+    <project path="vendor/xiaomi/msm8974-common" name="Mokee/android_vendor_xiaomi_msm8974-common" remote="qcom_common_vendor"/>
+    <project path="vendor/xiaomi/cancro" name="Mokee/android_vendor_xiaomi_cancro" remote="vendor"/>
+    <project path="kernel/xiaomi/cancro" name="Mokee/android_kernel_xiaomi_cancro" remote="kernel"/>
+	<project path="kernel/xiaomi/virgo" name="Mokee/android_kernel_xiaomi_virgo" remote="kernel_virgo"/>
+    <project path="device/xiaomi/cancro" name="Alcatraz323/android_device_xiaomi_cancro" remote="device"/>
+</manifest>

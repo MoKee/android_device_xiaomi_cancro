@@ -14,4 +14,8 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/mokee_cancro.mk
+    $(LOCAL_DIR)/exthm_cancro.mk
+
+COMMON_LUNCH_CHOICES := \
+	exthm_cancro-userdebug \
+	exthm_cancro-user
